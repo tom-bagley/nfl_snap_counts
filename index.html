@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NFL Snap Count Tracker</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            opacity: 0.9;
+            font-size: 1.1em;
+        }
+        
+        .upload-section {
+            padding: 30px;
+            background: #f8f9fa;
+            border-bottom: 2px solid #dee2e6;
+            text-align: center;
+        }
+        
+        .upload-box {
+            border: 3px dashed #667eea;
+            border-radius: 12px;
+            padding: 40px;
+            background: white;
+            transition: all 0.3s ease;
+        }
+        
+        .upload-box:hover {
+            border-color: #764ba2;
+            background: #f8f9fa;
+        }
+        
+        .upload-box input[type="file"] {
+            display: none;
+        }
+        
+        .upload-label {
+            cursor: pointer;
+            display: inline-block;
+        }
+        
+        .upload-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        
+        .upload-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .upload-info {
+            margin-top: 15px;
+            color: #6c757d;
+            font-size: 0.95em;
+        }
+        
+        .file-name {
+            margin-top: 10px;
+            color: #28a745;
+            font-weight: 600;
+        }
+        
+        .controls {
+            padding: 20px 30px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #dee2e6;
+            display: none;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        
+        .controls.active {
+            display: flex;
+        }
+        
+        .control-group {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .control-group label {
+            font-weight: 600;
+            color: #495057;
+        }
+        
+        select, input {
+            padding: 8px 12px;
+            border: 2px solid #dee2e6;
+            border-radius: 6px;
+            font-size: 14px;
+            background: white;
+        }
+        
+        input[type="search"] {
+            width: 200px;
+        }
+        
+        .toggle-group {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .toggle-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .toggle-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        
+        .player-list {
+            padding: 20px 30px;
+            display: none;
+        }
+        
+        .player-list.active {
+            display: block;
+        }
+        
+        .player-card {
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .player-card:hover {
+            border-color: var(--team-primary, #667eea);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+        }
+        
+        .player-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 20px;
+            background: #f8f9fa;
+            cursor: pointer;
+            user-select: none;
+        }
+        
+        .player-header:hover {
+            background: #e9ecef;
+        }
+        
+        .player-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex: 1;
+        }
+        
+        .player-name {
+            font-weight: 700;
+            font-size: 1.1em;
+            color: #212529;
+        }
+        
+        .position-badge {
+            background: linear-gradient(135deg, var(--team-primary, #667eea) 0%, var(--team-secondary, #764ba2) 100%);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+        
+        :root {
+            --team-primary: #667eea;
+            --team-secondary: #764ba2;
+        }
+        
+        .current-stats {
+            display: flex;
+            gap: 20px;
+            font-size: 0.95em;
+        }
+        
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .stat-label {
+            color: #6c757d;
+            font-size: 0.8em;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        
+        .stat-value {
+            color: #212529;
+            font-weight: 700;
+            font-size: 1.1em;
+        }
+        
+        .expand-icon {
+            font-size: 1.5em;
+            color: #6c757d;
+            transition: transform 0.3s ease;
+        }
+        
+        .player-card.expanded .expand-icon {
+            transform: rotate(180deg);
+        }
+        
+        .player-history {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .player-card.expanded .player-history {
+            max-height: 1000px;
+        }
+        
+        .history-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .history-table th {
+            background: linear-gradient(135deg, var(--team-primary, #667eea) 0%, var(--team-secondary, #764ba2) 100%);
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+        
+        .history-table td {
+            padding: 12px;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .history-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .history-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        .team-badge {
+            display: inline-block;
+            background: #6c757d;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .current-season {
+            background: #ffc107;
+            color: #000;
+            font-weight: 700;
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            color: #6c757d;
+            font-size: 1.1em;
+        }
+        
+        @media (max-width: 768px) {
+            .controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .control-group {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            input[type="search"] {
+                width: 100%;
+            }
+            
+            .player-header {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+            
+            .current-stats {
+                width: 100%;
+                justify-content: space-around;
+            }
+            
+            .history-table {
+                font-size: 0.85em;
+            }
+            
+            .history-table th,
+            .history-table td {
+                padding: 8px 4px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏈 NFL Snap Count Tracker</h1>
+            <p>2025 Season Player Statistics</p>
+        </div>
+        
+        <div class="upload-section" id="uploadSection">
+            <div class="upload-box">
+                <label for="csvFile" class="upload-label">
+                    <div class="upload-btn">📁 Upload CSV File</div>
+                </label>
+                <input type="file" id="csvFile" accept=".csv">
+                <div class="upload-info">
+                    Upload your exported snap count CSV file<br>
+                    Expected columns: pos, player_name, season_year, prev_team, current_team, current_team_name, offense, defense, special_teams, offense_2025
+                </div>
+                <div class="file-name" id="fileName"></div>
+            </div>
+        </div>
+        
+        <div class="controls" id="controls">
+            <div class="control-group">
+                <label for="teamFilter">Team:</label>
+                <select id="teamFilter">
+                    <option value="">Select a team...</option>
+                </select>
+            </div>
+            
+            <div class="control-group">
+                <label for="posFilter">Position:</label>
+                <select id="posFilter">
+                    <option value="all">All Positions</option>
+                </select>
+            </div>
+            
+            <div class="control-group">
+                <label for="searchPlayer">Search:</label>
+                <input type="search" id="searchPlayer" placeholder="Player name...">
+            </div>
+            
+            <div class="toggle-group">
+                <div class="toggle-item">
+                    <input type="checkbox" id="showOffense" checked>
+                    <label for="showOffense">Offense</label>
+                </div>
+                <div class="toggle-item">
+                    <input type="checkbox" id="showDefense">
+                    <label for="showDefense">Defense</label>
+                </div>
+                <div class="toggle-item">
+                    <input type="checkbox" id="showST">
+                    <label for="showST">Special Teams</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="player-list" id="playerList"></div>
+    </div>
+
+    <script>
+        let allData = [];
+        let playersByTeam = {};
+        let teams = [];
+        
+        // Master NFL team list with team colors
+        const NFL_TEAMS = {
+            'crd': { name: 'Arizona Cardinals', primary: '#97233F', secondary: '#000000' },
+            'atl': { name: 'Atlanta Falcons', primary: '#A71930', secondary: '#000000' },
+            'rav': { name: 'Baltimore Ravens', primary: '#241773', secondary: '#000000' },
+            'buf': { name: 'Buffalo Bills', primary: '#00338D', secondary: '#C60C30' },
+            'car': { name: 'Carolina Panthers', primary: '#0085CA', secondary: '#101820' },
+            'chi': { name: 'Chicago Bears', primary: '#C83803', secondary: '#0B162A' },
+            'cin': { name: 'Cincinnati Bengals', primary: '#FB4F14', secondary: '#000000' },
+            'cle': { name: 'Cleveland Browns', primary: '#311D00', secondary: '#FF3C00' },
+            'dal': { name: 'Dallas Cowboys', primary: '#041E42', secondary: '#869397' },
+            'den': { name: 'Denver Broncos', primary: '#FB4F14', secondary: '#002244' },
+            'det': { name: 'Detroit Lions', primary: '#0076B6', secondary: '#B0B7BC' },
+            'gnb': { name: 'Green Bay Packers', primary: '#203731', secondary: '#FFB612' },
+            'htx': { name: 'Houston Texans', primary: '#03202F', secondary: '#A71930' },
+            'clt': { name: 'Indianapolis Colts', primary: '#002C5F', secondary: '#A2AAAD' },
+            'jax': { name: 'Jacksonville Jaguars', primary: '#006778', secondary: '#D7A22A' },
+            'kan': { name: 'Kansas City Chiefs', primary: '#E31837', secondary: '#FFB81C' },
+            'rai': { name: 'Las Vegas Raiders', primary: '#000000', secondary: '#A5ACAF' },
+            'sdg': { name: 'Los Angeles Chargers', primary: '#0080C6', secondary: '#FFC20E' },
+            'ram': { name: 'Los Angeles Rams', primary: '#003594', secondary: '#FFA300' },
+            'sea': { name: 'Seattle Seahawks', primary: '#002244', secondary: '#69BE28' },
+            'sfo': { name: 'San Francisco 49ers', primary: '#AA0000', secondary: '#B3995D' },
+            'tam': { name: 'Tampa Bay Buccaneers', primary: '#D50A0A', secondary: '#FF7900' },
+            'oti': { name: 'Tennessee Titans', primary: '#0C2340', secondary: '#4B92DB' },
+            'nyg': { name: 'New York Giants', primary: '#0B2265', secondary: '#A71930' },
+            'nyj': { name: 'New York Jets', primary: '#125740', secondary: '#000000' },
+            'phi': { name: 'Philadelphia Eagles', primary: '#004C54', secondary: '#A5ACAF' },
+            'pit': { name: 'Pittsburgh Steelers', primary: '#FFB612', secondary: '#101820' },
+            'nwe': { name: 'New England Patriots', primary: '#002244', secondary: '#C60C30' },
+            'was': { name: 'Washington Commanders', primary: '#5A1414', secondary: '#FFB612' },
+            'mia': { name: 'Miami Dolphins', primary: '#008E97', secondary: '#FC4C02' },
+            'min': { name: 'Minnesota Vikings', primary: '#4F2683', secondary: '#FFC62F' },
+            'nor': { name: 'New Orleans Saints', primary: '#D3BC8D', secondary: '#101820' }
+        };
+
+        // Handle file upload
+        document.getElementById('csvFile').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            
+            document.getElementById('fileName').textContent = `Loading ${file.name}...`;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const csv = e.target.result;
+                parseCSV(csv);
+                document.getElementById('fileName').textContent = `✓ Loaded: ${file.name}`;
+                document.getElementById('uploadSection').style.display = 'none';
+                document.getElementById('controls').classList.add('active');
+                document.getElementById('playerList').classList.add('active');
+            };
+            reader.readAsText(file);
+        });
+
+        function parseCSV(csv) {
+            const lines = csv.trim().split('\n');
+            const headers = lines[0].split(',').map(h => h.trim().replace(/"/g, ''));
+            
+            allData = [];
+            const teamIdsInData = new Set();
+            
+            for (let i = 1; i < lines.length; i++) {
+                const values = lines[i].split(',').map(v => v.trim().replace(/"/g, ''));
+                const row = {};
+                
+                headers.forEach((header, index) => {
+                    row[header] = values[index];
+                });
+                
+                // Convert numbers
+                row.season_year = parseInt(row.season_year);
+                row.offense = parseInt(row.offense);
+                row.defense = parseInt(row.defense);
+                row.special_teams = parseInt(row.special_teams);
+                row.offense_2025 = parseInt(row.offense_2025);
+                
+                allData.push(row);
+                
+                // Collect team IDs present in the data
+                if (row.current_team) {
+                    teamIdsInData.add(row.current_team);
+                }
+            }
+            
+            // Build teams array using master list for teams present in data
+            teams = Array.from(teamIdsInData)
+                .filter(teamId => NFL_TEAMS[teamId]) // Only include teams we have in our master list
+                .map(teamId => ({
+                    id: teamId,
+                    name: NFL_TEAMS[teamId].name,
+                    primary: NFL_TEAMS[teamId].primary,
+                    secondary: NFL_TEAMS[teamId].secondary
+                }))
+                .sort((a, b) => a.name.localeCompare(b.name));
+            
+            // Populate team filter with full team names
+            const teamFilter = document.getElementById('teamFilter');
+            teamFilter.innerHTML = '<option value="">Select a team...</option>';
+            teams.forEach(team => {
+                const option = document.createElement('option');
+                option.value = team.id;
+                option.textContent = team.name; // This shows the full team name from current_team_name
+                teamFilter.appendChild(option);
+            });
+            
+            // Group data by team
+            groupDataByTeam();
+        }
+
+        function groupDataByTeam() {
+            playersByTeam = {};
+            
+            allData.forEach(row => {
+                const teamId = row.current_team;
+                if (!playersByTeam[teamId]) {
+                    playersByTeam[teamId] = {};
+                }
+                
+                if (!playersByTeam[teamId][row.player_name]) {
+                    playersByTeam[teamId][row.player_name] = {
+                        name: row.player_name,
+                        position: row.pos,
+                        offense_2025: row.offense_2025,
+                        currentTeam: row.current_team_name,
+                        current: null,
+                        history: []
+                    };
+                }
+                
+                if (row.season_year === 2025 && row.prev_team === teamId) {
+                    playersByTeam[teamId][row.player_name].current = row;
+                } else {
+                    playersByTeam[teamId][row.player_name].history.push(row);
+                }
+            });
+        }
+
+        function renderPlayers() {
+            const selectedTeam = document.getElementById('teamFilter').value;
+            if (!selectedTeam) {
+                document.getElementById('playerList').innerHTML = '<div class="no-results">Please select a team</div>';
+                return;
+            }
+            
+            // Get team colors
+            const teamData = teams.find(t => t.id === selectedTeam);
+            const primaryColor = teamData ? teamData.primary : '#667eea';
+            const secondaryColor = teamData ? teamData.secondary : '#764ba2';
+            
+            // Update header colors
+            const header = document.querySelector('.header');
+            header.style.background = `linear-gradient(135deg, ${primaryColor} 0%, ${secondaryColor} 100%)`;
+            
+            // Update CSS variables for dynamic styling
+            document.documentElement.style.setProperty('--team-primary', primaryColor);
+            document.documentElement.style.setProperty('--team-secondary', secondaryColor);
+            
+            const searchTerm = document.getElementById('searchPlayer').value.toLowerCase();
+            const positionFilter = document.getElementById('posFilter').value;
+            const showOffense = document.getElementById('showOffense').checked;
+            const showDefense = document.getElementById('showDefense').checked;
+            const showST = document.getElementById('showST').checked;
+            
+            const playerList = document.getElementById('playerList');
+            playerList.innerHTML = '';
+            
+            const teamPlayers = playersByTeam[selectedTeam] || {};
+            
+            // Update position filter options based on selected team
+            const positions = [...new Set(Object.values(teamPlayers).map(p => p.position))].sort();
+            const posFilter = document.getElementById('posFilter');
+            const currentPos = posFilter.value;
+            posFilter.innerHTML = '<option value="all">All Positions</option>';
+            positions.forEach(pos => {
+                const option = document.createElement('option');
+                option.value = pos;
+                option.textContent = pos;
+                if (pos === currentPos) option.selected = true;
+                posFilter.appendChild(option);
+            });
+            
+            const filteredPlayers = Object.values(teamPlayers)
+                .filter(player => {
+                    const matchesSearch = player.name.toLowerCase().includes(searchTerm);
+                    const matchesPosition = positionFilter === 'all' || player.position === positionFilter;
+                    return matchesSearch && matchesPosition && player.current;
+                })
+                .sort((a, b) => {
+                    // Smart sorting based on visible columns
+                    // Priority: Offense > Defense > Special Teams (only count columns that are visible)
+                    if (showOffense) {
+                        const offenseDiff = b.current.offense - a.current.offense;
+                        if (offenseDiff !== 0) return offenseDiff;
+                    }
+                    if (showDefense) {
+                        const defenseDiff = b.current.defense - a.current.defense;
+                        if (defenseDiff !== 0) return defenseDiff;
+                    }
+                    if (showST) {
+                        const stDiff = b.current.special_teams - a.current.special_teams;
+                        if (stDiff !== 0) return stDiff;
+                    }
+                    // If all stats are equal, sort by name
+                    return a.name.localeCompare(b.name);
+                });
+            
+            if (filteredPlayers.length === 0) {
+                playerList.innerHTML = '<div class="no-results">No players found</div>';
+                return;
+            }
+            
+            filteredPlayers.forEach(player => {
+                const card = document.createElement('div');
+                card.className = 'player-card';
+                
+                const current = player.current;
+                
+                card.innerHTML = `
+                    <div class="player-header">
+                        <div class="player-info">
+                            <div class="player-name">${player.name}</div>
+                            <div class="position-badge">${player.position}</div>
+                        </div>
+                        <div class="current-stats">
+                            ${showOffense ? `<div class="stat-item">
+                                <div class="stat-label">Offense</div>
+                                <div class="stat-value">${current.offense}</div>
+                            </div>` : ''}
+                            ${showDefense ? `<div class="stat-item">
+                                <div class="stat-label">Defense</div>
+                                <div class="stat-value">${current.defense}</div>
+                            </div>` : ''}
+                            ${showST ? `<div class="stat-item">
+                                <div class="stat-label">Special Teams</div>
+                                <div class="stat-value">${current.special_teams}</div>
+                            </div>` : ''}
+                        </div>
+                        <div class="expand-icon">▼</div>
+                    </div>
+                    <div class="player-history">
+                        <table class="history-table">
+                            <thead>
+                                <tr>
+                                    <th>Season</th>
+                                    <th>Team</th>
+                                    <th>Pos</th>
+                                    ${showOffense ? '<th>Offense</th>' : ''}
+                                    ${showDefense ? '<th>Defense</th>' : ''}
+                                    ${showST ? '<th>ST</th>' : ''}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="team-badge current-season">${current.season_year}</span></td>
+                                    <td><span class="team-badge" style="background: ${NFL_TEAMS[current.prev_team]?.primary || '#6c757d'};">${current.prev_team.toUpperCase()}</span></td>
+                                    <td>${current.pos}</td>
+                                    ${showOffense ? `<td><strong>${current.offense}</strong></td>` : ''}
+                                    ${showDefense ? `<td><strong>${current.defense}</strong></td>` : ''}
+                                    ${showST ? `<td><strong>${current.special_teams}</strong></td>` : ''}
+                                </tr>
+                                ${player.history.map(h => `
+                                    <tr>
+                                        <td>${h.season_year}</td>
+                                        <td><span class="team-badge" style="background: ${NFL_TEAMS[h.prev_team]?.primary || '#6c757d'};">${h.prev_team.toUpperCase()}</span></td>
+                                        <td>${h.pos}</td>
+                                        ${showOffense ? `<td>${h.offense}</td>` : ''}
+                                        ${showDefense ? `<td>${h.defense}</td>` : ''}
+                                        ${showST ? `<td>${h.special_teams}</td>` : ''}
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                `;
+                
+                const header = card.querySelector('.player-header');
+                header.addEventListener('click', () => {
+                    card.classList.toggle('expanded');
+                });
+                
+                playerList.appendChild(card);
+            });
+        }
+
+        // Event listeners
+        document.getElementById('teamFilter').addEventListener('change', renderPlayers);
+        document.getElementById('posFilter').addEventListener('change', renderPlayers);
+        document.getElementById('searchPlayer').addEventListener('input', renderPlayers);
+        document.getElementById('showOffense').addEventListener('change', renderPlayers);
+        document.getElementById('showDefense').addEventListener('change', renderPlayers);
+        document.getElementById('showST').addEventListener('change', renderPlayers);
+    </script>
+</body>
+</html>
