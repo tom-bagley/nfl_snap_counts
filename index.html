@@ -58,6 +58,7 @@
             padding: 40px;
             background: white;
             transition: all 0.3s ease;
+            margin-bottom: 20px;
         }
         
         .upload-box:hover {
@@ -114,6 +115,31 @@
         
         .controls.active {
             display: flex;
+        }
+        
+        .view-toggle {
+            display: flex;
+            gap: 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 2px solid #dee2e6;
+        }
+        
+        .view-btn {
+            padding: 10px 20px;
+            background: white;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            color: #495057;
+            transition: all 0.3s ease;
+        }
+        
+        .view-btn.active {
+            background: linear-gradient(135deg, var(--team-primary) 0%, var(--team-secondary) 100%);
+            color: white;
         }
         
         .control-group {
@@ -315,6 +341,349 @@
             font-size: 1.1em;
         }
         
+        .formation-view {
+            padding: 40px;
+            background: linear-gradient(180deg, #2d5016 0%, #4a7c1f 50%, #2d5016 100%);
+            min-height: 600px;
+            display: none;
+            position: relative;
+        }
+        
+        .formation-view.active {
+            display: block;
+        }
+        
+        .modal-backdrop {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 99;
+        }
+        
+        .modal-backdrop.active {
+            display: block;
+        }
+        
+        .unit-selector {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .unit-btn {
+            padding: 12px 30px;
+            margin: 0 10px;
+            background: white;
+            border: 2px solid var(--team-primary);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--team-primary);
+            transition: all 0.3s ease;
+        }
+        
+        .unit-btn.active {
+            background: linear-gradient(135deg, var(--team-primary) 0%, var(--team-secondary) 100%);
+            color: white;
+        }
+        
+        .formation-grid {
+            position: relative;
+            max-width: 1100px;
+            margin: 0 auto;
+            min-height: 550px;
+        }
+        
+        .position-card {
+            position: absolute;
+            background: white;
+            border: 2px solid var(--team-primary);
+            border-radius: 6px;
+            padding: 8px 10px;
+            cursor: move;
+            transition: opacity 0.2s ease, box-shadow 0.2s ease;
+            min-width: 100px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            user-select: none;
+        }
+        
+        .position-card.dragging {
+            opacity: 0.5;
+            cursor: grabbing;
+            z-index: 1000;
+            transition: none;
+        }
+        
+        .position-card:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+            z-index: 10;
+        }
+        
+        .position-card.expanded {
+            cursor: default;
+        }
+        
+        .position-card.expanded:hover {
+            transform: none;
+        }
+        
+        .position-label {
+            font-size: 9px;
+            font-weight: 700;
+            color: var(--team-primary);
+            text-transform: uppercase;
+            margin-bottom: 2px;
+        }
+        
+        .player-number {
+            font-size: 20px;
+            font-weight: 900;
+            color: var(--team-primary);
+            line-height: 1;
+            margin-bottom: 2px;
+        }
+        
+        .player-name-card {
+            font-size: 10px;
+            font-weight: 700;
+            color: #212529;
+            margin-bottom: 2px;
+            line-height: 1.2;
+        }
+        
+        .snap-preview {
+            font-size: 9px;
+            color: #6c757d;
+            font-weight: 600;
+        }
+        
+        .position-card.expanded {
+            position: fixed !important;
+            top: 50% !important;
+            left: 50% !important;
+            transform: translate(-50%, -50%) !important;
+            z-index: 100;
+            min-width: 380px;
+            max-height: 80vh;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+        
+        .position-card.expanded::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .position-card.expanded::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+        
+        .position-card.expanded::-webkit-scrollbar-thumb {
+            background: var(--team-primary);
+            border-radius: 4px;
+        }
+        
+        .position-card.expanded::-webkit-scrollbar-thumb:hover {
+            background: var(--team-secondary);
+        }
+        
+        .depth-chart {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 2px solid #dee2e6;
+            display: none;
+            text-align: left;
+        }
+        
+        .position-card.expanded .depth-chart {
+            display: block;
+        }
+        
+        .depth-item {
+            padding: 6px;
+            margin: 3px 0;
+            background: #f8f9fa;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .depth-item:hover {
+            background: #e9ecef;
+        }
+        
+        .depth-player {
+            font-size: 11px;
+            font-weight: 600;
+            color: #212529;
+        }
+        
+        .depth-number {
+            font-size: 14px;
+            font-weight: 800;
+            color: var(--team-primary);
+            display: inline-block;
+            margin-right: 6px;
+        }
+        
+        /* Player detail view in depth chart */
+        .player-detail-view {
+            display: none;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 2px solid #dee2e6;
+            text-align: left;
+        }
+        
+        .position-card.show-detail .player-detail-view {
+            display: block;
+        }
+        
+        .position-card.show-detail .depth-chart {
+            display: none;
+        }
+        
+        .detail-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        
+        .back-btn {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .back-btn:hover {
+            background: #5a6268;
+        }
+        
+        .detail-stats {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+        
+        .detail-stat {
+            background: #f8f9fa;
+            padding: 8px 12px;
+            border-radius: 4px;
+            text-align: center;
+            flex: 1;
+            min-width: 80px;
+        }
+        
+        .detail-stat-label {
+            font-size: 10px;
+            color: #6c757d;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        
+        .detail-stat-value {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--team-primary);
+        }
+        
+        .detail-history {
+            margin-top: 12px;
+        }
+        
+        .detail-history-title {
+            font-size: 12px;
+            font-weight: 700;
+            color: #495057;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+        
+        .history-row {
+            background: #f8f9fa;
+            padding: 8px;
+            margin-bottom: 4px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        
+        .history-row:last-child {
+            margin-bottom: 0;
+        }
+        
+        .history-row-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 4px;
+        }
+        
+        .history-year {
+            font-weight: 700;
+            color: #212529;
+        }
+        
+        .history-stats {
+            display: flex;
+            gap: 12px;
+            font-size: 11px;
+            color: #6c757d;
+        }
+        
+        .history-stats span {
+            font-weight: 600;
+        }
+        
+        .history-stats strong {
+            color: #212529;
+        }
+        
+        /* Position layouts for offense */
+        .pos-LWR { left: 5%; top: 5%; }
+        .pos-RWR { right: 5%; top: 5%; }
+        .pos-SWR { left: 25%; top: 20%; }
+        .pos-LT { left: 25%; top: 50%; }
+        .pos-LG { left: 35%; top: 50%; }
+        .pos-C { left: 45%; top: 50%; }
+        .pos-RG { right: 35%; top: 50%; }
+        .pos-RT { right: 25%; top: 50%; }
+        .pos-TE { right: 25%; top: 35%; }
+        .pos-QB { left: 45%; top: 70%; }
+        .pos-RB { left: 45%; top: 85%; }
+        .pos-FB { right: 45%; top: 85%; }
+        
+        /* Position layouts for defense */
+        .pos-LDE { left: 25%; top: 15%; }
+        .pos-NT { left: 45%; top: 15%; }
+        .pos-DT { left: 38%; top: 15%; }
+        .pos-LDT { left: 35%; top: 15%; }
+        .pos-RDT { right: 35%; top: 15%; }
+        .pos-RDE { right: 25%; top: 15%; }
+        .pos-DE { left: 30%; top: 15%; }
+        .pos-LOLB { left: 15%; top: 35%; }
+        .pos-WLB { left: 30%; top: 35%; }
+        .pos-MLB { left: 45%; top: 35%; }
+        .pos-LILB { left: 38%; top: 35%; }
+        .pos-RILB { right: 38%; top: 35%; }
+        .pos-ROLB { right: 15%; top: 35%; }
+        .pos-LCB { left: 10%; top: 60%; }
+        .pos-SS { left: 35%; top: 70%; }
+        .pos-FS { right: 35%; top: 70%; }
+        .pos-RCB { right: 10%; top: 60%; }
+        .pos-NB { left: 45%; top: 55%; }
+        
         @media (max-width: 768px) {
             .controls {
                 flex-direction: column;
@@ -349,6 +718,19 @@
             .history-table td {
                 padding: 8px 4px;
             }
+            
+            .formation-grid {
+                min-height: 400px;
+            }
+            
+            .position-card {
+                min-width: 80px;
+                padding: 6px;
+            }
+            
+            .position-card.expanded {
+                min-width: 260px;
+            }
         }
     </style>
 </head>
@@ -371,9 +753,26 @@
                 </div>
                 <div class="file-name" id="fileName"></div>
             </div>
+            
+            <div class="upload-box">
+                <label for="jsonFile" class="upload-label">
+                    <div class="upload-btn" style="background: linear-gradient(135deg, #28a745 0%, #20c997 100%);">📊 Upload Depth Chart JSON</div>
+                </label>
+                <input type="file" id="jsonFile" accept=".json">
+                <div class="upload-info">
+                    Optional: Upload depth chart JSON with all 32 teams<br>
+                    This will enhance the Depth Chart view with player numbers
+                </div>
+                <div class="file-name" id="jsonFileName"></div>
+            </div>
         </div>
         
         <div class="controls" id="controls">
+            <div class="view-toggle">
+                <button class="view-btn active" data-view="list">List View</button>
+                <button class="view-btn" data-view="formation">Depth Chart</button>
+            </div>
+            
             <div class="control-group">
                 <label for="teamFilter">Team:</label>
                 <select id="teamFilter">
@@ -381,32 +780,35 @@
                 </select>
             </div>
             
-            <div class="control-group">
+            <div class="control-group list-only">
                 <label for="posFilter">Position:</label>
                 <select id="posFilter">
                     <option value="all">All Positions</option>
                 </select>
             </div>
             
-            <div class="control-group">
+            <div class="control-group list-only">
                 <label for="searchPlayer">Search:</label>
                 <input type="search" id="searchPlayer" placeholder="Player name...">
             </div>
             
-            <div class="toggle-group">
-                <div class="toggle-item">
-                    <input type="checkbox" id="showOffense" checked>
-                    <label for="showOffense">Offense</label>
-                </div>
-                <div class="toggle-item">
-                    <input type="checkbox" id="showDefense">
-                    <label for="showDefense">Defense</label>
-                </div>
-                <div class="toggle-item">
-                    <input type="checkbox" id="showST">
-                    <label for="showST">Special Teams</label>
-                </div>
+            <div class="control-group list-only">
+                <label for="snapTypeFilter">Sort by:</label>
+                <select id="snapTypeFilter">
+                    <option value="offense">Offense Snaps</option>
+                    <option value="defense">Defense Snaps</option>
+                    <option value="special_teams">Special Teams Snaps</option>
+                </select>
             </div>
+        </div>
+        
+        <div class="formation-view" id="formationView">
+            <div class="modal-backdrop" id="modalBackdrop"></div>
+            <div class="unit-selector">
+                <button class="unit-btn active" data-unit="offense">Offense</button>
+                <button class="unit-btn" data-unit="defense">Defense</button>
+            </div>
+            <div class="formation-grid" id="formationGrid"></div>
         </div>
         
         <div class="player-list" id="playerList"></div>
@@ -416,6 +818,11 @@
         let allData = [];
         let playersByTeam = {};
         let teams = [];
+        let currentView = 'list';
+        let currentUnit = 'offense';
+        
+        // Depth chart data - will be populated from JSON upload
+        let DEPTH_CHARTS = {};
         
         // Master NFL team list with team colors
         const NFL_TEAMS = {
@@ -453,7 +860,7 @@
             'nor': { name: 'New Orleans Saints', primary: '#D3BC8D', secondary: '#101820' }
         };
 
-        // Handle file upload
+        // Handle CSV file upload
         document.getElementById('csvFile').addEventListener('change', function(e) {
             const file = e.target.files[0];
             if (!file) return;
@@ -465,12 +872,40 @@
                 const csv = e.target.result;
                 parseCSV(csv);
                 document.getElementById('fileName').textContent = `✓ Loaded: ${file.name}`;
-                document.getElementById('uploadSection').style.display = 'none';
-                document.getElementById('controls').classList.add('active');
-                document.getElementById('playerList').classList.add('active');
+                checkIfReadyToShow();
             };
             reader.readAsText(file);
         });
+        
+        // Handle JSON depth chart upload
+        document.getElementById('jsonFile').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            
+            document.getElementById('jsonFileName').textContent = `Loading ${file.name}...`;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const json = JSON.parse(e.target.result);
+                    DEPTH_CHARTS = json;
+                    document.getElementById('jsonFileName').textContent = `✓ Loaded: ${file.name} (${Object.keys(json).length} teams)`;
+                    console.log('Depth charts loaded:', Object.keys(DEPTH_CHARTS));
+                } catch (error) {
+                    document.getElementById('jsonFileName').textContent = `✗ Error loading JSON: ${error.message}`;
+                    console.error('JSON parse error:', error);
+                }
+            };
+            reader.readAsText(file);
+        });
+        
+        function checkIfReadyToShow() {
+            if (allData.length > 0) {
+                document.getElementById('uploadSection').style.display = 'none';
+                document.getElementById('controls').classList.add('active');
+                document.getElementById('playerList').classList.add('active');
+            }
+        }
 
         function parseCSV(csv) {
             const lines = csv.trim().split('\n');
@@ -487,7 +922,6 @@
                     row[header] = values[index];
                 });
                 
-                // Convert numbers
                 row.season_year = parseInt(row.season_year);
                 row.offense = parseInt(row.offense);
                 row.defense = parseInt(row.defense);
@@ -496,15 +930,13 @@
                 
                 allData.push(row);
                 
-                // Collect team IDs present in the data
                 if (row.current_team) {
                     teamIdsInData.add(row.current_team);
                 }
             }
             
-            // Build teams array using master list for teams present in data
             teams = Array.from(teamIdsInData)
-                .filter(teamId => NFL_TEAMS[teamId]) // Only include teams we have in our master list
+                .filter(teamId => NFL_TEAMS[teamId])
                 .map(teamId => ({
                     id: teamId,
                     name: NFL_TEAMS[teamId].name,
@@ -513,17 +945,15 @@
                 }))
                 .sort((a, b) => a.name.localeCompare(b.name));
             
-            // Populate team filter with full team names
             const teamFilter = document.getElementById('teamFilter');
-            teamFilter.innerHTML = '<option value="">Select a team...</option>';
+            teamFilter.innerHTML = '<option value="">Select a team...</option><option value="all">All Teams</option>';
             teams.forEach(team => {
                 const option = document.createElement('option');
                 option.value = team.id;
-                option.textContent = team.name; // This shows the full team name from current_team_name
+                option.textContent = team.name;
                 teamFilter.appendChild(option);
             });
             
-            // Group data by team
             groupDataByTeam();
         }
 
@@ -562,32 +992,48 @@
                 return;
             }
             
-            // Get team colors
-            const teamData = teams.find(t => t.id === selectedTeam);
-            const primaryColor = teamData ? teamData.primary : '#667eea';
-            const secondaryColor = teamData ? teamData.secondary : '#764ba2';
+            // Handle team colors - use default if "All Teams" is selected
+            let primaryColor = '#667eea';
+            let secondaryColor = '#764ba2';
             
-            // Update header colors
+            if (selectedTeam !== 'all') {
+                const teamData = teams.find(t => t.id === selectedTeam);
+                if (teamData) {
+                    primaryColor = teamData.primary;
+                    secondaryColor = teamData.secondary;
+                }
+            }
+            
             const header = document.querySelector('.header');
             header.style.background = `linear-gradient(135deg, ${primaryColor} 0%, ${secondaryColor} 100%)`;
             
-            // Update CSS variables for dynamic styling
             document.documentElement.style.setProperty('--team-primary', primaryColor);
             document.documentElement.style.setProperty('--team-secondary', secondaryColor);
             
             const searchTerm = document.getElementById('searchPlayer').value.toLowerCase();
             const positionFilter = document.getElementById('posFilter').value;
-            const showOffense = document.getElementById('showOffense').checked;
-            const showDefense = document.getElementById('showDefense').checked;
-            const showST = document.getElementById('showST').checked;
+            const snapType = document.getElementById('snapTypeFilter').value;
             
             const playerList = document.getElementById('playerList');
             playerList.innerHTML = '';
             
-            const teamPlayers = playersByTeam[selectedTeam] || {};
+            // Get players from selected team or all teams
+            let allPlayers = [];
+            if (selectedTeam === 'all') {
+                // Combine players from all teams
+                Object.keys(playersByTeam).forEach(teamId => {
+                    Object.values(playersByTeam[teamId]).forEach(player => {
+                        if (player.current) {
+                            allPlayers.push(player);
+                        }
+                    });
+                });
+            } else {
+                const teamPlayers = playersByTeam[selectedTeam] || {};
+                allPlayers = Object.values(teamPlayers).filter(p => p.current);
+            }
             
-            // Update position filter options based on selected team
-            const positions = [...new Set(Object.values(teamPlayers).map(p => p.position))].sort();
+            const positions = [...new Set(allPlayers.map(p => p.position))].sort();
             const posFilter = document.getElementById('posFilter');
             const currentPos = posFilter.value;
             posFilter.innerHTML = '<option value="all">All Positions</option>';
@@ -599,28 +1045,16 @@
                 posFilter.appendChild(option);
             });
             
-            const filteredPlayers = Object.values(teamPlayers)
+            const filteredPlayers = allPlayers
                 .filter(player => {
                     const matchesSearch = player.name.toLowerCase().includes(searchTerm);
                     const matchesPosition = positionFilter === 'all' || player.position === positionFilter;
-                    return matchesSearch && matchesPosition && player.current;
+                    return matchesSearch && matchesPosition;
                 })
                 .sort((a, b) => {
-                    // Smart sorting based on visible columns
-                    // Priority: Offense > Defense > Special Teams (only count columns that are visible)
-                    if (showOffense) {
-                        const offenseDiff = b.current.offense - a.current.offense;
-                        if (offenseDiff !== 0) return offenseDiff;
-                    }
-                    if (showDefense) {
-                        const defenseDiff = b.current.defense - a.current.defense;
-                        if (defenseDiff !== 0) return defenseDiff;
-                    }
-                    if (showST) {
-                        const stDiff = b.current.special_teams - a.current.special_teams;
-                        if (stDiff !== 0) return stDiff;
-                    }
-                    // If all stats are equal, sort by name
+                    // Sort by the selected snap type
+                    const snapDiff = b.current[snapType] - a.current[snapType];
+                    if (snapDiff !== 0) return snapDiff;
                     return a.name.localeCompare(b.name);
                 });
             
@@ -635,25 +1069,35 @@
                 
                 const current = player.current;
                 
+                // Determine label based on snap type
+                let snapLabel = 'Offense';
+                if (snapType === 'defense') snapLabel = 'Defense';
+                if (snapType === 'special_teams') snapLabel = 'Special Teams';
+                
+                // Get team colors for this player
+                let cardPrimaryColor = primaryColor;
+                let cardSecondaryColor = secondaryColor;
+                
+                if (selectedTeam === 'all' && current.prev_team) {
+                    const playerTeam = NFL_TEAMS[current.prev_team];
+                    if (playerTeam) {
+                        cardPrimaryColor = playerTeam.primary;
+                        cardSecondaryColor = playerTeam.secondary;
+                    }
+                }
+                
                 card.innerHTML = `
                     <div class="player-header">
                         <div class="player-info">
                             <div class="player-name">${player.name}</div>
-                            <div class="position-badge">${player.position}</div>
+                            <div class="position-badge" style="background: linear-gradient(135deg, ${cardPrimaryColor} 0%, ${cardSecondaryColor} 100%);">${player.position}</div>
+                            ${selectedTeam === 'all' ? `<div class="team-badge" style="background: ${cardPrimaryColor};">${current.prev_team.toUpperCase()}</div>` : ''}
                         </div>
                         <div class="current-stats">
-                            ${showOffense ? `<div class="stat-item">
-                                <div class="stat-label">Offense</div>
-                                <div class="stat-value">${current.offense}</div>
-                            </div>` : ''}
-                            ${showDefense ? `<div class="stat-item">
-                                <div class="stat-label">Defense</div>
-                                <div class="stat-value">${current.defense}</div>
-                            </div>` : ''}
-                            ${showST ? `<div class="stat-item">
-                                <div class="stat-label">Special Teams</div>
-                                <div class="stat-value">${current.special_teams}</div>
-                            </div>` : ''}
+                            <div class="stat-item">
+                                <div class="stat-label">${snapLabel}</div>
+                                <div class="stat-value">${current[snapType]}</div>
+                            </div>
                         </div>
                         <div class="expand-icon">▼</div>
                     </div>
@@ -661,12 +1105,12 @@
                         <table class="history-table">
                             <thead>
                                 <tr>
-                                    <th>Season</th>
-                                    <th>Team</th>
-                                    <th>Pos</th>
-                                    ${showOffense ? '<th>Offense</th>' : ''}
-                                    ${showDefense ? '<th>Defense</th>' : ''}
-                                    ${showST ? '<th>ST</th>' : ''}
+                                    <th style="background: linear-gradient(135deg, ${cardPrimaryColor} 0%, ${cardSecondaryColor} 100%);">Season</th>
+                                    <th style="background: linear-gradient(135deg, ${cardPrimaryColor} 0%, ${cardSecondaryColor} 100%);">Team</th>
+                                    <th style="background: linear-gradient(135deg, ${cardPrimaryColor} 0%, ${cardSecondaryColor} 100%);">Pos</th>
+                                    <th style="background: linear-gradient(135deg, ${cardPrimaryColor} 0%, ${cardSecondaryColor} 100%);">Offense</th>
+                                    <th style="background: linear-gradient(135deg, ${cardPrimaryColor} 0%, ${cardSecondaryColor} 100%);">Defense</th>
+                                    <th style="background: linear-gradient(135deg, ${cardPrimaryColor} 0%, ${cardSecondaryColor} 100%);">ST</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -674,18 +1118,18 @@
                                     <td><span class="team-badge current-season">${current.season_year}</span></td>
                                     <td><span class="team-badge" style="background: ${NFL_TEAMS[current.prev_team]?.primary || '#6c757d'};">${current.prev_team.toUpperCase()}</span></td>
                                     <td>${current.pos}</td>
-                                    ${showOffense ? `<td><strong>${current.offense}</strong></td>` : ''}
-                                    ${showDefense ? `<td><strong>${current.defense}</strong></td>` : ''}
-                                    ${showST ? `<td><strong>${current.special_teams}</strong></td>` : ''}
+                                    <td><strong>${current.offense}</strong></td>
+                                    <td><strong>${current.defense}</strong></td>
+                                    <td><strong>${current.special_teams}</strong></td>
                                 </tr>
                                 ${player.history.map(h => `
                                     <tr>
                                         <td>${h.season_year}</td>
                                         <td><span class="team-badge" style="background: ${NFL_TEAMS[h.prev_team]?.primary || '#6c757d'};">${h.prev_team.toUpperCase()}</span></td>
                                         <td>${h.pos}</td>
-                                        ${showOffense ? `<td>${h.offense}</td>` : ''}
-                                        ${showDefense ? `<td>${h.defense}</td>` : ''}
-                                        ${showST ? `<td>${h.special_teams}</td>` : ''}
+                                        <td>${h.offense}</td>
+                                        <td>${h.defense}</td>
+                                        <td>${h.special_teams}</td>
                                     </tr>
                                 `).join('')}
                             </tbody>
@@ -702,13 +1146,390 @@
             });
         }
 
+        // Formation view functions
+        function renderFormation() {
+            const selectedTeam = document.getElementById('teamFilter').value;
+            const grid = document.getElementById('formationGrid');
+            
+            if (!selectedTeam) {
+                grid.innerHTML = '<div style="text-align:center; color:white; padding:60px; font-size:1.2em;">Select a team to view depth chart</div>';
+                return;
+            }
+            
+            const depthChart = DEPTH_CHARTS[selectedTeam]?.[currentUnit];
+            if (!depthChart) {
+                grid.innerHTML = '<div style="text-align:center; color:white; padding:60px; font-size:1.2em;">Depth chart not available for this team. Please upload the JSON file.</div>';
+                return;
+            }
+            
+            grid.innerHTML = '';
+            
+            Object.keys(depthChart).forEach(position => {
+                const players = depthChart[position];
+                const starter = players[0];
+                
+                const card = document.createElement('div');
+                card.className = `position-card pos-${position}`;
+                
+                const starterData = findPlayerData(starter.name, selectedTeam);
+                const snapCount = starterData ? (currentUnit === 'offense' ? starterData.offense : starterData.defense) : 0;
+                
+                card.innerHTML = `
+                    <div class="position-label">${position}</div>
+                    <div class="player-number">${starter.num}</div>
+                    <div class="player-name-card">${formatPlayerName(starter.name)}</div>
+                    <div class="snap-preview">${snapCount} snaps</div>
+                    <div class="depth-chart">
+                        ${players.map((p, idx) => {
+                            const pData = findPlayerData(p.name, selectedTeam);
+                            const pSnaps = pData ? (currentUnit === 'offense' ? pData.offense : pData.defense) : 0;
+                            return `
+                                <div class="depth-item" data-player-name="${p.name}">
+                                    <span class="depth-number">${p.num}</span>
+                                    <span class="depth-player">${formatPlayerName(p.name)}</span>
+                                    <div class="snap-preview">${pSnaps} snaps</div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                    <div class="player-detail-view"></div>
+                `;
+                
+                // Append to grid first so browser can calculate position
+                grid.appendChild(card);
+                
+                // Convert CSS positioning to explicit left/top after a brief delay
+                setTimeout(() => {
+                    const rect = card.getBoundingClientRect();
+                    const gridRect = grid.getBoundingClientRect();
+                    
+                    // Calculate position as percentage of grid
+                    const leftPercent = ((rect.left - gridRect.left) / gridRect.width) * 100;
+                    const topPercent = ((rect.top - gridRect.top) / gridRect.height) * 100;
+                    
+                    // Now set explicit left/top and remove right positioning
+                    card.style.left = `${leftPercent}%`;
+                    card.style.top = `${topPercent}%`;
+                    card.style.right = 'auto';
+                }, 0);
+                
+                // Click on the card expands depth chart
+                card.addEventListener('click', function(e) {
+                    // Don't open if we just dragged
+                    if (hasDragged) {
+                        hasDragged = false;
+                        return;
+                    }
+                    
+                    if (e.target.closest('.depth-item')) {
+                        return; // Don't expand when clicking depth items
+                    }
+                    if (e.target.closest('.back-btn')) {
+                        return; // Don't expand when clicking back button
+                    }
+                    e.stopPropagation();
+                    const wasExpanded = card.classList.contains('expanded');
+                    const wasShowingDetail = card.classList.contains('show-detail');
+                    
+                    document.querySelectorAll('.position-card').forEach(c => {
+                        c.classList.remove('expanded');
+                        c.classList.remove('show-detail');
+                    });
+                    
+                    const backdrop = document.getElementById('modalBackdrop');
+                    
+                    if (!wasExpanded || wasShowingDetail) {
+                        card.classList.add('expanded');
+                        card.classList.remove('show-detail');
+                        backdrop.classList.add('active');
+                    } else {
+                        backdrop.classList.remove('active');
+                    }
+                });
+                
+                // Add drag and drop functionality
+                let isDragging = false;
+                let hasDragged = false;
+                let startX, startY;
+                let offsetX, offsetY;
+                
+                card.addEventListener('mousedown', function(e) {
+                    // Don't start dragging if card is expanded or clicking on interactive elements
+                    if (card.classList.contains('expanded') || 
+                        e.target.closest('.depth-item') || 
+                        e.target.closest('.back-btn')) {
+                        return;
+                    }
+                    
+                    isDragging = true;
+                    hasDragged = false;
+                    card.classList.add('dragging');
+                    
+                    const rect = card.getBoundingClientRect();
+                    const gridRect = grid.getBoundingClientRect();
+                    
+                    startX = e.clientX;
+                    startY = e.clientY;
+                    offsetX = e.clientX - rect.left;
+                    offsetY = e.clientY - rect.top;
+                    
+                    // Store current position as percentages from the actual style
+                    const currentLeft = parseFloat(card.style.left) || 0;
+                    const currentTop = parseFloat(card.style.top) || 0;
+                    
+                    card.dataset.dragStartLeft = currentLeft;
+                    card.dataset.dragStartTop = currentTop;
+                    
+                    e.preventDefault();
+                });
+                
+                document.addEventListener('mousemove', function(e) {
+                    if (!isDragging || !card.classList.contains('dragging')) return;
+                    
+                    // Check if mouse has moved enough to be considered a drag
+                    const movedX = Math.abs(e.clientX - startX);
+                    const movedY = Math.abs(e.clientY - startY);
+                    
+                    if (movedX > 5 || movedY > 5) {
+                        hasDragged = true;
+                    }
+                    
+                    const gridRect = grid.getBoundingClientRect();
+                    
+                    // Calculate new position relative to grid
+                    const newX = e.clientX - gridRect.left - offsetX;
+                    const newY = e.clientY - gridRect.top - offsetY;
+                    
+                    // Convert to percentage
+                    const percentX = (newX / gridRect.width) * 100;
+                    const percentY = (newY / gridRect.height) * 100;
+                    
+                    // Constrain to grid bounds
+                    const constrainedX = Math.max(0, Math.min(95, percentX));
+                    const constrainedY = Math.max(0, Math.min(95, percentY));
+                    
+                    card.style.left = `${constrainedX}%`;
+                    card.style.top = `${constrainedY}%`;
+                    
+                    e.preventDefault();
+                });
+                
+                document.addEventListener('mouseup', function(e) {
+                    if (isDragging && card.classList.contains('dragging')) {
+                        isDragging = false;
+                        card.classList.remove('dragging');
+                        
+                        // If we didn't actually drag, reset position
+                        if (!hasDragged) {
+                            card.style.left = card.dataset.dragStartLeft + '%';
+                            card.style.top = card.dataset.dragStartTop + '%';
+                        }
+                    }
+                });
+                
+                // Click on depth items shows player detail
+                card.querySelectorAll('.depth-item').forEach(item => {
+                    item.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const playerName = this.dataset.playerName;
+                        showPlayerDetail(card, playerName, selectedTeam);
+                    });
+                });
+            });
+            
+            const backdrop = document.getElementById('modalBackdrop');
+            backdrop.addEventListener('click', function() {
+                document.querySelectorAll('.position-card').forEach(c => {
+                    c.classList.remove('expanded');
+                    c.classList.remove('show-detail');
+                });
+                backdrop.classList.remove('active');
+            });
+            
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.position-card')) {
+                    document.querySelectorAll('.position-card').forEach(c => {
+                        c.classList.remove('expanded');
+                        c.classList.remove('show-detail');
+                    });
+                    backdrop.classList.remove('active');
+                }
+            });
+        }
+        
+        function showPlayerDetail(card, playerName, teamId) {
+            const playerData = getPlayerHistory(playerName, teamId);
+            
+            if (!playerData) {
+                return;
+            }
+            
+            const detailView = card.querySelector('.player-detail-view');
+            
+            const current = playerData.current;
+            const history = playerData.history.sort((a, b) => b.season_year - a.season_year);
+            
+            detailView.innerHTML = `
+                <div class="detail-header">
+                    <div style="font-weight: 700; font-size: 14px;">${formatPlayerName(playerName)}</div>
+                    <button class="back-btn">← Back to Depth</button>
+                </div>
+                <div class="detail-stats">
+                    <div class="detail-stat">
+                        <div class="detail-stat-label">Offense</div>
+                        <div class="detail-stat-value">${current ? current.offense : 0}</div>
+                    </div>
+                    <div class="detail-stat">
+                        <div class="detail-stat-label">Defense</div>
+                        <div class="detail-stat-value">${current ? current.defense : 0}</div>
+                    </div>
+                    <div class="detail-stat">
+                        <div class="detail-stat-label">Special Teams</div>
+                        <div class="detail-stat-value">${current ? current.special_teams : 0}</div>
+                    </div>
+                </div>
+                ${history.length > 0 ? `
+                    <div class="detail-history">
+                        <div class="detail-history-title">Career History</div>
+                        ${history.map(h => `
+                            <div class="history-row">
+                                <div class="history-row-header">
+                                    <span class="history-year">${h.season_year} ${h.season_year === 2025 ? '(Current)' : ''}</span>
+                                    <span class="team-badge" style="background: ${NFL_TEAMS[h.prev_team]?.primary || '#6c757d'};">${h.prev_team.toUpperCase()}</span>
+                                </div>
+                                <div class="history-stats">
+                                    <span>OFF: <strong>${h.offense}</strong></span>
+                                    <span>DEF: <strong>${h.defense}</strong></span>
+                                    <span>ST: <strong>${h.special_teams}</strong></span>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                ` : ''}
+            `;
+            
+            card.classList.add('show-detail');
+            card.classList.add('expanded');
+            
+            const backdrop = document.getElementById('modalBackdrop');
+            backdrop.classList.add('active');
+            
+            // Back button handler
+            detailView.querySelector('.back-btn').addEventListener('click', function(e) {
+                e.stopPropagation();
+                card.classList.remove('show-detail');
+            });
+        }
+        
+        function getPlayerHistory(playerName, teamId) {
+            const normalized = normalizePlayerName(playerName);
+            
+            const playerRecords = allData.filter(row => {
+                const rowName = normalizePlayerName(row.player_name);
+                return rowName === normalized && row.current_team === teamId;
+            });
+            
+            if (playerRecords.length === 0) {
+                return null;
+            }
+            
+            const current = playerRecords.find(r => r.season_year === 2025 && r.prev_team === teamId);
+            const history = playerRecords.filter(r => !(r.season_year === 2025 && r.prev_team === teamId));
+            
+            return {
+                current: current,
+                history: history
+            };
+        }
+        
+        function findPlayerData(playerName, teamId) {
+            const normalized = normalizePlayerName(playerName);
+            return allData.find(row => {
+                const rowName = normalizePlayerName(row.player_name);
+                return rowName === normalized && 
+                       row.current_team === teamId && 
+                       row.season_year === 2025 &&
+                       row.prev_team === teamId;
+            });
+        }
+        
+        function normalizePlayerName(name) {
+            let normalized = name.trim();
+            if (normalized.includes(',')) {
+                const parts = normalized.split(',').map(p => p.trim());
+                normalized = `${parts[1]} ${parts[0]}`;
+            }
+            normalized = normalized
+                .replace(/\s+(Jr\.|Sr\.|III|II|IV)\.?/gi, '')
+                .replace(/\s+/g, ' ')
+                .toLowerCase();
+            return normalized;
+        }
+        
+        function formatPlayerName(name) {
+            if (name.includes(',')) {
+                const parts = name.split(',').map(p => p.trim());
+                return `${parts[1]} ${parts[0]}`;
+            }
+            return name;
+        }
+
         // Event listeners
-        document.getElementById('teamFilter').addEventListener('change', renderPlayers);
+        document.querySelectorAll('.view-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                currentView = this.dataset.view;
+                
+                if (currentView === 'list') {
+                    document.getElementById('playerList').classList.add('active');
+                    document.getElementById('formationView').classList.remove('active');
+                    document.querySelectorAll('.list-only').forEach(el => el.style.display = 'flex');
+                    renderPlayers();
+                } else {
+                    document.getElementById('playerList').classList.remove('active');
+                    document.getElementById('formationView').classList.add('active');
+                    document.querySelectorAll('.list-only').forEach(el => el.style.display = 'none');
+                    renderFormation();
+                }
+            });
+        });
+        
+        document.querySelectorAll('.unit-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.unit-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                currentUnit = this.dataset.unit;
+                renderFormation();
+            });
+        });
+        
+        document.getElementById('teamFilter').addEventListener('change', function() {
+            const teamData = teams.find(t => t.id === this.value);
+            if (teamData) {
+                updateTeamColors(teamData);
+            }
+            if (currentView === 'list') {
+                renderPlayers();
+            } else {
+                renderFormation();
+            }
+        });
+        
+        function updateTeamColors(teamData) {
+            const primaryColor = teamData.primary;
+            const secondaryColor = teamData.secondary;
+            
+            document.documentElement.style.setProperty('--team-primary', primaryColor);
+            document.documentElement.style.setProperty('--team-secondary', secondaryColor);
+            
+            const header = document.querySelector('.header');
+            header.style.background = `linear-gradient(135deg, ${primaryColor} 0%, ${secondaryColor} 100%)`;
+        }
+        
         document.getElementById('posFilter').addEventListener('change', renderPlayers);
         document.getElementById('searchPlayer').addEventListener('input', renderPlayers);
-        document.getElementById('showOffense').addEventListener('change', renderPlayers);
-        document.getElementById('showDefense').addEventListener('change', renderPlayers);
-        document.getElementById('showST').addEventListener('change', renderPlayers);
+        document.getElementById('snapTypeFilter').addEventListener('change', renderPlayers);
     </script>
 </body>
 </html>
