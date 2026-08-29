@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useMemo, useRef } from 'react';
 import { formatPlayerName, normalizePlayerName, snapTotal } from '../lib/data';
 
 const LAYOUT = {
@@ -20,8 +20,21 @@ function fallbackPosition(index, total) {
   return [14 + column * 24, 18 + row * 25];
 }
 
-function PlayerLine({ player, snapRow, category, starter, emptySeason, onSelect }) {
+function PlayerLine({ player, position, snapRow, historyRow, season, teamCode, category, starter, emptySeason, onSelect }) {
   const hasStats = Boolean(snapRow);
+  const historicalSelection = !hasStats && historyRow ? {
+    ...historyRow,
+    id: `depth-${season}-${teamCode}-${historyRow.playerKey}`,
+    playerName: formatPlayerName(player.name),
+    normalizedName: normalizePlayerName(player.name),
+    position,
+    season,
+    team: teamCode,
+    offense: 0,
+    defense: 0,
+    specialTeams: 0,
+  } : null;
+  const selectedRow = snapRow ?? historicalSelection;
   const snapLabel = hasStats
     ? `${snapTotal(snapRow, category).toLocaleString()} snaps`
     : emptySeason ? '0 snaps' : 'Stats not matched';
@@ -29,11 +42,12 @@ function PlayerLine({ player, snapRow, category, starter, emptySeason, onSelect 
     <button
       className={`depth-player ${starter ? 'is-starter' : ''}`}
       type="button"
-      onClick={() => hasStats && onSelect(snapRow)}
-      disabled={!hasStats}
+      onClick={() => selectedRow && onSelect(selectedRow)}
+      disabled={!selectedRow}
       title={hasStats
         ? `View ${formatPlayerName(player.name)} history`
-        : emptySeason ? 'No snaps recorded for this season yet' : 'No matching snap-count record'}
+        : historyRow ? `View ${formatPlayerName(player.name)} past seasons`
+          : emptySeason ? 'No NFL snap history found for this player' : 'No matching snap-count record'}
     >
       <span className="jersey-number">{player.num || '—'}</span>
       <span className="depth-player-copy">
@@ -44,10 +58,18 @@ function PlayerLine({ player, snapRow, category, starter, emptySeason, onSelect 
   );
 }
 
-export default function DepthChart({ chart, unit, rows, category, emptySeason, customLayout, onPositionMove, onSelectPlayer }) {
+export default function DepthChart({ chart, unit, rows, historyRows, season, teamCode, category, emptySeason, customLayout, onPositionMove, onSelectPlayer }) {
   const fieldRef = useRef(null);
   const dragRef = useRef(null);
   const rowByName = new Map(rows.map((row) => [row.normalizedName, row]));
+  const historyRowByName = useMemo(() => {
+    const latestRows = new Map();
+    historyRows.forEach((row) => {
+      const existing = latestRows.get(row.normalizedName);
+      if (!existing || row.season > existing.season) latestRows.set(row.normalizedName, row);
+    });
+    return latestRows;
+  }, [historyRows]);
   const positions = Object.entries(chart ?? {});
 
   const moveDrag = (event) => {
@@ -119,7 +141,11 @@ export default function DepthChart({ chart, unit, rows, category, emptySeason, c
                   <PlayerLine
                     key={`${player.num}-${player.name}`}
                     player={player}
+                    position={position}
                     snapRow={rowByName.get(normalizePlayerName(player.name))}
+                    historyRow={historyRowByName.get(normalizePlayerName(player.name))}
+                    season={season}
+                    teamCode={teamCode}
                     category={category}
                     starter={playerIndex === 0}
                     emptySeason={emptySeason}

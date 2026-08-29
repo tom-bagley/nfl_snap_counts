@@ -213,6 +213,9 @@ export default function App() {
                   chart={depthCharts[teamCode][unit]}
                   unit={unit}
                   rows={depthRows}
+                  historyRows={data.snapCounts}
+                  season={season}
+                  teamCode={teamCode}
                   category={category}
                   emptySeason={!seasonHasSnaps}
                   customLayout={currentLayout}
