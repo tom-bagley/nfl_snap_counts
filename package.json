@@ -4,9 +4,12 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "prepare-data": "node scripts/prepare-data.mjs",
+    "prepare:nfl-data": "node scripts/prepare-data.mjs",
+    "prepare:college-data": "node scripts/prepare-college-data.mjs",
+    "prepare-data": "npm run prepare:nfl-data && npm run prepare:college-data",
     "collect:snap-counts": "node scripts/collect-snap-counts.mjs",
     "collect:depth-charts": "node scripts/refresh-depth-charts.mjs",
+    "collect:college-data": "node scripts/collect-college-data.mjs",
     "collect:data": "node scripts/collect-data.mjs",
     "dev": "npm run prepare-data && vite",
     "build": "npm run prepare-data && vite build",

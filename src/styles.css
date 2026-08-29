@@ -50,6 +50,10 @@ button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px s
 }
 .brand strong { display: block; font-family: 'Barlow Condensed', sans-serif; font-size: 19px; letter-spacing: .12em; }
 .brand small { color: var(--muted); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; }
+.header-tools { display: flex; align-items: center; gap: 22px; }
+.league-switch { height: 36px; display: flex; padding: 3px; border: 1px solid var(--line); background: #091321; }
+.league-switch button { min-width: 68px; padding: 0 12px; border: 0; color: var(--muted); background: transparent; font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.league-switch button.active { color: #fff; background: color-mix(in srgb, var(--team-primary) 75%, #223047); box-shadow: inset 0 -2px 0 var(--team-secondary); }
 .data-stamp { color: #b8c2d0; font-size: 12px; text-transform: uppercase; letter-spacing: .09em; display: flex; align-items: center; gap: 9px; }
 .live-dot { width: 7px; height: 7px; border-radius: 99px; background: #48d597; box-shadow: 0 0 0 5px rgba(72,213,151,.11); }
 
@@ -85,6 +89,10 @@ main { max-width: 1500px; margin: 0 auto; padding: 0 34px 60px; }
 .hero-metrics div:last-child { grid-column: 1 / -1; border-top: 1px solid var(--line); border-right: 0; }
 .hero-metrics strong { display: block; max-width: 260px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: 700 27px/1 'Barlow Condensed', sans-serif; }
 .hero-metrics span { display: block; margin-top: 6px; color: var(--muted); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; }
+.college-hero .hero-copy h1 { max-width: 900px; font-size: clamp(48px, 7vw, 94px); }
+.college-hero .hero-metrics { grid-template-columns: repeat(3, minmax(100px, 1fr)); }
+.college-hero .hero-metrics div { border-top: 0; border-right: 1px solid var(--line); grid-column: auto; }
+.college-hero .hero-metrics div:last-child { border-right: 0; }
 
 .control-deck {
   position: relative; z-index: 4; margin: -1px 0 42px; padding: 20px 24px;
@@ -98,6 +106,11 @@ select { appearance: none; background-image: linear-gradient(45deg, transparent 
 .segmented-control > div { height: 42px; display: flex; border: 1px solid var(--line); background: #091321; padding: 3px; }
 .segmented-control button { flex: 1; border: 0; color: var(--muted); background: transparent; font-size: 11px; font-weight: 600; white-space: nowrap; }
 .segmented-control button.active { color: #fff; background: color-mix(in srgb, var(--team-primary) 75%, #223047); box-shadow: inset 0 -2px 0 var(--team-secondary); }
+.college-key { min-height: 42px; display: flex; align-items: center; gap: 12px; padding: 7px 10px; border: 1px solid var(--line); background: #091321; }
+.college-key > .five-star { font-size: 23px; }
+.college-key strong, .college-key small { display: block; }
+.college-key strong { font: 600 13px 'Barlow Condensed', sans-serif; text-transform: uppercase; letter-spacing: .04em; }
+.college-key small { margin-top: 3px; color: var(--muted); font-size: 8px; text-transform: uppercase; letter-spacing: .06em; }
 
 .section-heading, .list-toolbar { display: flex; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: 20px; }
 .section-heading h2, .list-toolbar h2 { margin: 0; font: 700 34px/1 'Barlow Condensed', sans-serif; text-transform: uppercase; letter-spacing: .01em; }
@@ -136,6 +149,11 @@ select { appearance: none; background-image: linear-gradient(45deg, transparent 
 .depth-player-copy { min-width: 0; display: flex; flex-direction: column; }
 .depth-player-copy strong { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: 600 12px 'Barlow Condensed', sans-serif; letter-spacing: .015em; }
 .depth-player-copy small { color: #9da9b9; font-size: 8px; text-transform: uppercase; letter-spacing: .04em; }
+.college-depth-player { position: relative; }
+.college-depth-player .depth-player-copy { flex: 1; }
+.college-depth-player .depth-player-copy strong { display: flex; align-items: center; gap: 4px; }
+.five-star { margin-left: 6px; color: #ffd56a; text-shadow: 0 0 12px rgba(255,213,106,.35); }
+.transfer-chip { flex: 0 0 auto; padding: 3px 4px; border: 1px solid rgba(112,198,255,.42); color: #8ed4ff; font: 700 8px 'Barlow Condensed', sans-serif; letter-spacing: .08em; }
 
 .season-notice, .empty-state { min-height: 300px; display: flex; align-items: center; justify-content: center; gap: 22px; border: 1px solid var(--line); background: var(--panel); padding: 45px; }
 .notice-icon, .error-mark { width: 58px; height: 58px; flex: 0 0 auto; display: grid; place-items: center; border: 1px solid var(--team-secondary); color: var(--team-secondary); font: 700 29px 'Barlow Condensed', sans-serif; }
@@ -143,7 +161,7 @@ select { appearance: none; background-image: linear-gradient(45deg, transparent 
 .season-notice p { max-width: 620px; margin: 0; color: var(--muted); line-height: 1.6; }
 .season-notice button { margin-left: auto; border: 0; padding: 12px 18px; background: var(--team-primary); color: #fff; font-weight: 700; }
 
-.list-section { min-height: 560px; }
+.list-section, .player-list-section { min-height: 560px; }
 .list-filters { display: flex; gap: 12px; }
 .list-filters label { min-width: 180px; display: flex; flex-direction: column; gap: 7px; }
 .player-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 1px solid var(--line); }
@@ -158,6 +176,7 @@ select { appearance: none; background-image: linear-gradient(45deg, transparent 
 .player-card-stat small { display: block; margin-top: 5px; color: var(--muted); font-size: 8px; text-transform: uppercase; letter-spacing: .08em; }
 .card-arrow { position: absolute; right: 20px; color: #617085; transition: transform .15s ease; }
 .player-card:hover .card-arrow { color: var(--team-secondary); transform: translate(2px, -2px); }
+.college-player-card .player-card-name .five-star { font-size: 13px; }
 .empty-state { flex-direction: column; gap: 8px; color: var(--muted); }
 .empty-state strong { color: var(--ink); font: 700 24px 'Barlow Condensed', sans-serif; text-transform: uppercase; }
 
@@ -183,6 +202,21 @@ select { appearance: none; background-image: linear-gradient(45deg, transparent 
 .history-row dl div { display: flex; flex-direction: column; align-items: flex-end; }
 .history-row dt { color: var(--muted); font-size: 7px; letter-spacing: .08em; }
 .history-row dd { margin: 2px 0 0; font: 600 16px 'Barlow Condensed', sans-serif; }
+.college-profile-facts { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--line); }
+.college-profile-facts div { min-width: 0; padding: 16px; border-right: 1px solid var(--line); }
+.college-profile-facts div:last-child { border-right: 0; }
+.college-profile-facts span, .college-ranks dt { display: block; color: var(--muted); font-size: 8px; letter-spacing: .09em; text-transform: uppercase; }
+.college-profile-facts strong { display: block; margin-top: 7px; overflow-wrap: anywhere; font: 600 15px 'Barlow Condensed', sans-serif; }
+.college-rating-block { margin-top: 24px; padding: 22px; border: 1px solid var(--line); background: #0a1422; }
+.college-rating-block h3 { margin: 0; font: 700 29px 'Barlow Condensed', sans-serif; text-transform: uppercase; }
+.college-rating-block > p:not(.eyebrow) { margin: 8px 0 0; color: var(--muted); font-size: 11px; }
+.rating-title { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.panel-star { margin: 0; font-size: 30px; }
+.college-ranks { margin: 18px 0 0; display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); }
+.college-ranks div { padding: 14px 10px 0 0; }
+.college-ranks dd { margin: 5px 0 0; font: 600 15px 'Barlow Condensed', sans-serif; }
+.source-link { margin-top: 24px; padding: 13px 15px; display: flex; justify-content: space-between; color: #fff; border: 1px solid color-mix(in srgb, var(--team-secondary) 45%, transparent); text-decoration: none; font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.source-link:hover { background: color-mix(in srgb, var(--team-primary) 34%, transparent); }
 
 footer { max-width: 1500px; margin: 0 auto; min-height: 70px; padding: 22px 34px; display: flex; justify-content: space-between; gap: 20px; border-top: 1px solid var(--line); color: #657286; font-size: 9px; letter-spacing: .08em; text-transform: uppercase; }
 
@@ -214,6 +248,8 @@ footer { max-width: 1500px; margin: 0 auto; min-height: 70px; padding: 22px 34px
 @media (max-width: 760px) {
   .site-header { height: 66px; padding: 0 18px; }
   .brand small, .data-stamp { display: none; }
+  .header-tools { gap: 0; }
+  .league-switch button { min-width: 58px; padding: 0 9px; }
   main { padding: 0 16px 40px; }
   .team-hero { min-height: 330px; padding: 45px 24px 28px; border: 0; }
   .team-monogram { font-size: 190px; right: 2%; top: 10px; }
@@ -240,12 +276,18 @@ footer { max-width: 1500px; margin: 0 auto; min-height: 70px; padding: 22px 34px
   .season-notice { align-items: flex-start; flex-direction: column; }
   .season-notice button { margin-left: 0; }
   .player-panel { padding: 48px 22px; }
+  .college-profile-facts { grid-template-columns: 1fr; }
+  .college-profile-facts div { border-right: 0; border-bottom: 1px solid var(--line); }
+  .college-profile-facts div:last-child { border-bottom: 0; }
   footer { padding: 20px 18px; flex-direction: column; }
 }
 
 @media (max-width: 460px) {
   .formation { grid-template-columns: 1fr; }
   .hero-metrics { grid-template-columns: 1fr 1fr; }
+  .college-hero .hero-metrics { grid-template-columns: 1fr; }
+  .college-hero .hero-metrics div { border-right: 0; border-top: 1px solid var(--line); }
+  .college-hero .hero-metrics div:first-child { border-top: 0; }
   .list-filters { flex-direction: column; }
   .history-row { grid-template-columns: 40px 38px 1fr; }
   .history-position { display: none; }

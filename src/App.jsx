@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import CollegeApp from './CollegeApp';
 import DepthChart from './components/DepthChart';
 import PlayerList from './components/PlayerList';
 import PlayerPanel from './components/PlayerPanel';
@@ -42,7 +43,7 @@ function ErrorState({ message }) {
   );
 }
 
-export default function App() {
+function NflApp({ onLeagueChange }) {
   const [data, setData] = useState(null);
   const [error, setError] = useState('');
   const [teamCode, setTeamCode] = useState('crd');
@@ -135,9 +136,15 @@ export default function App() {
           <span className="brand-mark">SA</span>
           <span><strong>SNAP ATLAS</strong><small>NFL personnel intelligence</small></span>
         </a>
-        <div className="data-stamp">
-          <span className="live-dot" />
-          {metadata.depthChartSeason} rosters · snaps through {metadata.latestSeason}
+        <div className="header-tools">
+          <div className="league-switch" role="group" aria-label="League">
+            <button className="active" type="button">NFL</button>
+            <button type="button" onClick={() => onLeagueChange('college')}>College</button>
+          </div>
+          <div className="data-stamp">
+            <span className="live-dot" />
+            {metadata.depthChartSeason} rosters · snaps through {metadata.latestSeason}
+          </div>
         </div>
       </header>
 
@@ -255,4 +262,18 @@ export default function App() {
       <PlayerPanel player={selectedPlayer} history={history} onClose={() => setSelectedPlayer(null)} />
     </div>
   );
+}
+
+export default function App() {
+  const [league, setLeague] = useState(() => window.location.hash === '#college' ? 'college' : 'nfl');
+
+  const chooseLeague = (nextLeague) => {
+    setLeague(nextLeague);
+    window.history.replaceState(null, '', nextLeague === 'college' ? '#college' : window.location.pathname);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  return league === 'college'
+    ? <CollegeApp onLeagueChange={chooseLeague} />
+    : <NflApp onLeagueChange={chooseLeague} />;
 }
