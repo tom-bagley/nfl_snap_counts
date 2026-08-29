@@ -1,4 +1,4 @@
-import { useMemo, useRef } from 'react';
+import { useCallback, useEffect, useMemo, useRef } from 'react';
 import { formatPlayerName, normalizePlayerName, snapTotal } from '../lib/data';
 
 const LAYOUT = {
@@ -72,33 +72,55 @@ export default function DepthChart({ chart, unit, rows, historyRows, season, tea
   }, [historyRows]);
   const positions = Object.entries(chart ?? {});
 
+  const finishDrag = useCallback((event) => {
+    const drag = dragRef.current;
+    if (!drag || (event?.pointerId !== undefined && drag.pointerId !== event.pointerId)) return;
+
+    dragRef.current = null;
+    drag.element?.classList.remove('is-dragging');
+    document.body.classList.remove('is-position-dragging');
+    if (drag.handle?.hasPointerCapture?.(drag.pointerId)) drag.handle.releasePointerCapture(drag.pointerId);
+    if (drag.coordinates) onPositionMove(drag.position, drag.coordinates);
+  }, [onPositionMove]);
+
+  useEffect(() => {
+    window.addEventListener('blur', finishDrag);
+    window.addEventListener('pointerup', finishDrag);
+    window.addEventListener('pointercancel', finishDrag);
+    return () => {
+      window.removeEventListener('blur', finishDrag);
+      window.removeEventListener('pointerup', finishDrag);
+      window.removeEventListener('pointercancel', finishDrag);
+      finishDrag();
+    };
+  }, [finishDrag]);
+
   const moveDrag = (event) => {
     if (!dragRef.current || !fieldRef.current) return;
+    if (event.pointerId !== dragRef.current.pointerId) return;
     event.preventDefault();
     const bounds = fieldRef.current.getBoundingClientRect();
     const left = Math.max(4, Math.min(96, ((event.clientX - bounds.left) / bounds.width) * 100));
     const top = Math.max(7, Math.min(93, ((event.clientY - bounds.top) / bounds.height) * 100));
-    onPositionMove(dragRef.current.position, [Number(left.toFixed(2)), Number(top.toFixed(2))]);
-  };
-
-  const stopDrag = () => {
-    dragRef.current?.element?.classList.remove('is-dragging');
-    dragRef.current = null;
-    document.body.classList.remove('is-position-dragging');
-    window.removeEventListener('mousemove', moveDrag);
-    window.removeEventListener('mouseup', stopDrag);
+    const coordinates = [Number(left.toFixed(2)), Number(top.toFixed(2))];
+    dragRef.current.coordinates = coordinates;
+    dragRef.current.element?.style.setProperty('--left', `${coordinates[0]}%`);
+    dragRef.current.element?.style.setProperty('--top', `${coordinates[1]}%`);
   };
 
   const startDrag = (event, position) => {
     if (window.matchMedia('(max-width: 1100px)').matches) return;
-    if (event.button !== 0) return;
+    if (event.pointerType === 'mouse' && event.button !== 0) return;
     event.preventDefault();
     const element = event.currentTarget.closest('.position-group');
-    dragRef.current = { position, element };
+    try {
+      event.currentTarget.setPointerCapture?.(event.pointerId);
+    } catch {
+      // Synthetic events and older browsers can reject capture; local handlers still provide cleanup.
+    }
+    dragRef.current = { position, element, handle: event.currentTarget, pointerId: event.pointerId, coordinates: null };
     element?.classList.add('is-dragging');
     document.body.classList.add('is-position-dragging');
-    window.addEventListener('mousemove', moveDrag, { passive: false });
-    window.addEventListener('mouseup', stopDrag, { once: true });
   };
 
   const moveWithKeyboard = (event, position, currentPosition) => {
@@ -130,7 +152,11 @@ export default function DepthChart({ chart, unit, rows, historyRows, season, tea
                 type="button"
                 aria-label={`Move ${position} position`}
                 title="Drag to move · Arrow keys for fine adjustment"
-                onMouseDown={(event) => startDrag(event, position)}
+                onPointerDown={(event) => startDrag(event, position)}
+                onPointerMove={moveDrag}
+                onPointerUp={finishDrag}
+                onPointerCancel={finishDrag}
+                onLostPointerCapture={finishDrag}
                 onKeyDown={(event) => moveWithKeyboard(event, position, positionCoordinates)}
               >
                 <span>{position}</span>
