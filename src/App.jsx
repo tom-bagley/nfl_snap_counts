@@ -60,7 +60,7 @@ export default function App() {
     loadNflData(controller.signal)
       .then((result) => {
         setData(result);
-        setSeason(result.metadata.latestSeason);
+        setSeason(result.metadata.depthChartSeason);
       })
       .catch((caught) => {
         if (caught.name !== 'AbortError') setError(caught.message);
@@ -98,6 +98,7 @@ export default function App() {
   const { metadata, depthCharts } = data;
   const team = teamFor(teamCode);
   const chartAvailable = Boolean(depthCharts[teamCode]);
+  const seasonHasSnaps = data.snapCounts.some((row) => row.season === season);
   const leader = [...rows].sort((left, right) => snapTotal(right, category) - snapTotal(left, category))[0];
   const unitTotal = rows.reduce((sum, row) => sum + snapTotal(row, category), 0);
 
@@ -136,7 +137,7 @@ export default function App() {
         </a>
         <div className="data-stamp">
           <span className="live-dot" />
-          {metadata.depthChartSeason} rosters · {metadata.latestSeason} snaps
+          {metadata.depthChartSeason} rosters · snaps through {metadata.latestSeason}
         </div>
       </header>
 
@@ -145,12 +146,12 @@ export default function App() {
           <div className="hero-glow" />
           <div className="team-monogram" aria-hidden="true">{team.short}</div>
           <div className="hero-copy">
-            <p className="eyebrow">{season} snap study</p>
+            <p className="eyebrow">{season} season overview</p>
             <h1>{team.name}</h1>
             <p>Personnel, workload, and depth—mapped onto the field.</p>
           </div>
           <div className="hero-metrics">
-            <div><strong>{rows.length}</strong><span>Players</span></div>
+            <div><strong>{rows.length}</strong><span>Players with snaps</span></div>
             <div><strong>{unitTotal.toLocaleString()}</strong><span>{SNAP_CATEGORIES.find(([key]) => key === category)?.[1]} snaps</span></div>
             <div><strong>{leader?.playerName ?? '—'}</strong><span>Team leader · {leader ? snapTotal(leader, category).toLocaleString() : 0}</span></div>
           </div>
@@ -164,7 +165,7 @@ export default function App() {
             </select>
           </label>
           <label>
-            <span>Snap season</span>
+            <span>Season</span>
             <select value={season} onChange={(event) => { setSeason(Number(event.target.value)); setSelectedPlayer(null); }}>
               {metadata.seasons.map((year) => <option value={year} key={year}>{year}</option>)}
             </select>
@@ -205,7 +206,7 @@ export default function App() {
               <>
                 <div className="chart-context">
                   <span>{metadata.depthChartSeason} current depth chart</span>
-                  <span>Showing {season} snap totals</span>
+                  <span>{seasonHasSnaps ? `Showing ${season} snap totals` : `${season} snaps · season not started`}</span>
                   <span className="drag-instruction">Drag a position label to customize the formation</span>
                 </div>
                 <DepthChart
@@ -213,6 +214,7 @@ export default function App() {
                   unit={unit}
                   rows={depthRows}
                   category={category}
+                  emptySeason={!seasonHasSnaps}
                   customLayout={currentLayout}
                   onPositionMove={savePosition}
                   onSelectPlayer={setSelectedPlayer}

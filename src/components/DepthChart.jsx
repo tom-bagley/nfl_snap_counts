@@ -20,26 +20,31 @@ function fallbackPosition(index, total) {
   return [14 + column * 24, 18 + row * 25];
 }
 
-function PlayerLine({ player, snapRow, category, starter, onSelect }) {
+function PlayerLine({ player, snapRow, category, starter, emptySeason, onSelect }) {
   const hasStats = Boolean(snapRow);
+  const snapLabel = hasStats
+    ? `${snapTotal(snapRow, category).toLocaleString()} snaps`
+    : emptySeason ? '0 snaps' : 'Stats not matched';
   return (
     <button
       className={`depth-player ${starter ? 'is-starter' : ''}`}
       type="button"
       onClick={() => hasStats && onSelect(snapRow)}
       disabled={!hasStats}
-      title={hasStats ? `View ${formatPlayerName(player.name)} history` : 'No matching snap-count record'}
+      title={hasStats
+        ? `View ${formatPlayerName(player.name)} history`
+        : emptySeason ? 'No snaps recorded for this season yet' : 'No matching snap-count record'}
     >
       <span className="jersey-number">{player.num || '—'}</span>
       <span className="depth-player-copy">
         <strong>{formatPlayerName(player.name)}</strong>
-        <small>{hasStats ? `${snapTotal(snapRow, category).toLocaleString()} snaps` : 'Stats not matched'}</small>
+        <small>{snapLabel}</small>
       </span>
     </button>
   );
 }
 
-export default function DepthChart({ chart, unit, rows, category, customLayout, onPositionMove, onSelectPlayer }) {
+export default function DepthChart({ chart, unit, rows, category, emptySeason, customLayout, onPositionMove, onSelectPlayer }) {
   const fieldRef = useRef(null);
   const dragRef = useRef(null);
   const rowByName = new Map(rows.map((row) => [row.normalizedName, row]));
@@ -117,6 +122,7 @@ export default function DepthChart({ chart, unit, rows, category, customLayout, 
                     snapRow={rowByName.get(normalizePlayerName(player.name))}
                     category={category}
                     starter={playerIndex === 0}
+                    emptySeason={emptySeason}
                     onSelect={onSelectPlayer}
                   />
                 ))}

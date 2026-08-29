@@ -163,10 +163,11 @@ const config = JSON.parse(configText);
 validateDepthCharts(depthCharts);
 if (!Number.isInteger(config.depthChartSeason)) throw new Error('depthChartSeason must be an integer.');
 
-const seasons = [...new Set(snapCounts.map((row) => row.season))].sort((a, b) => b - a);
+const snapSeasons = [...new Set(snapCounts.map((row) => row.season))].sort((a, b) => b - a);
+const seasons = [...new Set([config.depthChartSeason, ...snapSeasons])].sort((a, b) => b - a);
 const teams = [...new Set(snapCounts.map((row) => row.team))].sort();
 const players = new Set(snapCounts.map((row) => row.playerId));
-const latestSeason = seasons[0];
+const latestSeason = snapSeasons[0];
 const latestSnapMtime = new Date(Math.max(...seasonSources.map((source) => source.fileStat.mtimeMs)));
 
 const output = {
