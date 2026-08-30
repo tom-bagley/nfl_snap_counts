@@ -210,6 +210,17 @@ select { appearance: none; background-image: linear-gradient(45deg, transparent 
 .college-profile-facts div:last-child { border-right: 0; }
 .college-profile-facts span, .college-ranks dt { display: block; color: var(--muted); font-size: 8px; letter-spacing: .09em; text-transform: uppercase; }
 .college-profile-facts strong { display: block; margin-top: 7px; overflow-wrap: anywhere; font: 600 15px 'Barlow Condensed', sans-serif; }
+.school-history-block { margin-top: 24px; padding: 22px; border: 1px solid var(--line); background: #0a1422; }
+.school-history-title { display: flex; align-items: end; justify-content: space-between; gap: 18px; }
+.school-history-title h3 { margin: 0; font: 700 29px 'Barlow Condensed', sans-serif; text-transform: uppercase; }
+.school-history-title > span { color: var(--muted); font-size: 8px; letter-spacing: .1em; text-transform: uppercase; }
+.school-history-list { margin-top: 17px; border-top: 1px solid var(--line); }
+.school-history-row { min-height: 54px; display: grid; grid-template-columns: 48px 42px 1fr auto; align-items: center; gap: 11px; border-bottom: 1px solid var(--line); }
+.school-history-year { color: #c4cdda; font: 600 15px 'Barlow Condensed', sans-serif; }
+.school-history-mark { height: 28px; display: grid; place-items: center; color: #fff; background: var(--school-color); font: 700 10px 'Barlow Condensed', sans-serif; letter-spacing: .04em; }
+.school-history-row strong { font: 600 15px 'Barlow Condensed', sans-serif; }
+.school-history-row small { color: var(--team-secondary); font-size: 7px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; }
+.school-history-note { margin: 13px 0 0; color: #6f7d91; font-size: 8px; line-height: 1.5; }
 .college-rating-block { margin-top: 24px; padding: 22px; border: 1px solid var(--line); background: #0a1422; }
 .college-rating-block h3 { margin: 0; font: 700 29px 'Barlow Condensed', sans-serif; text-transform: uppercase; }
 .college-rating-block > p:not(.eyebrow) { margin: 8px 0 0; color: var(--muted); font-size: 11px; }

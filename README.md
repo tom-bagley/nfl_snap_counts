@@ -13,6 +13,7 @@ Snap Atlas is a static React website for exploring NFL snap counts and visual de
 - Power Four and Notre Dame college depth charts
 - On3 high-school recruiting profiles with a gold star for On3 five-star recruits
 - Separate On3 transfer ratings and prior-team context when a portal match is available
+- A year-by-year college school history inside each recruiting profile
 - Responsive desktop and mobile layouts
 - A validated, command-driven data preparation step
 - Render static-site configuration

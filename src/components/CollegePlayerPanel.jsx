@@ -28,6 +28,44 @@ function RatingBlock({ title, rating, transfer = false }) {
   );
 }
 
+function SchoolHistory({ history }) {
+  const seasons = (history ?? []).flatMap((entry) => {
+    const startYear = Number(entry.startYear);
+    const endYear = Number(entry.endYear);
+    if (!Number.isInteger(startYear) || !Number.isInteger(endYear)) return [];
+    return Array.from({ length: Math.max(0, endYear - startYear + 1) }, (_, index) => ({
+      ...entry,
+      year: startYear + index,
+    }));
+  }).sort((left, right) => right.year - left.year);
+
+  if (!seasons.length) return null;
+  return (
+    <section className="school-history-block">
+      <p className="eyebrow">College career</p>
+      <div className="school-history-title">
+        <h3>School history</h3>
+        <span>{seasons.length} season{seasons.length === 1 ? '' : 's'}</span>
+      </div>
+      <div className="school-history-list">
+        {seasons.map((season, index) => (
+          <div className="school-history-row" key={`${season.organizationKey}-${season.year}-${index}`}>
+            <span className="school-history-year">{season.year}</span>
+            <span className="school-history-mark" style={{ '--school-color': season.primary || 'var(--team-primary)' }}>{season.abbreviation || season.team.slice(0, 3)}</span>
+            <strong>{season.team}</strong>
+            {index === 0 && <small>Current</small>}
+          </div>
+        ))}
+      </div>
+      <p className="school-history-note">
+        {history.length > 1
+          ? 'School ranges reflect On3 organization history.'
+          : 'Continuous enrollment is inferred from the On3 recruiting class and current roster.'}
+      </p>
+    </section>
+  );
+}
+
 export default function CollegePlayerPanel({ player, onClose }) {
   useEffect(() => {
     const closeOnEscape = (event) => {
@@ -57,6 +95,7 @@ export default function CollegePlayerPanel({ player, onClose }) {
           <div><span>Hometown</span><strong>{player.hometown || '—'}</strong></div>
         </div>
 
+        <SchoolHistory history={player.schoolHistory} />
         <RatingBlock title="On3 high-school recruiting" rating={player.recruiting} />
         {(player.isTransfer || player.transfer) && <RatingBlock title="On3 transfer rating" rating={player.transfer} transfer />}
 

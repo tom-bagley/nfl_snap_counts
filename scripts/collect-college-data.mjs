@@ -210,11 +210,16 @@ function compactRosterPlayer(item) {
     highSchool: cleanText(player.highSchoolName ?? player.highSchool?.name ?? ''),
     recruiting: compactRating(item.rating),
     transfer: null,
+    schoolHistory: [],
   };
 }
 
+function committedOrganization(item) {
+  return item.commitStatus?.committedOrganization ?? item.interestStatus?.committedOrganization;
+}
+
 function compactTransfer(item, organizationKey) {
-  const committed = item.commitStatus?.committedOrganization ?? item.interestStatus?.committedOrganization;
+  const committed = committedOrganization(item);
   if (Number(committed?.key) !== Number(organizationKey)) return null;
   const rating = compactRating(item.transferRating ?? item.rosterRating);
   if (!rating) return null;
@@ -224,6 +229,51 @@ function compactTransfer(item, organizationKey) {
     toTeam: cleanText(committed?.name ?? committed?.fullName ?? ''),
     portalYear: year,
   };
+}
+
+function compactSchoolHistory(item, organizationKey, currentTeam) {
+  const committed = committedOrganization(item);
+  if (Number(committed?.key) !== Number(organizationKey)) return [];
+
+  const history = (item.organizationHistory ?? []).map((entry) => {
+    const team = entry.team ?? {};
+    const startYear = Number(entry.startYear);
+    const endYear = Number(entry.latestYear ?? entry.startYear);
+    if (!team.key || !Number.isInteger(startYear) || !Number.isInteger(endYear)) return null;
+    return {
+      organizationKey: Number(team.key),
+      team: cleanText(team.name ?? team.fullName),
+      abbreviation: cleanText(team.abbreviation ?? ''),
+      primary: team.primaryColor ?? null,
+      startYear,
+      endYear,
+    };
+  }).filter(Boolean);
+
+  const currentEntry = history.find((entry) => entry.organizationKey === Number(organizationKey) && entry.endYear >= year);
+  if (!currentEntry) {
+    history.push({
+      organizationKey: Number(organizationKey),
+      team: currentTeam.name,
+      abbreviation: currentTeam.abbreviation,
+      primary: currentTeam.primary,
+      startYear: year,
+      endYear: year,
+    });
+  }
+  return history.sort((left, right) => right.endYear - left.endYear || right.startYear - left.startYear);
+}
+
+function inferredCollegeStart(player) {
+  if (Number.isInteger(player.recruiting?.year)) {
+    return Math.max(year - 6, Math.min(year, player.recruiting.year));
+  }
+  const classRank = String(player.classRank ?? '').toLowerCase();
+  if (classRank.includes('graduate')) return year - 4;
+  if (classRank.includes('senior')) return year - 3;
+  if (classRank.includes('junior')) return year - 2;
+  if (classRank.includes('sophomore')) return year - 1;
+  return year;
 }
 
 function matchPlayers(depthCharts, players) {
@@ -278,6 +328,12 @@ const teams = await mapLimit(sourceTeams, 4, async (sourceTeam) => {
   const depthCharts = parseDepthChart(depthHtml, sourceTeam.name);
   const players = (rosterResponse.list ?? []).map(compactRosterPlayer).filter((player) => player.id && player.name);
   if (players.length < 40) throw new Error(`${sourceTeam.name} returned only ${players.length} On3 roster players.`);
+  const org = rosterResponse.relatedModel?.orgResponse ?? rosterResponse.relatedModel?.org ?? {};
+  const currentTeam = {
+    name: sourceTeam.name,
+    abbreviation: cleanText(org.abbreviation ?? on3Team.abbreviation ?? sourceTeam.key.slice(0, 4)).toUpperCase(),
+    primary: org.primaryColor ?? on3Team.primaryColor ?? '#1d4f7a',
+  };
 
   const depthTransfers = new Set(
     ['offense', 'defense'].flatMap((unit) => Object.values(depthCharts[unit]).flat())
@@ -304,12 +360,26 @@ const teams = await mapLimit(sourceTeams, 4, async (sourceTeam) => {
     transferItems.forEach((item) => {
       const player = rosterByName.get(normalizeName(item.name));
       const transfer = compactTransfer(item, organizationKey);
-      if (player && transfer) player.transfer = transfer;
+      if (!player || Number(committedOrganization(item)?.key) !== Number(organizationKey)) return;
+      if (transfer) player.transfer = transfer;
+      const schoolHistory = compactSchoolHistory(item, organizationKey, currentTeam);
+      if (schoolHistory.length) player.schoolHistory = schoolHistory;
     });
   }
 
+  players.forEach((player) => {
+    if (player.schoolHistory.length) return;
+    player.schoolHistory = [{
+      organizationKey: Number(organizationKey),
+      team: currentTeam.name,
+      abbreviation: currentTeam.abbreviation,
+      primary: currentTeam.primary,
+      startYear: inferredCollegeStart(player),
+      endYear: year,
+    }];
+  });
+
   const match = matchPlayers(depthCharts, players);
-  const org = rosterResponse.relatedModel?.orgResponse ?? rosterResponse.relatedModel?.org ?? {};
   completed += 1;
   if (completed % 5 === 0 || completed === sourceTeams.length) {
     console.log(`Collected ${completed}/${sourceTeams.length} college teams...`);
@@ -319,9 +389,9 @@ const teams = await mapLimit(sourceTeams, 4, async (sourceTeam) => {
     key: sourceTeam.key,
     name: sourceTeam.name,
     mascot: cleanText(org.mascot ?? on3Team.mascot ?? ''),
-    abbreviation: cleanText(org.abbreviation ?? on3Team.abbreviation ?? sourceTeam.key.slice(0, 4)).toUpperCase(),
+    abbreviation: currentTeam.abbreviation,
     conference: sourceTeam.conference,
-    primary: org.primaryColor ?? on3Team.primaryColor ?? '#1d4f7a',
+    primary: currentTeam.primary,
     secondary: '#f2b84b',
     on3OrganizationKey: Number(organizationKey),
     players,
