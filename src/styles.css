@@ -205,6 +205,17 @@ select { appearance: none; background-image: linear-gradient(45deg, transparent 
 .card-arrow { position: absolute; right: 20px; color: #617085; transition: transform .15s ease; }
 .player-card:hover .card-arrow { color: var(--team-secondary); transform: translate(2px, -2px); }
 .college-player-card .player-card-name .five-star { font-size: 13px; }
+.talent-board-note { margin: 9px 0 0; color: var(--muted); font-size: 9px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
+.college-player-card { min-height: 112px; grid-template-columns: 32px 42px minmax(120px, 1fr) minmax(210px, auto); }
+.college-talent-ratings { display: grid; grid-template-columns: repeat(2, minmax(92px, 1fr)); border: 1px solid rgba(115, 200, 255, .16); background: rgba(8, 23, 39, .7); }
+.talent-rating { min-width: 0; padding: 10px 12px; text-align: left; }
+.talent-rating + .talent-rating { border-left: 1px solid rgba(115, 200, 255, .16); }
+.talent-rating small, .talent-rating > span { display: block; white-space: nowrap; text-transform: uppercase; }
+.talent-rating small { color: #73c8ff; font-size: 8px; font-weight: 700; letter-spacing: .11em; }
+.talent-rating strong { display: block; margin-top: 4px; color: #eaf7ff; font: 700 27px/1 'Barlow Condensed', sans-serif; }
+.talent-rating > span { margin-top: 4px; color: #73859a; font-size: 7px; font-weight: 600; letter-spacing: .08em; }
+.pff-rating.is-ranked { background: linear-gradient(135deg, rgba(26, 119, 176, .2), rgba(10, 32, 51, .45)); box-shadow: inset 0 -2px 0 #4bb9f6; }
+.pff-rating.is-ranked strong { color: #73c8ff; text-shadow: 0 0 18px rgba(67, 174, 235, .18); }
 .empty-state { flex-direction: column; gap: 8px; color: var(--muted); }
 .empty-state strong { color: var(--ink); font: 700 24px 'Barlow Condensed', sans-serif; text-transform: uppercase; }
 
@@ -327,6 +338,11 @@ footer { max-width: 1500px; margin: 0 auto; min-height: 70px; padding: 22px 34px
   .player-card:nth-child(odd) { border-right: 0; }
   .player-card { grid-template-columns: 26px 36px minmax(90px, 1fr) auto; gap: 8px; padding: 17px 35px 17px 8px; }
   .player-card-stat small { display: none; }
+  .college-player-card { min-height: 104px; grid-template-columns: 26px 36px minmax(80px, 1fr) minmax(158px, auto); }
+  .college-talent-ratings { grid-template-columns: repeat(2, minmax(76px, 1fr)); }
+  .talent-rating { padding: 9px 8px; }
+  .talent-rating strong { font-size: 23px; }
+  .talent-rating > span { font-size: 6px; }
   .season-notice { align-items: flex-start; flex-direction: column; }
   .season-notice button { margin-left: 0; }
   .player-panel { padding: 48px 22px; }
@@ -343,6 +359,14 @@ footer { max-width: 1500px; margin: 0 auto; min-height: 70px; padding: 22px 34px
   .college-hero .hero-metrics div { border-right: 0; border-top: 1px solid var(--line); }
   .college-hero .hero-metrics div:first-child { border-top: 0; }
   .list-filters { flex-direction: column; }
+  .college-player-card { padding: 14px 28px 14px 4px; grid-template-columns: 28px minmax(70px, 1fr) minmax(126px, auto); gap: 7px; }
+  .college-player-card .rank { display: none; }
+  .college-player-card .position-pill { width: 30px; }
+  .college-talent-ratings { grid-template-columns: repeat(2, minmax(65px, 1fr)); }
+  .talent-rating { padding: 8px 6px; }
+  .talent-rating small { font-size: 7px; letter-spacing: .06em; }
+  .talent-rating strong { font-size: 21px; }
+  .talent-rating > span { overflow: hidden; text-overflow: ellipsis; }
   .history-row { grid-template-columns: 40px 38px 1fr; }
   .history-position { display: none; }
 }
