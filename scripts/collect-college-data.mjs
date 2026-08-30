@@ -7,17 +7,25 @@ const OURLADS_INDEX = 'https://secure.ourlads.com/ncaa-football-depth-charts/def
 const OURLADS_ROOT = 'https://secure.ourlads.com/ncaa-football-depth-charts/';
 const ON3_API = 'https://api.on3.com/public/rdb/v1';
 const FOOTBALL_SPORT_KEY = 1;
+const EXPECTED_TEAM_COUNT = 92;
 const INCLUDED_CONFERENCES = new Map([
+  ['AAC', 'American'],
   ['ACC', 'ACC'],
   ['Big 10', 'Big Ten'],
   ['Big 12', 'Big 12'],
+  ['Conference USA', 'Conference USA'],
   ['SEC', 'SEC'],
   ['Independents', 'Independent'],
 ]);
 const ON3_NAME_ALIASES = {
   'North Carolina State': 'NC State',
   'Central Florida': 'UCF',
+  'Florida International': 'FIU',
+  'Middle Tennessee': 'Middle Tennessee State',
   Mississippi: 'Ole Miss',
+  'Missouri State': 'Missouri State University',
+  'Sam Houston': 'Sam Houston State',
+  'South Florida': 'USF',
 };
 const MANUAL_ON3_KEYS = { Arizona: 3376 };
 
@@ -154,7 +162,7 @@ function parseOurladsIndex(html) {
     }
   });
 
-  if (teams.length !== 68) throw new Error(`Expected 68 Power Four + Notre Dame teams but found ${teams.length}.`);
+  if (teams.length !== EXPECTED_TEAM_COUNT) throw new Error(`Expected ${EXPECTED_TEAM_COUNT} selected FBS teams but found ${teams.length}.`);
   return teams;
 }
 
@@ -235,6 +243,38 @@ function compactRosterPlayer(item) {
     schoolHistoryVerified: false,
     personSportKey: null,
   };
+}
+
+function depthChartRoster(depthCharts, sourceTeam, on3Players) {
+  const on3ByName = new Map(on3Players.map((player) => [player.normalizedName, player]));
+  const players = new Map();
+  for (const unit of ['offense', 'defense']) {
+    Object.entries(depthCharts[unit]).forEach(([position, depthPlayers]) => depthPlayers.forEach((depthPlayer) => {
+      if (players.has(depthPlayer.normalizedName)) return;
+      const on3Player = on3ByName.get(depthPlayer.normalizedName);
+      players.set(depthPlayer.normalizedName, on3Player ?? {
+        id: `${sourceTeam.key}:${depthPlayer.normalizedName}`,
+        name: depthPlayer.name,
+        normalizedName: depthPlayer.normalizedName,
+        slug: null,
+        jerseyNumber: depthPlayer.num || null,
+        position,
+        classRank: depthPlayer.classRank || null,
+        height: null,
+        weight: null,
+        hometown: '',
+        highSchool: '',
+        recruiting: null,
+        currentAbility: null,
+        transfer: null,
+        schoolHistory: [],
+        schoolHistoryVerified: false,
+        personSportKey: null,
+        on3Unavailable: true,
+      });
+    }));
+  }
+  return [...players.values()];
 }
 
 function committedOrganization(item) {
@@ -367,14 +407,17 @@ const teams = await mapLimit(sourceTeams, 4, async (sourceTeam) => {
     fetchJson(`${ON3_API}/organizations/${organizationKey}/roster?sportKey=${FOOTBALL_SPORT_KEY}&year=${year}`, `${sourceTeam.name} On3 roster`),
   ]);
   const depthCharts = parseDepthChart(depthHtml, sourceTeam.name);
-  const players = (rosterResponse.list ?? []).map(compactRosterPlayer).filter((player) => player.id && player.name);
-  if (players.length < 40) throw new Error(`${sourceTeam.name} returned only ${players.length} On3 roster players.`);
+  const on3Players = (rosterResponse.list ?? []).map(compactRosterPlayer).filter((player) => player.id && player.name);
   const org = rosterResponse.relatedModel?.orgResponse ?? rosterResponse.relatedModel?.org ?? {};
   const currentTeam = {
     name: sourceTeam.name,
     abbreviation: cleanText(org.abbreviation ?? on3Team.abbreviation ?? sourceTeam.key.slice(0, 4)).toUpperCase(),
     primary: org.primaryColor ?? on3Team.primaryColor ?? '#1d4f7a',
   };
+  const players = on3Players.length >= 40 ? on3Players : depthChartRoster(depthCharts, sourceTeam, on3Players);
+  if (on3Players.length < 40) {
+    console.warn(`${sourceTeam.name} returned ${on3Players.length} On3 roster players; using its Ourlads depth chart as the roster fallback.`);
+  }
 
   const depthTransfers = new Set(
     ['offense', 'defense'].flatMap((unit) => Object.values(depthCharts[unit]).flat())
@@ -458,7 +501,7 @@ teams.forEach((team) => {
 
 const historyLookups = [];
 transferPlayers.forEach((player) => {
-  if (player.schoolHistoryVerified) return;
+  if (player.schoolHistoryVerified || player.on3Unavailable) return;
   const cached = historyCache.get(player.id);
   if (cached) {
     player.personSportKey = cached.personSportKey;
@@ -492,9 +535,10 @@ const rosterPlayerCount = teams.reduce((sum, team) => sum + team.players.length,
 const recruitingRatedCount = teams.reduce((sum, team) => sum + team.players.filter((player) => player.recruiting).length, 0);
 const currentAbilityRatedCount = teams.reduce((sum, team) => sum + team.players.filter((player) => player.currentAbility).length, 0);
 const transferRatedCount = teams.reduce((sum, team) => sum + team.players.filter((player) => player.transfer).length, 0);
-const verifiedTransferHistoryCount = [...transferPlayers.values()].filter((player) => player.schoolHistoryVerified).length;
-if (verifiedTransferHistoryCount !== transferPlayers.size) {
-  throw new Error(`Verified ${verifiedTransferHistoryCount}/${transferPlayers.size} transfer-player school histories.`);
+const verifiableTransferPlayers = [...transferPlayers.values()].filter((player) => !player.on3Unavailable);
+const verifiedTransferHistoryCount = verifiableTransferPlayers.filter((player) => player.schoolHistoryVerified).length;
+if (verifiedTransferHistoryCount !== verifiableTransferPlayers.length) {
+  throw new Error(`Verified ${verifiedTransferHistoryCount}/${verifiableTransferPlayers.length} transfer-player school histories.`);
 }
 if (matchedDepthSlots / depthSlotCount < 0.65) {
   throw new Error(`Only ${matchedDepthSlots}/${depthSlotCount} depth-chart slots matched On3 roster players.`);

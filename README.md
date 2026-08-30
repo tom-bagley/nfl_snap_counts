@@ -64,7 +64,9 @@ Collect the 2026 college dataset with:
 npm run collect:college-data -- 2026
 ```
 
-That command collects current Ourlads depth charts for the ACC, Big Ten, Big 12, SEC, and Notre Dame. It then matches those players to On3 roster, high-school recruiting, and transfer-portal records. The generated canonical source is `data/source/college/2026.json`.
+That command collects current Ourlads depth charts for the American, ACC, Big Ten, Big 12, Conference USA, SEC, and Notre Dame. It then matches those players to On3 roster, high-school recruiting, and transfer-portal records. The generated canonical source is `data/source/college/2026.json`.
+
+If On3 does not publish a complete roster for a selected team, the collector keeps that team available by building its player list from the Ourlads depth chart. On3 ratings remain blank for unmatched fallback players.
 
 The 2027 PFF Big Board snapshot lives in `data/source/pff-big-board/2027.json`. It is matched to the 2026 college rosters during `npm run prepare:college-data`; players who are not on the board receive no PFF label. The source snapshot can be refreshed from the PFF Big Board in this chat without exposing an upload or editing feature on the website.
 
