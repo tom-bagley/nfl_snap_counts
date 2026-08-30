@@ -3,14 +3,14 @@ import { ratingLabel } from '../lib/college';
 
 const LAYOUT = {
   offense: {
-    'WR-X': [8, 13], LWR: [8, 13], 'WR-Z': [92, 13], RWR: [92, 13], 'WR-H': [22, 27], SWR: [22, 27],
-    LT: [24, 52], LG: [35, 52], C: [50, 52], RG: [65, 52], RT: [76, 52], TE: [82, 37],
+    'WR-X': [10, 13], LWR: [10, 13], 'WR-Z': [90, 13], RWR: [90, 13], 'WR-H': [22, 27], SWR: [22, 27],
+    LT: [16, 52], LG: [33, 52], C: [50, 52], RG: [67, 52], RT: [84, 52], TE: [82, 37],
     QB: [50, 72], RB: [50, 90], FB: [67, 87],
   },
   defense: {
     DE: [24, 18], LDE: [22, 18], DT: [40, 18], NT: [50, 18], RDT: [60, 18], RDE: [76, 18], EDGE: [83, 36],
     WOLF: [17, 39], STING: [30, 42], WLB: [31, 42], LB: [43, 42], MLB: [50, 42], ILB: [58, 42], SLB: [69, 42],
-    LCB: [9, 70], CB: [12, 70], NB: [50, 63], HUSKY: [50, 63], SS: [36, 81], FS: [64, 81], RCB: [91, 70],
+    LCB: [10, 70], CB: [12, 70], NB: [50, 63], HUSKY: [50, 63], SS: [36, 81], FS: [64, 81], RCB: [90, 70],
   },
 };
 
@@ -40,11 +40,11 @@ function CollegePlayerLine({ player, position, rosterPlayer, starter, onSelect }
     >
       <span className="jersey-number">{player.num || '—'}</span>
       <span className="depth-player-copy">
-        <strong>
+        <strong className={selected.name.length > 17 ? 'long-player-name' : ''}>
           {selected.name}
           {recruiting?.stars === 5 && <span className="five-star" title="On3 five-star high-school recruit" aria-label="On3 five-star high-school recruit">★</span>}
         </strong>
-        <small>{ratingLabel(recruiting)}{player.isTransfer ? ' · Transfer' : ''}</small>
+        <small>{ratingLabel(recruiting)}</small>
       </span>
       {player.isTransfer && <span className="transfer-chip">TR</span>}
     </button>
@@ -83,7 +83,7 @@ export default function CollegeDepthChart({ chart, unit, playersById, customLayo
     event.preventDefault();
     const bounds = fieldRef.current.getBoundingClientRect();
     const coordinates = [
-      Number(Math.max(4, Math.min(96, ((event.clientX - bounds.left) / bounds.width) * 100)).toFixed(2)),
+      Number(Math.max(10, Math.min(90, ((event.clientX - bounds.left) / bounds.width) * 100)).toFixed(2)),
       Number(Math.max(7, Math.min(93, ((event.clientY - bounds.top) / bounds.height) * 100)).toFixed(2)),
     ];
     dragRef.current.coordinates = coordinates;
@@ -109,7 +109,7 @@ export default function CollegeDepthChart({ chart, unit, playersById, customLayo
     if (!movement) return;
     event.preventDefault();
     onPositionMove(position, [
-      Math.max(4, Math.min(96, coordinates[0] + movement[0])),
+      Math.max(10, Math.min(90, coordinates[0] + movement[0])),
       Math.max(7, Math.min(93, coordinates[1] + movement[1])),
     ]);
   };
@@ -121,7 +121,8 @@ export default function CollegeDepthChart({ chart, unit, playersById, customLayo
       </div>
       <div className="formation">
         {positions.map(([position, players], index) => {
-          const coordinates = customLayout?.[position] ?? LAYOUT[unit]?.[position] ?? fallbackPosition(index, positions.length);
+          const rawCoordinates = customLayout?.[position] ?? LAYOUT[unit]?.[position] ?? fallbackPosition(index, positions.length);
+          const coordinates = [Math.max(10, Math.min(90, rawCoordinates[0])), rawCoordinates[1]];
           return (
             <article className="position-group" style={{ '--left': `${coordinates[0]}%`, '--top': `${coordinates[1]}%` }} key={position}>
               <button

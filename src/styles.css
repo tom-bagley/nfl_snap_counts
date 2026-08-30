@@ -152,6 +152,9 @@ select { appearance: none; background-image: linear-gradient(45deg, transparent 
 .college-depth-player { position: relative; }
 .college-depth-player .depth-player-copy { flex: 1; }
 .college-depth-player .depth-player-copy strong { display: flex; align-items: center; gap: 4px; }
+.college-shell .position-group { width: 190px; }
+.college-depth-player .depth-player-copy small { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.college-depth-player .long-player-name { font-size: 10.5px; letter-spacing: -.01em; }
 .five-star { margin-left: 6px; color: #ffd56a; text-shadow: 0 0 12px rgba(255,213,106,.35); }
 .transfer-chip { flex: 0 0 auto; padding: 3px 4px; border: 1px solid rgba(112,198,255,.42); color: #8ed4ff; font: 700 8px 'Barlow Condensed', sans-serif; letter-spacing: .08em; }
 
@@ -240,6 +243,7 @@ footer { max-width: 1500px; margin: 0 auto; min-height: 70px; padding: 22px 34px
   .field::after, .field-markings { display: none; }
   .formation { position: relative; padding: 18px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
   .position-group { position: relative; width: auto; left: auto; top: auto; transform: none; }
+  .college-shell .position-group { width: auto; }
   .position-heading { cursor: default; touch-action: auto; }
   .drag-instruction, .drag-glyph, .reset-layout { display: none; }
   .depth-stack { max-height: none; }
