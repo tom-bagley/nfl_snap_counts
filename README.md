@@ -67,6 +67,8 @@ That command collects current Ourlads depth charts for the ACC, Big Ten, Big 12,
 
 The gold star is intentionally narrow: it appears only when the player's native On3 high-school recruiting record has five stars. A five-star transfer rating never creates the gold high-school star. High-school and portal ratings remain separate in the player panel.
 
+Players marked as transfers receive a verified On3 organization-history lookup, including transfers from earlier portal cycles. Verified histories are cached in the canonical college source file so later collection runs do not repeat those requests.
+
 To rebuild both browser bundles from existing local source files without downloading anything, run:
 
 ```bash

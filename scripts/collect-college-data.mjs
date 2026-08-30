@@ -1,4 +1,4 @@
-import { mkdir, rename, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { load } from 'cheerio';
@@ -26,6 +26,22 @@ const rootDir = path.resolve(scriptDir, '..');
 const year = Number.parseInt(process.argv[2] ?? new Date().getFullYear(), 10);
 if (!Number.isInteger(year) || year < 2020 || year > 2035) {
   throw new Error('Pass a college season between 2020 and 2035, for example: npm run collect:college-data -- 2026');
+}
+const outputDir = path.join(rootDir, 'data', 'source', 'college');
+const outputPath = path.join(outputDir, `${year}.json`);
+const historyCache = new Map();
+try {
+  const previous = JSON.parse(await readFile(outputPath, 'utf8'));
+  previous.teams?.forEach((team) => team.players?.forEach((player) => {
+    if (player.schoolHistoryVerified && player.schoolHistory?.length) {
+      historyCache.set(String(player.id), {
+        personSportKey: player.personSportKey ?? null,
+        schoolHistory: player.schoolHistory,
+      });
+    }
+  }));
+} catch (caught) {
+  if (caught.code !== 'ENOENT') throw caught;
 }
 
 function cleanText(value) {
@@ -76,13 +92,17 @@ async function fetchText(url, label) {
   return response.text();
 }
 
-async function fetchJson(url, label) {
+async function fetchJson(url, label, attempt = 0) {
   const response = await fetch(url, {
     headers: {
       accept: 'application/json',
       'user-agent': 'Mozilla/5.0 (compatible; Snap-Atlas/2.0; college-data-collector)',
     },
   });
+  if ((response.status === 429 || response.status >= 500) && attempt < 3) {
+    await new Promise((resolve) => setTimeout(resolve, 750 * (attempt + 1)));
+    return fetchJson(url, label, attempt + 1);
+  }
   if (!response.ok) throw new Error(`${label} failed with status ${response.status}.`);
   return response.json();
 }
@@ -212,6 +232,8 @@ function compactRosterPlayer(item) {
     currentAbility: compactRating(item.rosterRating),
     transfer: null,
     schoolHistory: [],
+    schoolHistoryVerified: false,
+    personSportKey: null,
   };
 }
 
@@ -275,6 +297,24 @@ function inferredCollegeStart(player) {
   if (classRank.includes('junior')) return year - 2;
   if (classRank.includes('sophomore')) return year - 1;
   return year;
+}
+
+function compactVerifiedSchoolHistory(response) {
+  return (response.organizations ?? []).map((entry) => {
+    const organization = entry.organization ?? {};
+    const startYear = Number(entry.expMin);
+    const endYear = Number(entry.expMax ?? entry.expMin);
+    if ((organization.orgType ?? organization.orgTypeEnum) !== 'College') return null;
+    if (!organization.key || !Number.isInteger(startYear) || !Number.isInteger(endYear)) return null;
+    return {
+      organizationKey: Number(organization.key),
+      team: cleanText(organization.name ?? organization.fullName),
+      abbreviation: cleanText(organization.abbreviation ?? ''),
+      primary: organization.primaryColor ?? null,
+      startYear,
+      endYear,
+    };
+  }).filter(Boolean).sort((left, right) => right.endYear - left.endYear || right.startYear - left.startYear);
 }
 
 function matchPlayers(depthCharts, players) {
@@ -364,7 +404,11 @@ const teams = await mapLimit(sourceTeams, 4, async (sourceTeam) => {
       if (!player || Number(committedOrganization(item)?.key) !== Number(organizationKey)) return;
       if (transfer) player.transfer = transfer;
       const schoolHistory = compactSchoolHistory(item, organizationKey, currentTeam);
-      if (schoolHistory.length) player.schoolHistory = schoolHistory;
+      if (schoolHistory.length) {
+        player.schoolHistory = schoolHistory;
+        player.schoolHistoryVerified = true;
+        player.personSportKey = item.personSportKey ?? null;
+      }
     });
   }
 
@@ -402,12 +446,56 @@ const teams = await mapLimit(sourceTeams, 4, async (sourceTeam) => {
 });
 
 teams.sort((left, right) => left.name.localeCompare(right.name));
+const transferPlayers = new Map();
+teams.forEach((team) => {
+  const playersById = new Map(team.players.map((player) => [player.id, player]));
+  ['offense', 'defense'].forEach((unit) => Object.values(team.depthCharts[unit]).flat().forEach((slot) => {
+    if (!slot.isTransfer || !slot.playerId) return;
+    const player = playersById.get(slot.playerId);
+    if (player) transferPlayers.set(player.id, player);
+  }));
+});
+
+const historyLookups = [];
+transferPlayers.forEach((player) => {
+  if (player.schoolHistoryVerified) return;
+  const cached = historyCache.get(player.id);
+  if (cached) {
+    player.personSportKey = cached.personSportKey;
+    player.schoolHistory = cached.schoolHistory;
+    player.schoolHistoryVerified = true;
+  } else {
+    historyLookups.push(player);
+  }
+});
+
+let historiesCompleted = 0;
+await mapLimit(historyLookups, 10, async (player) => {
+  const profile = await fetchJson(`${ON3_API}/player/${player.id}/profile`, `${player.name} On3 profile`);
+  const personSportKey = profile.personSportKey;
+  if (!personSportKey) throw new Error(`${player.name} did not return an On3 person-sport key.`);
+  const response = await fetchJson(`${ON3_API}/player/${personSportKey}/organizations`, `${player.name} On3 school history`);
+  const schoolHistory = compactVerifiedSchoolHistory(response);
+  if (!schoolHistory.length) throw new Error(`${player.name} did not return a verified college school history.`);
+  player.personSportKey = Number(personSportKey);
+  player.schoolHistory = schoolHistory;
+  player.schoolHistoryVerified = true;
+  historiesCompleted += 1;
+  if (historiesCompleted % 25 === 0 || historiesCompleted === historyLookups.length) {
+    console.log(`Verified ${historiesCompleted}/${historyLookups.length} older transfer histories...`);
+  }
+});
+
 const depthSlotCount = teams.reduce((sum, team) => sum + team.match.slots, 0);
 const matchedDepthSlots = teams.reduce((sum, team) => sum + team.match.matched, 0);
 const rosterPlayerCount = teams.reduce((sum, team) => sum + team.players.length, 0);
 const recruitingRatedCount = teams.reduce((sum, team) => sum + team.players.filter((player) => player.recruiting).length, 0);
 const currentAbilityRatedCount = teams.reduce((sum, team) => sum + team.players.filter((player) => player.currentAbility).length, 0);
 const transferRatedCount = teams.reduce((sum, team) => sum + team.players.filter((player) => player.transfer).length, 0);
+const verifiedTransferHistoryCount = [...transferPlayers.values()].filter((player) => player.schoolHistoryVerified).length;
+if (verifiedTransferHistoryCount !== transferPlayers.size) {
+  throw new Error(`Verified ${verifiedTransferHistoryCount}/${transferPlayers.size} transfer-player school histories.`);
+}
 if (matchedDepthSlots / depthSlotCount < 0.65) {
   throw new Error(`Only ${matchedDepthSlots}/${depthSlotCount} depth-chart slots matched On3 roster players.`);
 }
@@ -424,6 +512,8 @@ const output = {
     recruitingRatedCount,
     currentAbilityRatedCount,
     transferRatedCount,
+    transferPlayerCount: transferPlayers.size,
+    verifiedTransferHistoryCount,
     sources: {
       depthCharts: 'Ourlads',
       recruiting: 'On3',
@@ -434,8 +524,6 @@ const output = {
   teams,
 };
 
-const outputDir = path.join(rootDir, 'data', 'source', 'college');
-const outputPath = path.join(outputDir, `${year}.json`);
 const temporaryPath = `${outputPath}.tmp`;
 await mkdir(outputDir, { recursive: true });
 await writeFile(temporaryPath, `${JSON.stringify(output, null, 2)}\n`);

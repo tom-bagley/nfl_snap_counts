@@ -28,7 +28,7 @@ function RatingBlock({ title, rating, transfer = false, collegeGrade = false }) 
   );
 }
 
-function SchoolHistory({ history }) {
+function SchoolHistory({ history, verified }) {
   const seasons = (history ?? []).flatMap((entry) => {
     const startYear = Number(entry.startYear);
     const endYear = Number(entry.endYear);
@@ -58,7 +58,7 @@ function SchoolHistory({ history }) {
         ))}
       </div>
       <p className="school-history-note">
-        {history.length > 1
+        {verified
           ? 'School ranges reflect On3 organization history.'
           : 'Continuous enrollment is inferred from the On3 recruiting class and current roster.'}
       </p>
@@ -96,7 +96,7 @@ export default function CollegePlayerPanel({ player, onClose }) {
         </div>
 
         {player.currentAbility && <RatingBlock title="On3 current college ability" rating={player.currentAbility} collegeGrade />}
-        <SchoolHistory history={player.schoolHistory} />
+        <SchoolHistory history={player.schoolHistory} verified={player.schoolHistoryVerified} />
         <RatingBlock title="On3 high-school recruiting" rating={player.recruiting} />
         {(player.isTransfer || player.transfer) && <RatingBlock title="On3 transfer rating" rating={player.transfer} transfer />}
 
