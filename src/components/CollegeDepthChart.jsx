@@ -143,7 +143,7 @@ export default function CollegeDepthChart({ chart, unit, playersById, customLayo
                 onKeyDown={(event) => moveWithKeyboard(event, position, coordinates)}
               >
                 <span>{position}</span>
-                <small><span className="drag-glyph" aria-hidden="true">✥</span>{players.length} deep</small>
+                <small><span className="drag-glyph" aria-hidden="true">✥</span></small>
               </button>
               <div className="depth-stack">
                 {players.map((player, playerIndex) => (
