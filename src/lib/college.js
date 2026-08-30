@@ -12,7 +12,7 @@ export function ratingLabel(rating) {
 }
 
 export function collegeGradeLabel(rating) {
-  return Number.isFinite(rating?.rating) ? `CG ${Number(rating.rating).toFixed(0)}` : 'CG not ranked';
+  return Number.isFinite(rating?.rating) ? Number(rating.rating).toFixed(0) : '';
 }
 
 export function rankLabel(rank, suffix) {

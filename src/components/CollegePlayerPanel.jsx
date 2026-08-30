@@ -15,7 +15,7 @@ function RatingBlock({ title, rating, transfer = false, collegeGrade = false }) 
     <section className="college-rating-block">
       <p className="eyebrow">{title}</p>
       <div className="rating-title">
-        <h3>{collegeGrade ? `College grade ${Number(rating.rating).toFixed(0)}` : ratingLabel(rating)}</h3>
+        <h3>{collegeGrade ? Number(rating.rating).toFixed(0) : ratingLabel(rating)}</h3>
         {!transfer && rating.stars === 5 && <span className="five-star panel-star" title="On3 five-star high-school recruit">★</span>}
       </div>
       {transfer && (rating.fromTeam || rating.toTeam) && <p>{rating.fromTeam || 'Previous school unavailable'} → {rating.toTeam || 'Current school'}</p>}
@@ -95,7 +95,7 @@ export default function CollegePlayerPanel({ player, onClose }) {
           <div><span>Hometown</span><strong>{player.hometown || '—'}</strong></div>
         </div>
 
-        <RatingBlock title="On3 current college ability" rating={player.currentAbility} collegeGrade />
+        {player.currentAbility && <RatingBlock title="On3 current college ability" rating={player.currentAbility} collegeGrade />}
         <SchoolHistory history={player.schoolHistory} />
         <RatingBlock title="On3 high-school recruiting" rating={player.recruiting} />
         {(player.isTransfer || player.transfer) && <RatingBlock title="On3 transfer rating" rating={player.transfer} transfer />}
