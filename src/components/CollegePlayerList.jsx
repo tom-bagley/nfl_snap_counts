@@ -28,7 +28,7 @@ export default function CollegePlayerList({ players, onSelectPlayer }) {
             <span className="rank">{String(index + 1).padStart(2, '0')}</span>
             <span className="position-pill">{player.position ?? '—'}</span>
             <span className="player-card-name">{player.name}{player.recruiting?.stars === 5 && <span className="five-star" title="On3 five-star high-school recruit">★</span>}</span>
-            <span className="player-card-stat"><strong>{collegeGradeLabel(player.currentAbility) || '—'}</strong><small>HS {ratingLabel(player.recruiting)}{player.isTransfer || player.transfer ? ' · TR' : ''}</small></span>
+            <span className="player-card-stat"><strong>{collegeGradeLabel(player.currentAbility) || '—'}</strong><small>{player.pffBigBoard ? `PFF #${player.pffBigBoard.rank} · ` : ''}HS {ratingLabel(player.recruiting)}{player.isTransfer || player.transfer ? ' · TR' : ''}</small></span>
             <span className="card-arrow">↗</span>
           </button>
         ))}

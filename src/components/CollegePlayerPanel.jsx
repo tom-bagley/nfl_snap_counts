@@ -28,6 +28,23 @@ function RatingBlock({ title, rating, transfer = false, collegeGrade = false }) 
   );
 }
 
+function PffBigBoardBlock({ ranking }) {
+  if (!ranking) return null;
+  return (
+    <section className="college-rating-block pff-big-board-block">
+      <p className="eyebrow">NFL draft projection</p>
+      <div className="rating-title">
+        <h3>#{ranking.rank}</h3>
+        <span>{ranking.draftYear} PFF Big Board</span>
+      </div>
+      <p>{ranking.position} · {ranking.school}</p>
+      <a className="source-link" href={ranking.sourceUrl} target="_blank" rel="noreferrer">
+        View the PFF Big Board <span aria-hidden="true">↗</span>
+      </a>
+    </section>
+  );
+}
+
 function SchoolHistory({ history, verified }) {
   const seasons = (history ?? []).flatMap((entry) => {
     const startYear = Number(entry.startYear);
@@ -96,6 +113,7 @@ export default function CollegePlayerPanel({ player, onClose }) {
         </div>
 
         {player.currentAbility && <RatingBlock title="On3 current college ability" rating={player.currentAbility} collegeGrade />}
+        <PffBigBoardBlock ranking={player.pffBigBoard} />
         <SchoolHistory history={player.schoolHistory} verified={player.schoolHistoryVerified} />
         <RatingBlock title="On3 high-school recruiting" rating={player.recruiting} />
         {(player.isTransfer || player.transfer) && <RatingBlock title="On3 transfer rating" rating={player.transfer} transfer />}

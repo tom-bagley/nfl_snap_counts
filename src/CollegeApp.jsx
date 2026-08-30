@@ -96,7 +96,7 @@ export default function CollegeApp({ onLeagueChange }) {
             <button type="button" onClick={() => onLeagueChange('nfl')}>NFL</button>
             <button className="active" type="button">College</button>
           </div>
-          <div className="data-stamp"><span className="live-dot" />{data.metadata.season} depth charts · On3 talent data</div>
+          <div className="data-stamp"><span className="live-dot" />{data.metadata.season} depth charts · On3 talent{data.metadata.pffBigBoardDraftYear ? ` · ${data.metadata.pffBigBoardDraftYear} PFF board` : ''}</div>
         </div>
       </header>
 
@@ -128,7 +128,7 @@ export default function CollegeApp({ onLeagueChange }) {
         ) : <CollegePlayerList players={chartPlayers} onSelectPlayer={setSelectedPlayer} />}
       </main>
 
-      <footer><span>Snap Atlas · College Football</span><span>{data.metadata.teamCount} teams · {data.metadata.rosterPlayerCount.toLocaleString()} roster players · Generated {formatDate(data.metadata.generatedAt)}</span><span>Sources: Ourlads &amp; On3</span></footer>
+      <footer><span>Snap Atlas · College Football</span><span>{data.metadata.teamCount} teams · {data.metadata.rosterPlayerCount.toLocaleString()} roster players · Generated {formatDate(data.metadata.generatedAt)}</span><span>Sources: Ourlads, On3 &amp; PFF</span></footer>
       <CollegePlayerPanel player={selectedPlayer} onClose={() => setSelectedPlayer(null)} />
     </div>
   );

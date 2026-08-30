@@ -153,8 +153,9 @@ select { appearance: none; background-image: linear-gradient(45deg, transparent 
 .college-depth-player .depth-player-copy { flex: 1; }
 .college-depth-player .depth-player-copy strong { display: flex; align-items: center; gap: 4px; }
 .college-shell .position-group { width: 190px; }
-.college-depth-player .depth-player-copy small { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.college-depth-player .depth-player-copy small { display: flex; align-items: center; gap: 5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .college-depth-player .long-player-name { font-size: 10.5px; letter-spacing: -.01em; }
+.pff-rank-label { color: #73c8ff; font-weight: 700; }
 .recruiting-hover-label { display: none; color: #ffd56a; }
 .college-depth-player:hover .college-grade-label, .college-depth-player:focus-visible .college-grade-label { display: none; }
 .college-depth-player:hover .recruiting-hover-label, .college-depth-player:focus-visible .recruiting-hover-label { display: inline; }
@@ -228,6 +229,8 @@ select { appearance: none; background-image: linear-gradient(45deg, transparent 
 .college-rating-block h3 { margin: 0; font: 700 29px 'Barlow Condensed', sans-serif; text-transform: uppercase; }
 .college-rating-block > p:not(.eyebrow) { margin: 8px 0 0; color: var(--muted); font-size: 11px; }
 .rating-title { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.pff-big-board-block .rating-title > span { color: #73c8ff; font: 700 11px 'Barlow Condensed', sans-serif; letter-spacing: .08em; text-transform: uppercase; }
+.pff-big-board-block .source-link { margin-top: 16px; }
 .panel-star { margin: 0; font-size: 30px; }
 .college-ranks { margin: 18px 0 0; display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); }
 .college-ranks div { padding: 14px 10px 0 0; }

@@ -13,6 +13,7 @@ Snap Atlas is a static React website for exploring NFL snap counts and visual de
 - Power Four and Notre Dame college depth charts
 - On3 high-school recruiting profiles with a gold star for On3 five-star recruits
 - On3 current college grades as the primary player rating, with high-school stars and ratings revealed on hover
+- Separate PFF Big Board ranks for listed NFL draft prospects
 - Separate On3 transfer ratings and prior-team context when a portal match is available
 - A year-by-year college school history inside each recruiting profile
 - Responsive desktop and mobile layouts
@@ -65,6 +66,8 @@ npm run collect:college-data -- 2026
 
 That command collects current Ourlads depth charts for the ACC, Big Ten, Big 12, SEC, and Notre Dame. It then matches those players to On3 roster, high-school recruiting, and transfer-portal records. The generated canonical source is `data/source/college/2026.json`.
 
+The 2027 PFF Big Board snapshot lives in `data/source/pff-big-board/2027.json`. It is matched to the 2026 college rosters during `npm run prepare:college-data`; players who are not on the board receive no PFF label. The source snapshot can be refreshed from the PFF Big Board in this chat without exposing an upload or editing feature on the website.
+
 The gold star is intentionally narrow: it appears only when the player's native On3 high-school recruiting record has five stars. A five-star transfer rating never creates the gold high-school star. High-school and portal ratings remain separate in the player panel.
 
 Players marked as transfers receive a verified On3 organization-history lookup, including transfers from earlier portal cycles. Verified histories are cached in the canonical college source file so later collection runs do not repeat those requests.
@@ -110,6 +113,7 @@ The JSON is keyed by the Pro Football Reference-style team code. Each team conta
 ```text
 data/source/snap-counts/ One canonical NFL CSV per collected season
 data/source/college/     Canonical college JSON by season
+data/source/pff-big-board/ Canonical PFF draft ranks by draft year
 data/source/             Current NFL depth charts and source configuration
 scripts/collect-*.mjs    Snap-count and depth-chart collectors
 scripts/prepare-*.mjs    Validation and browser-data generators
@@ -142,5 +146,6 @@ College depth-chart and recruiting sources also lack a shared player ID. The col
 - Depth charts: [Ourlads](https://www.ourlads.com/nfldepthcharts/depthcharts.aspx).
 - College depth charts: [Ourlads NCAA Football](https://secure.ourlads.com/ncaa-football-depth-charts/default.aspx).
 - College recruiting and transfer ratings: [On3](https://www.on3.com/rivals/rankings/industry-player/football/2026/) and the [On3 Transfer Portal](https://www.on3.com/transfer-portal/top/football/2026/).
+- NFL draft prospect ranks: [PFF 2027 Big Board](https://www.pff.com/draft/big-board?season=2027).
 
 The frontend contains no data-upload or mutation capability. Source updates happen through the local collection commands and reach Render only after the repository changes are reviewed and pushed.

@@ -22,6 +22,7 @@ function fallbackPosition(index, total) {
 function CollegePlayerLine({ player, position, rosterPlayer, starter, onSelect }) {
   const recruiting = rosterPlayer?.recruiting;
   const currentAbility = rosterPlayer?.currentAbility;
+  const pffBigBoard = rosterPlayer?.pffBigBoard;
   const recruitingLabel = `HS ${ratingLabel(recruiting)}`;
   const selected = {
     ...(rosterPlayer ?? {}),
@@ -48,6 +49,7 @@ function CollegePlayerLine({ player, position, rosterPlayer, starter, onSelect }
         </strong>
         <small>
           <span className="college-grade-label">{collegeGradeLabel(currentAbility)}</span>
+          {pffBigBoard && <span className="pff-rank-label" title={`${pffBigBoard.draftYear} PFF Big Board rank`}>PFF #{pffBigBoard.rank}</span>}
           <span className="recruiting-hover-label">{recruitingLabel}</span>
         </small>
       </span>
