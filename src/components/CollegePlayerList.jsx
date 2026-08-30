@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { collegeGradeLabel, ratingLabel } from '../lib/college';
 
-export default function CollegePlayerList({ players, onSelectPlayer }) {
+export default function CollegePlayerList({ players, teamName, onSelectPlayer }) {
   const [search, setSearch] = useState('');
   const [filter, setFilter] = useState('all');
   const visible = useMemo(() => players
@@ -15,7 +15,7 @@ export default function CollegePlayerList({ players, onSelectPlayer }) {
       <div className="list-toolbar">
         <div>
           <p className="eyebrow">Talent board</p>
-          <h2>Players on the depth chart</h2>
+          <h2>{teamName ? `${teamName} players` : 'Players on the depth chart'}</h2>
         </div>
         <div className="list-filters">
           <label><span>Search</span><input value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Player name" /></label>
