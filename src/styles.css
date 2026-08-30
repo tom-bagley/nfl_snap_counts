@@ -155,6 +155,9 @@ select { appearance: none; background-image: linear-gradient(45deg, transparent 
 .college-shell .position-group { width: 190px; }
 .college-depth-player .depth-player-copy small { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .college-depth-player .long-player-name { font-size: 10.5px; letter-spacing: -.01em; }
+.recruiting-hover-label { display: none; color: #ffd56a; }
+.college-depth-player:hover .college-grade-label, .college-depth-player:focus-visible .college-grade-label { display: none; }
+.college-depth-player:hover .recruiting-hover-label, .college-depth-player:focus-visible .recruiting-hover-label { display: inline; }
 .five-star { margin-left: 6px; color: #ffd56a; text-shadow: 0 0 12px rgba(255,213,106,.35); }
 .transfer-chip { flex: 0 0 auto; padding: 3px 4px; border: 1px solid rgba(112,198,255,.42); color: #8ed4ff; font: 700 8px 'Barlow Condensed', sans-serif; letter-spacing: .08em; }
 

@@ -11,6 +11,10 @@ export function ratingLabel(rating) {
   return `${stars}${score}`;
 }
 
+export function collegeGradeLabel(rating) {
+  return Number.isFinite(rating?.rating) ? `CG ${Number(rating.rating).toFixed(0)}` : 'CG not ranked';
+}
+
 export function rankLabel(rank, suffix) {
   return Number.isFinite(rank) ? `#${rank.toLocaleString()} ${suffix}` : '—';
 }

@@ -209,6 +209,7 @@ function compactRosterPlayer(item) {
     hometown: cleanText(player.hometown?.name ?? player.homeTownName ?? ''),
     highSchool: cleanText(player.highSchoolName ?? player.highSchool?.name ?? ''),
     recruiting: compactRating(item.rating),
+    currentAbility: compactRating(item.rosterRating),
     transfer: null,
     schoolHistory: [],
   };
@@ -405,6 +406,7 @@ const depthSlotCount = teams.reduce((sum, team) => sum + team.match.slots, 0);
 const matchedDepthSlots = teams.reduce((sum, team) => sum + team.match.matched, 0);
 const rosterPlayerCount = teams.reduce((sum, team) => sum + team.players.length, 0);
 const recruitingRatedCount = teams.reduce((sum, team) => sum + team.players.filter((player) => player.recruiting).length, 0);
+const currentAbilityRatedCount = teams.reduce((sum, team) => sum + team.players.filter((player) => player.currentAbility).length, 0);
 const transferRatedCount = teams.reduce((sum, team) => sum + team.players.filter((player) => player.transfer).length, 0);
 if (matchedDepthSlots / depthSlotCount < 0.65) {
   throw new Error(`Only ${matchedDepthSlots}/${depthSlotCount} depth-chart slots matched On3 roster players.`);
@@ -420,6 +422,7 @@ const output = {
     depthSlotCount,
     matchedDepthSlots,
     recruitingRatedCount,
+    currentAbilityRatedCount,
     transferRatedCount,
     sources: {
       depthCharts: 'Ourlads',

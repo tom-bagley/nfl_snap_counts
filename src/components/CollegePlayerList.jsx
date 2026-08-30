@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { ratingLabel } from '../lib/college';
+import { collegeGradeLabel, ratingLabel } from '../lib/college';
 
 export default function CollegePlayerList({ players, onSelectPlayer }) {
   const [search, setSearch] = useState('');
@@ -7,7 +7,7 @@ export default function CollegePlayerList({ players, onSelectPlayer }) {
   const visible = useMemo(() => players
     .filter((player) => player.name.toLowerCase().includes(search.trim().toLowerCase()))
     .filter((player) => filter === 'five-star' ? player.recruiting?.stars === 5 : filter === 'transfer' ? player.isTransfer || player.transfer : true)
-    .sort((left, right) => (right.recruiting?.rating ?? -1) - (left.recruiting?.rating ?? -1) || left.name.localeCompare(right.name)),
+    .sort((left, right) => (right.currentAbility?.rating ?? -1) - (left.currentAbility?.rating ?? -1) || (right.recruiting?.rating ?? -1) - (left.recruiting?.rating ?? -1) || left.name.localeCompare(right.name)),
   [filter, players, search]);
 
   return (
@@ -28,7 +28,7 @@ export default function CollegePlayerList({ players, onSelectPlayer }) {
             <span className="rank">{String(index + 1).padStart(2, '0')}</span>
             <span className="position-pill">{player.position ?? '—'}</span>
             <span className="player-card-name">{player.name}{player.recruiting?.stars === 5 && <span className="five-star" title="On3 five-star high-school recruit">★</span>}</span>
-            <span className="player-card-stat"><strong>{player.recruiting?.rating ? Number(player.recruiting.rating).toFixed(1) : '—'}</strong><small>{ratingLabel(player.recruiting)}{player.isTransfer || player.transfer ? ' · TR' : ''}</small></span>
+            <span className="player-card-stat"><strong>{player.currentAbility?.rating ? Number(player.currentAbility.rating).toFixed(0) : '—'}</strong><small>{collegeGradeLabel(player.currentAbility)} · HS {ratingLabel(player.recruiting)}{player.isTransfer || player.transfer ? ' · TR' : ''}</small></span>
             <span className="card-arrow">↗</span>
           </button>
         ))}

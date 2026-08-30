@@ -1,13 +1,13 @@
 import { useEffect } from 'react';
 import { rankLabel, ratingLabel } from '../lib/college';
 
-function RatingBlock({ title, rating, transfer = false }) {
+function RatingBlock({ title, rating, transfer = false, collegeGrade = false }) {
   if (!rating) {
     return (
       <section className="college-rating-block">
         <p className="eyebrow">{title}</p>
         <h3>Not rated</h3>
-        <p>No matching {transfer ? 'portal' : 'high-school recruiting'} rating was found.</p>
+        <p>No matching {collegeGrade ? 'current college-player' : transfer ? 'portal' : 'high-school recruiting'} rating was found.</p>
       </section>
     );
   }
@@ -15,14 +15,14 @@ function RatingBlock({ title, rating, transfer = false }) {
     <section className="college-rating-block">
       <p className="eyebrow">{title}</p>
       <div className="rating-title">
-        <h3>{ratingLabel(rating)}</h3>
+        <h3>{collegeGrade ? `College grade ${Number(rating.rating).toFixed(0)}` : ratingLabel(rating)}</h3>
         {!transfer && rating.stars === 5 && <span className="five-star panel-star" title="On3 five-star high-school recruit">★</span>}
       </div>
       {transfer && (rating.fromTeam || rating.toTeam) && <p>{rating.fromTeam || 'Previous school unavailable'} → {rating.toTeam || 'Current school'}</p>}
       <dl className="college-ranks">
         <div><dt>National</dt><dd>{rankLabel(rating.nationalRank, 'NATL')}</dd></div>
         <div><dt>Position</dt><dd>{rankLabel(rating.positionRank, rating.position ?? 'POS')}</dd></div>
-        <div><dt>{transfer ? 'Portal year' : 'State'}</dt><dd>{transfer ? rating.portalYear ?? '—' : rankLabel(rating.stateRank, rating.state ?? 'STATE')}</dd></div>
+        <div><dt>{collegeGrade ? 'Grade year' : transfer ? 'Portal year' : 'State'}</dt><dd>{collegeGrade ? rating.year ?? '—' : transfer ? rating.portalYear ?? '—' : rankLabel(rating.stateRank, rating.state ?? 'STATE')}</dd></div>
       </dl>
     </section>
   );
@@ -95,6 +95,7 @@ export default function CollegePlayerPanel({ player, onClose }) {
           <div><span>Hometown</span><strong>{player.hometown || '—'}</strong></div>
         </div>
 
+        <RatingBlock title="On3 current college ability" rating={player.currentAbility} collegeGrade />
         <SchoolHistory history={player.schoolHistory} />
         <RatingBlock title="On3 high-school recruiting" rating={player.recruiting} />
         {(player.isTransfer || player.transfer) && <RatingBlock title="On3 transfer rating" rating={player.transfer} transfer />}

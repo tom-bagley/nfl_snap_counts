@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef } from 'react';
-import { ratingLabel } from '../lib/college';
+import { collegeGradeLabel, ratingLabel } from '../lib/college';
 
 const LAYOUT = {
   offense: {
@@ -21,6 +21,8 @@ function fallbackPosition(index, total) {
 
 function CollegePlayerLine({ player, position, rosterPlayer, starter, onSelect }) {
   const recruiting = rosterPlayer?.recruiting;
+  const currentAbility = rosterPlayer?.currentAbility;
+  const recruitingLabel = `HS ${ratingLabel(recruiting)}`;
   const selected = {
     ...(rosterPlayer ?? {}),
     id: rosterPlayer?.id ?? `unmatched-${position}-${player.num}-${player.normalizedName}`,
@@ -42,9 +44,12 @@ function CollegePlayerLine({ player, position, rosterPlayer, starter, onSelect }
       <span className="depth-player-copy">
         <strong className={selected.name.length > 17 ? 'long-player-name' : ''}>
           {selected.name}
-          {recruiting?.stars === 5 && <span className="five-star" title="On3 five-star high-school recruit" aria-label="On3 five-star high-school recruit">★</span>}
+          {recruiting?.stars === 5 && <span className="five-star" title={`On3 high-school recruiting: ${ratingLabel(recruiting)}`} aria-label={`On3 high-school recruiting: ${ratingLabel(recruiting)}`}>★</span>}
         </strong>
-        <small>{ratingLabel(recruiting)}</small>
+        <small>
+          <span className="college-grade-label">{collegeGradeLabel(currentAbility)}</span>
+          <span className="recruiting-hover-label">{recruitingLabel}</span>
+        </small>
       </span>
       {player.isTransfer && <span className="transfer-chip">TR</span>}
     </button>
