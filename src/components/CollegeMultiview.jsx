@@ -28,6 +28,10 @@ function rankingPlayersForTeam(team) {
   }));
 }
 
+function jerseyNumber(player) {
+  return player.jerseyNumber === null || player.jerseyNumber === undefined || player.jerseyNumber === '' ? '—' : player.jerseyNumber;
+}
+
 export default function CollegeMultiview({ teams, conferences, teamKeys, onTeamChange, onSelectPlayer }) {
   const [search, setSearch] = useState('');
   const [position, setPosition] = useState('all');
@@ -97,9 +101,9 @@ export default function CollegeMultiview({ teams, conferences, teamKeys, onTeamC
               {!screenTeams.length && <span className="is-empty">Add teams to this screen</span>}
             </div>
             <div className="multiview-leaders">
-              {leaders.map((player, index) => (
+              {leaders.map((player) => (
                 <button type="button" onClick={() => onSelectPlayer(player)} key={`${player.teamKey}:${player.id}`}>
-                  <span>{index + 1}</span>
+                  <span className="multiview-leader-jersey" style={{ '--jersey-color': player.teamPrimary }}>#{jerseyNumber(player)}</span>
                   <span><strong>{player.name}</strong><small>{player.teamAbbreviation} · {player.position ?? '—'}</small></span>
                   <b>{collegeGradeLabel(player.currentAbility) || '—'}</b>
                 </button>
@@ -127,8 +131,9 @@ export default function CollegeMultiview({ teams, conferences, teamKeys, onTeamC
           {visiblePlayers.map((player) => {
             const overallRank = rankedPlayers.indexOf(player) + 1;
             return (
-              <button className="player-card college-player-card" type="button" onClick={() => onSelectPlayer(player)} key={`${player.teamKey}:${player.id}`}>
+              <button className="player-card college-player-card multiview-player-card" type="button" onClick={() => onSelectPlayer(player)} key={`${player.teamKey}:${player.id}`}>
                 <span className="rank">{String(overallRank).padStart(2, '0')}</span>
+                <span className="multiview-jersey" style={{ '--jersey-color': player.teamPrimary }}><small>#</small>{jerseyNumber(player)}</span>
                 <span className="position-pill">{player.position ?? '—'}</span>
                 <span className="college-player-identity">
                   <span className="player-card-name">
