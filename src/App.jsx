@@ -6,12 +6,6 @@ import PlayerPanel from './components/PlayerPanel';
 import { formatDate, loadNflData, snapTotal } from './lib/data';
 import { teamEntries, teamFor } from './lib/teams';
 
-const SNAP_CATEGORIES = [
-  ['offense', 'Offense'],
-  ['defense', 'Defense'],
-  ['specialTeams', 'Special teams'],
-];
-
 const LAYOUT_STORAGE_KEY = 'snap-atlas-position-layouts';
 
 function loadSavedLayouts() {
@@ -50,7 +44,6 @@ function NflApp({ onLeagueChange }) {
   const [season, setSeason] = useState(null);
   const [view, setView] = useState('depth');
   const [unit, setUnit] = useState('offense');
-  const [category, setCategory] = useState('offense');
   const [search, setSearch] = useState('');
   const [position, setPosition] = useState('all');
   const [selectedPlayer, setSelectedPlayer] = useState(null);
@@ -100,8 +93,9 @@ function NflApp({ onLeagueChange }) {
   const team = teamFor(teamCode);
   const chartAvailable = Boolean(depthCharts[teamCode]);
   const seasonHasSnaps = data.snapCounts.some((row) => row.season === season);
-  const leader = [...rows].sort((left, right) => snapTotal(right, category) - snapTotal(left, category))[0];
-  const unitTotal = rows.reduce((sum, row) => sum + snapTotal(row, category), 0);
+  const seasonTeamCount = new Set(data.snapCounts.filter((row) => row.season === season).map((row) => row.team)).size;
+  const leader = [...rows].sort((left, right) => snapTotal(right, unit) - snapTotal(left, unit))[0];
+  const unitTotal = rows.reduce((sum, row) => sum + snapTotal(row, unit), 0);
 
   const chooseTeam = (value) => {
     setTeamCode(value);
@@ -128,6 +122,18 @@ function NflApp({ onLeagueChange }) {
       return next;
     });
   };
+
+  const chooseUnit = (nextUnit) => {
+    setUnit(nextUnit);
+    setPosition('all');
+    setSelectedPlayer(null);
+  };
+  const unitControl = (
+    <div className="unit-switch" role="group" aria-label="Unit">
+      <button className={unit === 'offense' ? 'active' : ''} aria-pressed={unit === 'offense'} type="button" onClick={() => chooseUnit('offense')}>Offense</button>
+      <button className={unit === 'defense' ? 'active' : ''} aria-pressed={unit === 'defense'} type="button" onClick={() => chooseUnit('defense')}>Defense</button>
+    </div>
+  );
 
   return (
     <div className="app-shell" style={{ '--team-primary': team.primary, '--team-secondary': team.secondary }}>
@@ -159,8 +165,8 @@ function NflApp({ onLeagueChange }) {
           </div>
           <div className="hero-metrics">
             <div><strong>{rows.length}</strong><span>Players with snaps</span></div>
-            <div><strong>{unitTotal.toLocaleString()}</strong><span>{SNAP_CATEGORIES.find(([key]) => key === category)?.[1]} snaps</span></div>
-            <div><strong>{leader?.playerName ?? '—'}</strong><span>Team leader · {leader ? snapTotal(leader, category).toLocaleString() : 0}</span></div>
+            <div><strong>{unitTotal.toLocaleString()}</strong><span>{unit === 'offense' ? 'Offensive' : 'Defensive'} snaps</span></div>
+            <div><strong>{leader?.playerName ?? '—'}</strong><span>Team leader · {leader ? snapTotal(leader, unit).toLocaleString() : 0}</span></div>
           </div>
         </section>
 
@@ -184,15 +190,17 @@ function NflApp({ onLeagueChange }) {
               <button className={view === 'list' ? 'active' : ''} type="button" onClick={() => setView('list')}>Player list</button>
             </div>
           </div>
-          <div className="segmented-control category-control" aria-label="Snap category">
-            <span>Snap category</span>
+        </section>
+
+        {seasonTeamCount > 0 && seasonTeamCount < 32 && (
+          <div className="season-notice">
+            <span className="notice-icon">i</span>
             <div>
-              {SNAP_CATEGORIES.map(([key, label]) => (
-                <button className={category === key ? 'active' : ''} type="button" onClick={() => setCategory(key)} key={key}>{label}</button>
-              ))}
+              <h3>{season} snap coverage: {seasonTeamCount} of 32 teams</h3>
+              <p>{rows.length ? 'Showing available regular-season games.' : `Snap counts for ${team.name} are not available in the current update.`}</p>
             </div>
           </div>
-        </section>
+        )}
 
         {view === 'depth' ? (
           <section className="depth-section">
@@ -203,17 +211,14 @@ function NflApp({ onLeagueChange }) {
               </div>
               <div className="chart-actions">
                 <button className="reset-layout" type="button" onClick={resetPositions} disabled={Object.keys(currentLayout).length === 0}>Reset positions</button>
-                <div className="unit-switch">
-                  <button className={unit === 'offense' ? 'active' : ''} type="button" onClick={() => setUnit('offense')}>Offense</button>
-                  <button className={unit === 'defense' ? 'active' : ''} type="button" onClick={() => setUnit('defense')}>Defense</button>
-                </div>
+                {unitControl}
               </div>
             </div>
             {chartAvailable ? (
               <>
                 <div className="chart-context">
                   <span>{metadata.depthChartSeason} current depth chart</span>
-                  <span>{seasonHasSnaps ? `Showing ${season} snap totals` : `${season} snaps · season not started`}</span>
+                  <span>{seasonHasSnaps ? `Showing ${season} snap totals` : `${season} snaps not available`}</span>
                   <span className="drag-instruction">Drag a position label to customize the formation</span>
                 </div>
                 <DepthChart
@@ -223,7 +228,7 @@ function NflApp({ onLeagueChange }) {
                   historyRows={data.snapCounts}
                   season={season}
                   teamCode={teamCode}
-                  category={category}
+                  category={unit}
                   emptySeason={!seasonHasSnaps}
                   customLayout={currentLayout}
                   onPositionMove={savePosition}
@@ -243,7 +248,8 @@ function NflApp({ onLeagueChange }) {
         ) : (
           <PlayerList
             rows={rows}
-            category={category}
+            category={unit}
+            unitControl={unitControl}
             search={search}
             position={position}
             onSearch={setSearch}

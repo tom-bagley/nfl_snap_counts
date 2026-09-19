@@ -10,6 +10,7 @@
     "collect:snap-counts": "node scripts/collect-snap-counts.mjs",
     "collect:depth-charts": "node scripts/refresh-depth-charts.mjs",
     "collect:college-data": "node scripts/collect-college-data.mjs",
+    "collect:pff-big-board": "node scripts/collect-pff-big-board.mjs",
     "collect:data": "node scripts/collect-data.mjs",
     "dev": "npm run prepare-data && vite",
     "build": "npm run prepare-data && vite build",

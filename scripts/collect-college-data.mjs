@@ -2,26 +2,18 @@ import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { load } from 'cheerio';
+import { INCLUDED_CONFERENCES, validateCollegeCoverage } from './lib/college-coverage.mjs';
 
 const OURLADS_INDEX = 'https://secure.ourlads.com/ncaa-football-depth-charts/default.aspx';
 const OURLADS_ROOT = 'https://secure.ourlads.com/ncaa-football-depth-charts/';
 const ON3_API = 'https://api.on3.com/public/rdb/v1';
 const FOOTBALL_SPORT_KEY = 1;
-const EXPECTED_TEAM_COUNT = 92;
-const INCLUDED_CONFERENCES = new Map([
-  ['AAC', 'American'],
-  ['ACC', 'ACC'],
-  ['Big 10', 'Big Ten'],
-  ['Big 12', 'Big 12'],
-  ['Conference USA', 'Conference USA'],
-  ['SEC', 'SEC'],
-  ['Independents', 'Independent'],
-]);
 const ON3_NAME_ALIASES = {
   'North Carolina State': 'NC State',
   'Central Florida': 'UCF',
   'Florida International': 'FIU',
   'Middle Tennessee': 'Middle Tennessee State',
+  'Miami (Ohio)': 'Miami (OH)',
   Mississippi: 'Ole Miss',
   'Missouri State': 'Missouri State University',
   'Sam Houston': 'Sam Houston State',
@@ -147,7 +139,7 @@ function parseOurladsIndex(html) {
       if (sibling.hasClass('nfl-dc-mm-team')) pendingName = cleanText(sibling.text());
       if (sibling.hasClass('ncaa-dc-mm-team-links') && pendingName) {
         const link = sibling.find('a[href*="depth-chart.aspx"]').first().attr('href');
-        if (link && (sourceConference !== 'Independents' || pendingName === 'Notre Dame')) {
+        if (link) {
           const url = new URL(link, OURLADS_ROOT);
           teams.push({
             key: url.searchParams.get('s'),
@@ -162,7 +154,7 @@ function parseOurladsIndex(html) {
     }
   });
 
-  if (teams.length !== EXPECTED_TEAM_COUNT) throw new Error(`Expected ${EXPECTED_TEAM_COUNT} selected FBS teams but found ${teams.length}.`);
+  validateCollegeCoverage(teams);
   return teams;
 }
 

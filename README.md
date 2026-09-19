@@ -10,7 +10,7 @@ Snap Atlas is a static React website for exploring NFL snap counts and visual de
 - Offense, defense, and special-teams workload views
 - Historical player panels
 - An NFL/College switch in the shared site header
-- Power Four and Notre Dame college depth charts
+- All 138 FBS teams across ten conferences and both independents
 - On3 high-school recruiting profiles with a gold star for On3 five-star recruits
 - On3 current college grades as the primary player rating, with high-school stars and ratings revealed on hover
 - Separate PFF Big Board ranks for listed NFL draft prospects
@@ -20,7 +20,7 @@ Snap Atlas is a static React website for exploring NFL snap counts and visual de
 - A validated, command-driven data preparation step
 - Render static-site configuration
 
-The current source snapshot contains NFL snap counts for 2012–2025, current 2026 NFL depth charts, and current 2026 college depth charts and talent data.
+The current source snapshot contains NFL snap counts for 2012–2026, current 2026 NFL depth charts, and current 2026 college depth charts and talent data. The 2026 snap counts cover the available regular-season games; the site shows how many teams have data.
 
 ## Local development
 
@@ -58,17 +58,31 @@ npm run collect:snap-counts -- 2025
 npm run collect:depth-charts
 ```
 
+For an in-progress NFL season, explicitly allow partial team coverage:
+
+```bash
+node scripts/collect-snap-counts.mjs 2026 --allow-partial
+```
+
+Partial collection still requires both teams for every game and at least 40 player records per team. The default completed-season checks continue to require all 32 teams.
+
 Collect the 2026 college dataset with:
 
 ```bash
 npm run collect:college-data -- 2026
 ```
 
-That command collects current Ourlads depth charts for the American, ACC, Big Ten, Big 12, Conference USA, SEC, and Notre Dame. It then matches those players to On3 roster, high-school recruiting, and transfer-portal records. The generated canonical source is `data/source/college/2026.json`.
+That command collects current Ourlads depth charts for all 138 FBS teams: American, ACC, Big Ten, Big 12, Conference USA, MAC, Mountain West, Pac-12, SEC, Sun Belt, and independents Connecticut and Notre Dame. Conference assignments come from the current Ourlads index, including 2026 realignment and transitioning programs. It then matches those players to On3 roster, high-school recruiting, and transfer-portal records. The generated canonical source is `data/source/college/2026.json`.
 
 If On3 does not publish a complete roster for a selected team, the collector keeps that team available by building its player list from the Ourlads depth chart. On3 ratings remain blank for unmatched fallback players.
 
-The 2027 PFF Big Board snapshot lives in `data/source/pff-big-board/2027.json`. It is matched to the 2026 college rosters during `npm run prepare:college-data`; players who are not on the board receive no PFF label. The source snapshot can be refreshed from the PFF Big Board in this chat without exposing an upload or editing feature on the website.
+Refresh the latest published PFF Big Board with:
+
+```bash
+npm run collect:pff-big-board -- 2027
+```
+
+The collector reads PFF's published board versions and public rankings, validates the response, and writes `data/source/pff-big-board/2027.json`. It records collection time separately from PFF's board update time; a fresh collection may return unchanged rankings. It is matched to the 2026 college rosters during `npm run prepare:college-data`; players who are not on the board receive no PFF label. These are draft rankings, not performance grades.
 
 The gold star is intentionally narrow: it appears only when the player's native On3 high-school recruiting record has five stars. A five-star transfer rating never creates the gold high-school star. High-school and portal ratings remain separate in the player panel.
 

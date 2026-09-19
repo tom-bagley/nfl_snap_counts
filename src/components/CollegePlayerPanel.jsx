@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { rankLabel, ratingLabel } from '../lib/college';
+import usePageScrollLock from '../hooks/usePageScrollLock';
 
 function RatingBlock({ title, rating, transfer = false, collegeGrade = false }) {
   if (!rating) {
@@ -84,6 +85,8 @@ function SchoolHistory({ history, verified }) {
 }
 
 export default function CollegePlayerPanel({ player, onClose }) {
+  usePageScrollLock(Boolean(player));
+
   useEffect(() => {
     const closeOnEscape = (event) => {
       if (event.key === 'Escape') onClose();

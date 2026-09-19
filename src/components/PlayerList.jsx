@@ -6,7 +6,7 @@ const LABELS = {
   specialTeams: 'special teams',
 };
 
-export default function PlayerList({ rows, category, search, position, onSearch, onPosition, onSelectPlayer }) {
+export default function PlayerList({ rows, category, unitControl, search, position, onSearch, onPosition, onSelectPlayer }) {
   const positions = [...new Set(rows.map((row) => row.position))].sort();
   const normalizedSearch = search.trim().toLowerCase();
   const filtered = rows
@@ -20,6 +20,7 @@ export default function PlayerList({ rows, category, search, position, onSearch,
         <div>
           <p className="eyebrow">Roster explorer</p>
           <h2>{filtered.length} players</h2>
+          {unitControl}
         </div>
         <div className="list-filters">
           <label>

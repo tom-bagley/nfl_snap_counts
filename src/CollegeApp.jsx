@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import CollegeDepthChart from './components/CollegeDepthChart';
+import CollegeMultiview from './components/CollegeMultiview';
 import CollegePlayerList from './components/CollegePlayerList';
 import CollegePlayerPanel from './components/CollegePlayerPanel';
 import { loadCollegeData } from './lib/college';
@@ -34,6 +35,9 @@ function playersOnChart(team, playersById) {
         jerseyNumber: depthPlayer.num || roster?.jerseyNumber,
         classRank: depthPlayer.classRank || roster?.classRank,
         isTransfer: depthPlayer.isTransfer,
+        teamKey: team.key,
+        teamName: team.name,
+        teamPrimary: team.primary,
       });
       else if (depthPlayer.isTransfer) unique.get(key).isTransfer = true;
     });
@@ -48,6 +52,8 @@ export default function CollegeApp({ onLeagueChange }) {
   const [opponentKey, setOpponentKey] = useState('georgia');
   const [matchupSwapped, setMatchupSwapped] = useState(false);
   const [view, setView] = useState('depth');
+  const [talentScope, setTalentScope] = useState('a');
+  const [multiviewTeamKeys, setMultiviewTeamKeys] = useState(['alabama', 'georgia', '', '', '', '', '', '']);
   const [selectedPlayer, setSelectedPlayer] = useState(null);
   const [savedLayouts, setSavedLayouts] = useState(loadSavedLayouts);
 
@@ -65,6 +71,13 @@ export default function CollegeApp({ onLeagueChange }) {
   const opponentPlayersById = useMemo(() => new Map((opponent?.players ?? []).map((player) => [player.id, player])), [opponent]);
   const chartPlayers = useMemo(() => playersOnChart(team, playersById), [playersById, team]);
   const opponentChartPlayers = useMemo(() => playersOnChart(opponent, opponentPlayersById), [opponent, opponentPlayersById]);
+  const talentPlayers = useMemo(() => talentScope === 'both'
+    ? [...chartPlayers, ...opponentChartPlayers]
+    : talentScope === 'b' ? opponentChartPlayers : chartPlayers,
+  [chartPlayers, opponentChartPlayers, talentScope]);
+  const multiviewTeams = useMemo(() => multiviewTeamKeys.map((key) => data?.teams.find((item) => item.key === key)).filter(Boolean), [data, multiviewTeamKeys]);
+  const multiviewPlayerCount = useMemo(() => multiviewTeams.reduce((total, item) => total + item.players.length, 0), [multiviewTeams]);
+  const multiviewPffCount = useMemo(() => multiviewTeams.reduce((total, item) => total + item.players.filter((player) => player.pffBigBoard).length, 0), [multiviewTeams]);
 
   if (error) return <ErrorState message={error} />;
   if (!data || !team || !opponent) return <LoadingState />;
@@ -81,6 +94,18 @@ export default function CollegeApp({ onLeagueChange }) {
   const defenseLayoutKey = `${defenseTeam.key}:defense`;
   const offenseLayout = savedLayouts[offenseLayoutKey] ?? {};
   const defenseLayout = savedLayouts[defenseLayoutKey] ?? {};
+  const talentTeamName = talentScope === 'both'
+    ? `${team.name} & ${opponent.name}`
+    : talentScope === 'b' ? `${opponent.name} ${opponent.mascot}` : `${team.name} ${team.mascot}`;
+  const talentViewLabel = talentScope === 'both' ? 'A + B talent' : talentScope === 'b' ? 'Team B talent' : 'Team A talent';
+
+  const updateMultiviewTeam = (slotIndex, nextKey) => {
+    setMultiviewTeamKeys((current) => {
+      if (nextKey && current.some((key, index) => key === nextKey && index !== slotIndex)) return current;
+      return current.map((key, index) => index === slotIndex ? nextKey : key);
+    });
+    setSelectedPlayer(null);
+  };
 
   const savePosition = (layoutKey, position, coordinates) => {
     setSavedLayouts((existing) => {
@@ -118,23 +143,32 @@ export default function CollegeApp({ onLeagueChange }) {
       </header>
 
       <main id="top">
-        <section className="team-hero college-hero matchup-hero">
+        <section className={`team-hero college-hero matchup-hero ${view === 'multiview' ? 'multiview-hero' : ''}`}>
           <div className="hero-glow" />
-          <div className="team-monogram" aria-hidden="true">{team.abbreviation}/{opponent.abbreviation}</div>
-          <div className="hero-copy"><p className="eyebrow">{team.conference} vs {opponent.conference} · {data.metadata.season}</p><h1>{team.name} vs {opponent.name}</h1><p>Put either offense against the other defense, then swap sides with one click.</p></div>
-          <div className="hero-metrics">
-            <div><strong>{chartPlayers.length}</strong><span>{team.abbreviation} chart players</span></div>
-            <div><strong>{opponentChartPlayers.length}</strong><span>{opponent.abbreviation} chart players</span></div>
-            <div><strong>{rankedProspects}</strong><span>PFF prospects in matchup</span></div>
-          </div>
+          <div className="team-monogram" aria-hidden="true">{view === 'multiview' ? '4×' : `${team.abbreviation}/${opponent.abbreviation}`}</div>
+          {view === 'multiview' ? <>
+            <div className="hero-copy"><p className="eyebrow">Four screens · Eight teams · {data.metadata.season}</p><h1>College talent multiview</h1><p>Build four two-team screens and rank every selected roster in one live board.</p></div>
+            <div className="hero-metrics">
+              <div><strong>{multiviewTeams.length}</strong><span>Teams selected</span></div>
+              <div><strong>{multiviewPlayerCount.toLocaleString()}</strong><span>Players ranked</span></div>
+              <div><strong>{multiviewPffCount}</strong><span>PFF prospects</span></div>
+            </div>
+          </> : <>
+            <div className="hero-copy"><p className="eyebrow">{team.conference} vs {opponent.conference} · {data.metadata.season}</p><h1>{team.name} vs {opponent.name}</h1><p>Put either offense against the other defense, then swap sides with one click.</p></div>
+            <div className="hero-metrics">
+              <div><strong>{chartPlayers.length}</strong><span>{team.abbreviation} chart players</span></div>
+              <div><strong>{opponentChartPlayers.length}</strong><span>{opponent.abbreviation} chart players</span></div>
+              <div><strong>{rankedProspects}</strong><span>PFF prospects in matchup</span></div>
+            </div>
+          </>}
         </section>
 
-        <section className="control-deck college-controls matchup-controls" aria-label="College matchup controls">
-          <label><span>Team A</span><select value={team.key} onChange={(event) => { setTeamKey(event.target.value); setMatchupSwapped(false); setSelectedPlayer(null); }}>{teamOptions(opponent.key)}</select></label>
-          <label><span>Team B</span><select value={opponent.key} onChange={(event) => { setOpponentKey(event.target.value); setMatchupSwapped(false); setSelectedPlayer(null); }}>{teamOptions(team.key)}</select></label>
-          <div className="segmented-control" aria-label="View"><span>View</span><div><button className={view === 'depth' ? 'active' : ''} type="button" onClick={() => setView('depth')}>Matchup</button><button className={view === 'list' ? 'active' : ''} type="button" onClick={() => setView('list')}>Team A talent</button></div></div>
-          <div className="matchup-swap-control"><span>Current sides</span><button className="matchup-swap-button" type="button" onClick={() => setMatchupSwapped((current) => !current)}><strong>Swap offense ↔ defense</strong><small>{offenseTeam.abbreviation} offense · {defenseTeam.abbreviation} defense</small></button></div>
-          <div className="college-key"><span className="five-star">★</span><div><strong>On3 five-star recruit</strong><small>Gold stars reflect high-school recruiting only</small></div></div>
+        <section className={`control-deck college-controls matchup-controls ${view === 'multiview' ? 'is-multiview' : ''}`} aria-label="College view controls">
+          {view !== 'multiview' && <>
+            <label><span>Team A</span><select value={team.key} onChange={(event) => { setTeamKey(event.target.value); setMatchupSwapped(false); setSelectedPlayer(null); }}>{teamOptions(opponent.key)}</select></label>
+            <label><span>Team B</span><select value={opponent.key} onChange={(event) => { setOpponentKey(event.target.value); setMatchupSwapped(false); setSelectedPlayer(null); }}>{teamOptions(team.key)}</select></label>
+          </>}
+          <div className="segmented-control college-view-control" aria-label="View"><span>View</span><div><button className={view === 'depth' ? 'active' : ''} type="button" onClick={() => setView('depth')}>Matchup</button><button className={view === 'list' ? 'active' : ''} type="button" onClick={() => setView('list')}>{talentViewLabel}</button><button className={view === 'multiview' ? 'active' : ''} type="button" onClick={() => setView('multiview')}>Multiview</button></div></div>
         </section>
 
         {view === 'depth' ? (
@@ -152,7 +186,8 @@ export default function CollegeApp({ onLeagueChange }) {
               <CollegeDepthChart chart={defenseTeam.depthCharts.defense} unit="defense" playersById={defensePlayersById} customLayout={defenseLayout} onPositionMove={(position, coordinates) => savePosition(defenseLayoutKey, position, coordinates)} onSelectPlayer={setSelectedPlayer} />
             </div>
           </section>
-        ) : <CollegePlayerList players={chartPlayers} teamName={`${team.name} ${team.mascot}`} onSelectPlayer={setSelectedPlayer} />}
+        ) : view === 'list' ? <CollegePlayerList players={talentPlayers} teamName={talentTeamName} scope={talentScope} onScopeChange={setTalentScope} teamAName={team.name} teamBName={opponent.name} onSelectPlayer={setSelectedPlayer} />
+          : <CollegeMultiview teams={data.teams} conferences={data.conferences} teamKeys={multiviewTeamKeys} onTeamChange={updateMultiviewTeam} onSelectPlayer={setSelectedPlayer} />}
       </main>
 
       <footer><span>Snap Atlas · College Football</span><span>{data.metadata.teamCount} teams · {data.metadata.rosterPlayerCount.toLocaleString()} roster players · Generated {formatDate(data.metadata.generatedAt)}</span><span>Sources: Ourlads, On3 &amp; PFF</span></footer>

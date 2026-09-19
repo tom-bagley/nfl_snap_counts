@@ -1,7 +1,10 @@
 import { useEffect } from 'react';
 import { teamFor } from '../lib/teams';
+import usePageScrollLock from '../hooks/usePageScrollLock';
 
 export default function PlayerPanel({ player, history, onClose }) {
+  usePageScrollLock(Boolean(player));
+
   useEffect(() => {
     const closeOnEscape = (event) => {
       if (event.key === 'Escape') onClose();

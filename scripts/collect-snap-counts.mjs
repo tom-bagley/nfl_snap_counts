@@ -13,6 +13,7 @@ if (!seasonArgument) {
 }
 
 const season = Number(seasonArgument);
+const allowPartial = process.argv.includes('--allow-partial');
 const sourceUrl = `https://github.com/nflverse/nflverse-data/releases/download/snap_counts/snap_counts_${season}.csv`;
 const outputPath = path.join(outputDir, `${season}.csv`);
 const temporaryPath = `${outputPath}.tmp`;
@@ -165,8 +166,26 @@ const outputRows = [...records.values()].map((record) => {
 });
 
 const teams = new Set(outputRows.map((row) => row.team));
-if (teams.size !== 32) throw new Error(`Expected 32 teams for ${season} but collected ${teams.size}.`);
-if (outputRows.length < 1_500) throw new Error(`Expected at least 1,500 player-team records but collected ${outputRows.length}.`);
+if (allowPartial) {
+  if (teams.size < 2) throw new Error(`Expected at least one completed game for ${season}.`);
+  for (const team of teams) {
+    if (outputRows.filter((row) => row.team === team).length < 40) {
+      throw new Error(`Incomplete player coverage for ${team} in ${season}.`);
+    }
+  }
+  const gameTeams = new Map();
+  for (const key of gameTotals.keys()) {
+    const [game, team] = key.split('|');
+    if (!gameTeams.has(game)) gameTeams.set(game, new Set());
+    gameTeams.get(game).add(team);
+  }
+  if ([...gameTeams.values()].some((game) => game.size !== 2)) {
+    throw new Error('A partial-season game is missing one of its teams.');
+  }
+} else {
+  if (teams.size !== 32) throw new Error(`Expected 32 teams for ${season} but collected ${teams.size}. Use --allow-partial for an in-progress season.`);
+  if (outputRows.length < 1_500) throw new Error(`Expected at least 1,500 player-team records but collected ${outputRows.length}.`);
+}
 
 const order = new Map(TEAM_ORDER.map((team, index) => [team, index]));
 outputRows.sort((left, right) =>
