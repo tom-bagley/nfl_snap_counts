@@ -1,6 +1,7 @@
 import { mkdir, readFile, readdir, stat, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { normalizePlayerName } from '../src/lib/data.js';
 
 const scriptDir = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(scriptDir, '..');
@@ -47,22 +48,6 @@ function parseCsv(text) {
   return rows;
 }
 
-function normalizeName(name) {
-  let normalized = String(name ?? '').trim();
-  if (normalized.includes(',')) {
-    const [lastName, ...firstName] = normalized.split(',');
-    normalized = `${firstName.join(' ').trim()} ${lastName.trim()}`;
-  }
-  return normalized
-    .normalize('NFKD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .replace(/\b(jr|sr|ii|iii|iv|v)\.?\b/gi, '')
-    .replace(/[^a-z0-9]+/gi, ' ')
-    .trim()
-    .replace(/\s+/g, ' ')
-    .toLowerCase();
-}
-
 function numberValue(value, field, sourceLabel, rowNumber) {
   const parsed = Number.parseInt(value, 10);
   if (!Number.isFinite(parsed)) {
@@ -95,7 +80,7 @@ function buildSeasonRows(csvText, season, sourceLabel) {
       playerId,
       playerKey: playerId,
       playerName: source.player_name,
-      normalizedName: normalizeName(source.player_name),
+      normalizedName: normalizePlayerName(source.player_name),
       position,
       season,
       team,

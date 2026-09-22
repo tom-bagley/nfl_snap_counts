@@ -20,6 +20,13 @@ function fallbackPosition(index, total) {
   return [14 + column * 24, 18 + row * 25];
 }
 
+function matchByName(rowsByName, name, teamCode) {
+  const matches = rowsByName.get(normalizePlayerName(name)) ?? [];
+  if (matches.length === 1) return matches[0];
+  const onTeam = matches.filter((row) => row.teams.includes(teamCode));
+  return onTeam.length === 1 ? onTeam[0] : undefined;
+}
+
 function PlayerLine({ player, position, snapRow, historyRow, season, teamCode, category, starter, emptySeason, onSelect }) {
   const hasStats = Boolean(snapRow);
   const historicalSelection = !hasStats && historyRow ? {
@@ -61,14 +68,33 @@ function PlayerLine({ player, position, snapRow, historyRow, season, teamCode, c
 export default function DepthChart({ chart, unit, rows, historyRows, season, teamCode, category, emptySeason, customLayout, onPositionMove, onSelectPlayer }) {
   const fieldRef = useRef(null);
   const dragRef = useRef(null);
-  const rowByName = new Map(rows.map((row) => [row.normalizedName, row]));
-  const historyRowByName = useMemo(() => {
-    const latestRows = new Map();
-    historyRows.forEach((row) => {
-      const existing = latestRows.get(row.normalizedName);
-      if (!existing || row.season > existing.season) latestRows.set(row.normalizedName, row);
+  const rowByName = useMemo(() => {
+    const grouped = new Map();
+    rows.forEach((row) => {
+      const matches = grouped.get(row.normalizedName) ?? [];
+      matches.push(row);
+      grouped.set(row.normalizedName, matches);
     });
-    return latestRows;
+    return grouped;
+  }, [rows]);
+  const historyRowByName = useMemo(() => {
+    const byPlayer = new Map();
+    historyRows.forEach((row) => {
+      const playerNameKey = `${row.playerKey}|${row.normalizedName}`;
+      const existing = byPlayer.get(playerNameKey);
+      if (!existing) byPlayer.set(playerNameKey, { ...row, teams: [row.team] });
+      else {
+        if (row.season > existing.season) Object.assign(existing, row);
+        if (!existing.teams.includes(row.team)) existing.teams.push(row.team);
+      }
+    });
+    const grouped = new Map();
+    byPlayer.forEach((row) => {
+      const matches = grouped.get(row.normalizedName) ?? [];
+      matches.push(row);
+      grouped.set(row.normalizedName, matches);
+    });
+    return grouped;
   }, [historyRows]);
   const positions = Object.entries(chart ?? {});
 
@@ -168,8 +194,8 @@ export default function DepthChart({ chart, unit, rows, historyRows, season, tea
                     key={`${player.num}-${player.name}`}
                     player={player}
                     position={position}
-                    snapRow={rowByName.get(normalizePlayerName(player.name))}
-                    historyRow={historyRowByName.get(normalizePlayerName(player.name))}
+                    snapRow={matchByName(rowByName, player.name, teamCode)}
+                    historyRow={matchByName(historyRowByName, player.name, teamCode)}
                     season={season}
                     teamCode={teamCode}
                     category={category}

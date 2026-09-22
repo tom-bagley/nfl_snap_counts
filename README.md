@@ -7,6 +7,7 @@ Snap Atlas is a static React website for exploring NFL snap counts and visual de
 - Team and season browsing for snap-count data
 - Offense and defense depth-chart formations
 - Drag-and-drop formation positions with saved team/unit layouts
+- Saved NFL and college team selections, including all eight multiview slots, across browser reloads
 - Offense, defense, and special-teams workload views
 - Historical player panels
 - An NFL/College switch in the shared site header

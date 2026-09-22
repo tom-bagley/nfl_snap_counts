@@ -5,8 +5,14 @@ import CollegePlayerList from './components/CollegePlayerList';
 import CollegePlayerPanel from './components/CollegePlayerPanel';
 import { loadCollegeData } from './lib/college';
 import { formatDate } from './lib/data';
+import useStoredState from './hooks/useStoredState';
 
 const LAYOUT_STORAGE_KEY = 'snap-atlas-college-position-layouts';
+const isTeamKey = (value) => typeof value === 'string';
+const isMultiviewSelection = (value) => Array.isArray(value)
+  && value.length === 8
+  && value.every(isTeamKey)
+  && new Set(value.filter(Boolean)).size === value.filter(Boolean).length;
 
 function loadSavedLayouts() {
   try { return JSON.parse(localStorage.getItem(LAYOUT_STORAGE_KEY)) ?? {}; } catch { return {}; }
@@ -48,12 +54,12 @@ function playersOnChart(team, playersById) {
 export default function CollegeApp({ onLeagueChange }) {
   const [data, setData] = useState(null);
   const [error, setError] = useState('');
-  const [teamKey, setTeamKey] = useState('alabama');
-  const [opponentKey, setOpponentKey] = useState('georgia');
-  const [matchupSwapped, setMatchupSwapped] = useState(false);
-  const [view, setView] = useState('depth');
-  const [talentScope, setTalentScope] = useState('a');
-  const [multiviewTeamKeys, setMultiviewTeamKeys] = useState(['alabama', 'georgia', '', '', '', '', '', '']);
+  const [teamKey, setTeamKey] = useStoredState('snap-atlas-college-team-a', 'alabama', isTeamKey);
+  const [opponentKey, setOpponentKey] = useStoredState('snap-atlas-college-team-b', 'georgia', isTeamKey);
+  const [matchupSwapped, setMatchupSwapped] = useStoredState('snap-atlas-college-swapped', false, (value) => typeof value === 'boolean');
+  const [view, setView] = useStoredState('snap-atlas-college-view', 'depth', (value) => ['depth', 'list', 'multiview'].includes(value));
+  const [talentScope, setTalentScope] = useStoredState('snap-atlas-college-talent-scope', 'a', (value) => ['a', 'b', 'both'].includes(value));
+  const [multiviewTeamKeys, setMultiviewTeamKeys] = useStoredState('snap-atlas-college-multiview-teams', ['alabama', 'georgia', '', '', '', '', '', ''], isMultiviewSelection);
   const [selectedPlayer, setSelectedPlayer] = useState(null);
   const [savedLayouts, setSavedLayouts] = useState(loadSavedLayouts);
 
@@ -64,6 +70,25 @@ export default function CollegeApp({ onLeagueChange }) {
     });
     return () => controller.abort();
   }, []);
+
+  useEffect(() => {
+    if (!data) return;
+    const available = new Set(data.teams.map((item) => item.key));
+    const firstTeam = available.has(teamKey) ? teamKey : data.teams[0]?.key;
+    if (firstTeam !== teamKey) setTeamKey(firstTeam);
+    if (!available.has(opponentKey) || opponentKey === firstTeam) {
+      setOpponentKey(data.teams.find((item) => item.key !== firstTeam)?.key);
+    }
+    setMultiviewTeamKeys((current) => {
+      const seen = new Set();
+      const valid = current.map((key) => {
+        if (!available.has(key) || seen.has(key)) return '';
+        seen.add(key);
+        return key;
+      });
+      return valid.every((key, index) => key === current[index]) ? current : valid;
+    });
+  }, [data, opponentKey, setMultiviewTeamKeys, setOpponentKey, setTeamKey, teamKey]);
 
   const team = data?.teams.find((item) => item.key === teamKey) ?? data?.teams[0];
   const opponent = data?.teams.find((item) => item.key === opponentKey) ?? data?.teams.find((item) => item.key !== team?.key);

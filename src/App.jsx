@@ -5,6 +5,7 @@ import PlayerList from './components/PlayerList';
 import PlayerPanel from './components/PlayerPanel';
 import { formatDate, loadNflData, snapTotal } from './lib/data';
 import { teamEntries, teamFor } from './lib/teams';
+import useStoredState from './hooks/useStoredState';
 
 const LAYOUT_STORAGE_KEY = 'snap-atlas-position-layouts';
 
@@ -40,10 +41,10 @@ function ErrorState({ message }) {
 function NflApp({ onLeagueChange }) {
   const [data, setData] = useState(null);
   const [error, setError] = useState('');
-  const [teamCode, setTeamCode] = useState('crd');
-  const [season, setSeason] = useState(null);
-  const [view, setView] = useState('depth');
-  const [unit, setUnit] = useState('offense');
+  const [teamCode, setTeamCode] = useStoredState('snap-atlas-nfl-team', 'crd', (value) => teamEntries.some(([code]) => code === value));
+  const [season, setSeason] = useStoredState('snap-atlas-nfl-season', null, (value) => Number.isInteger(value));
+  const [view, setView] = useStoredState('snap-atlas-nfl-view', 'depth', (value) => ['depth', 'list'].includes(value));
+  const [unit, setUnit] = useStoredState('snap-atlas-nfl-unit', 'offense', (value) => ['offense', 'defense'].includes(value));
   const [search, setSearch] = useState('');
   const [position, setPosition] = useState('all');
   const [selectedPlayer, setSelectedPlayer] = useState(null);
@@ -54,7 +55,7 @@ function NflApp({ onLeagueChange }) {
     loadNflData(controller.signal)
       .then((result) => {
         setData(result);
-        setSeason(result.metadata.depthChartSeason);
+        setSeason((current) => result.metadata.seasons.includes(current) ? current : result.metadata.depthChartSeason);
       })
       .catch((caught) => {
         if (caught.name !== 'AbortError') setError(caught.message);
@@ -74,13 +75,14 @@ function NflApp({ onLeagueChange }) {
     const seasonRows = data?.snapCounts.filter((row) => row.season === season) ?? [];
     const combined = new Map();
     seasonRows.forEach((row) => {
-      const existing = combined.get(row.normalizedName);
+      const existing = combined.get(row.playerKey);
       if (existing) {
         existing.offense += row.offense;
         existing.defense += row.defense;
         existing.specialTeams += row.specialTeams;
+        if (!existing.teams.includes(row.team)) existing.teams.push(row.team);
       } else {
-        combined.set(row.normalizedName, { ...row, id: `depth-${season}-${row.playerKey}` });
+        combined.set(row.playerKey, { ...row, teams: [row.team], id: `depth-${season}-${row.playerKey}` });
       }
     });
     return [...combined.values()];
@@ -271,7 +273,12 @@ function NflApp({ onLeagueChange }) {
 }
 
 export default function App() {
-  const [league, setLeague] = useState(() => window.location.hash === '#college' ? 'college' : 'nfl');
+  const [league, setLeague] = useStoredState(
+    'snap-atlas-league',
+    'nfl',
+    (value) => ['nfl', 'college'].includes(value),
+    window.location.hash === '#college' ? 'college' : undefined,
+  );
 
   const chooseLeague = (nextLeague) => {
     setLeague(nextLeague);
