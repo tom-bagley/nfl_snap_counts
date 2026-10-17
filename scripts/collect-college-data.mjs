@@ -15,7 +15,7 @@ const ON3_NAME_ALIASES = {
   'Middle Tennessee': 'Middle Tennessee State',
   'Miami (Ohio)': 'Miami (OH)',
   Mississippi: 'Ole Miss',
-  'Missouri State': 'Missouri State University',
+  'Missouri State': 'Missouri State',
   'Sam Houston': 'Sam Houston State',
   'South Florida': 'USF',
 };

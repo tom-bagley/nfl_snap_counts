@@ -3,22 +3,18 @@
     "offense": {
       "LWR": [
         {
-          "num": "18",
-          "name": "Harrison Jr., Marvin"
-        },
-        {
           "num": "86",
           "name": "Brooks, Jalen"
+        },
+        {
+          "num": "80",
+          "name": "Fehoko, Simi"
         }
       ],
       "RWR": [
         {
           "num": "14",
           "name": "Wilson, Michael"
-        },
-        {
-          "num": "80",
-          "name": "Fehoko, Simi"
         },
         {
           "num": "82",
@@ -37,12 +33,12 @@
       ],
       "LT": [
         {
-          "num": "70",
-          "name": "Johnson Jr., Paris"
+          "num": "66",
+          "name": "Williams, Jayden"
         },
         {
-          "num": "78",
-          "name": "Fryar, Josh"
+          "num": "79",
+          "name": "Wills, Jedrick"
         }
       ],
       "LG": [
@@ -63,10 +59,6 @@
       ],
       "RG": [
         {
-          "num": "74",
-          "name": "Adams, Isaiah"
-        },
-        {
           "num": "71",
           "name": "Gaines II, Jon"
         }
@@ -77,8 +69,8 @@
           "name": "WILKINSON, ELIJAH"
         },
         {
-          "num": "66",
-          "name": "Williams, Jayden"
+          "num": "78",
+          "name": "Fryar, Josh"
         }
       ],
       "TE": [
@@ -87,12 +79,16 @@
           "name": "McBride, Trey"
         },
         {
-          "num": "89",
-          "name": "Long, Hunter"
-        },
-        {
           "num": "84",
           "name": "Higgins, Elijah"
+        },
+        {
+          "num": "47",
+          "name": "Quitoriano, Teagan"
+        },
+        {
+          "num": "44",
+          "name": "Bowman, Shawn"
         }
       ],
       "QB": [
@@ -157,12 +153,12 @@
       ],
       "LOLB": [
         {
-          "num": "25",
-          "name": "Collins, Zaven"
-        },
-        {
           "num": "5",
           "name": "Browning, Baron"
+        },
+        {
+          "num": "25",
+          "name": "Collins, Zaven"
         }
       ],
       "WLB": [
@@ -201,12 +197,12 @@
       ],
       "LCB": [
         {
-          "num": "29",
-          "name": "Burke, Denzel"
-        },
-        {
           "num": "16",
           "name": "Melton, Max"
+        },
+        {
+          "num": "13",
+          "name": "Clark, Kei'Trel"
         }
       ],
       "SS": [
@@ -231,12 +227,12 @@
       ],
       "RCB": [
         {
-          "num": "2",
-          "name": "Johnson, Will"
+          "num": "29",
+          "name": "Burke, Denzel"
         },
         {
-          "num": "13",
-          "name": "Clark, Kei'Trel"
+          "num": "24",
+          "name": "Thomas V, Starling"
         }
       ],
       "NB": [
@@ -257,16 +253,16 @@
         {
           "num": "5",
           "name": "London, Drake"
-        },
-        {
-          "num": "19",
-          "name": "Blair, Chris"
         }
       ],
       "RWR": [
         {
           "num": "4",
           "name": "Dotson, Jahan"
+        },
+        {
+          "num": "19",
+          "name": "Blair, Chris"
         }
       ],
       "SWR": [
@@ -368,7 +364,7 @@
         },
         {
           "num": "15",
-          "name": "Robinson, Brian"
+          "name": "Robinson Jr., Brian"
         }
       ]
     },
@@ -379,11 +375,15 @@
           "name": "Dorlus, Brandon"
         },
         {
-          "num": "96",
-          "name": "Harrison, Zach"
+          "num": "51",
+          "name": "Ivey, Jared"
         }
       ],
       "NT": [
+        {
+          "num": "92",
+          "name": "Smith, Maason"
+        },
         {
           "num": "94",
           "name": "London, LaCale"
@@ -391,26 +391,18 @@
       ],
       "DT": [
         {
-          "num": "92",
-          "name": "Smith, Maason"
-        },
-        {
           "num": "95",
           "name": "Dexter Sr., Gervon"
+        },
+        {
+          "num": "96",
+          "name": "Harrison, Zach"
         }
       ],
       "LOLB": [
         {
-          "num": "52",
-          "name": "EBUKAM, SAMSON"
-        },
-        {
-          "num": "55",
-          "name": "SMITH, ZA'DARIUS"
-        },
-        {
-          "num": "22",
-          "name": "Abdullah, Yasir"
+          "num": "99",
+          "name": "Thomas, Cameron"
         }
       ],
       "LILB": [
@@ -439,12 +431,12 @@
       ],
       "ROLB": [
         {
-          "num": "99",
-          "name": "Thomas, Cameron"
+          "num": "52",
+          "name": "EBUKAM, SAMSON"
         },
         {
-          "num": "51",
-          "name": "Ivey, Jared"
+          "num": "55",
+          "name": "SMITH, ZA'DARIUS"
         }
       ],
       "LCB": [
@@ -457,7 +449,7 @@
           "name": "FORD JR., MIKE"
         },
         {
-          "num": "",
+          "num": "37",
           "name": "Longerbeam, Robert"
         }
       ],
@@ -465,10 +457,6 @@
         {
           "num": "3",
           "name": "Bates III, Jessie"
-        },
-        {
-          "num": "29",
-          "name": "Brown, Sydney"
         }
       ],
       "FS": [
@@ -487,6 +475,10 @@
           "name": "Henderson, C.J."
         },
         {
+          "num": "12",
+          "name": "Terrell, Avieon"
+        },
+        {
           "num": "36",
           "name": "DeWalt IV, Malcolm"
         }
@@ -497,8 +489,8 @@
           "name": "Bowman Jr., Billy"
         },
         {
-          "num": "12",
-          "name": "Terrell, Avieon"
+          "num": "29",
+          "name": "Brown, Sydney"
         }
       ]
     }
@@ -516,10 +508,6 @@
         }
       ],
       "RWR": [
-        {
-          "num": "17",
-          "name": "MOORE, CHRIS"
-        },
         {
           "num": "81",
           "name": "Walker, Devontez"
@@ -549,30 +537,26 @@
         {
           "num": "74",
           "name": "Simpson, John"
-        },
-        {
-          "num": "72",
-          "name": "Vorhees, Andrew"
         }
       ],
       "C": [
-        {
-          "num": "54",
-          "name": "Gwyn, Jovaughn"
-        },
-        {
-          "num": "77",
-          "name": "POCIC, ETHAN"
-        }
-      ],
-      "RG": [
         {
           "num": "71",
           "name": "Ioane, Vega"
         },
         {
+          "num": "64",
+          "name": "Jurgens, Cam"
+        }
+      ],
+      "RG": [
+        {
           "num": "51",
           "name": "Jones Jr., Emery"
+        },
+        {
+          "num": "72",
+          "name": "Vorhees, Andrew"
         }
       ],
       "RT": [
@@ -587,16 +571,16 @@
           "name": "ANDREWS, MARK"
         },
         {
-          "num": "80",
-          "name": "SMYTHE, DURHAM"
-        },
-        {
           "num": "88",
           "name": "Hibner, Matt"
         },
         {
           "num": "85",
           "name": "Cuevas, Josh"
+        },
+        {
+          "num": "87",
+          "name": "VANNETT, NICK"
         }
       ],
       "QB": [
@@ -671,16 +655,12 @@
       ],
       "WLB": [
         {
-          "num": "40",
-          "name": "Buchanan, Teddye"
-        },
-        {
           "num": "32",
           "name": "Simpson, Trenton"
         },
         {
-          "num": "48",
-          "name": "Jones Jr., Carl"
+          "num": "40",
+          "name": "Buchanan, Teddye"
         }
       ],
       "MLB": [
@@ -713,14 +693,14 @@
           "name": "HUMPHREY, MARLON"
         },
         {
-          "num": "27",
-          "name": "Tampa Jr., T.J. CB^"
+          "num": "3",
+          "name": "AWUZIE, CHIDOBE"
         }
       ],
       "SS": [
         {
-          "num": "21",
-          "name": "Hawkins, Jaylinn"
+          "num": "24",
+          "name": "Starks, Malaki"
         },
         {
           "num": "39",
@@ -729,18 +709,18 @@
       ],
       "FS": [
         {
-          "num": "24",
-          "name": "Starks, Malaki"
+          "num": "21",
+          "name": "Hawkins, Jaylinn"
+        },
+        {
+          "num": "25",
+          "name": "Wallace, K'Von"
         }
       ],
       "RCB": [
         {
           "num": "2",
           "name": "Wiggins, Nate"
-        },
-        {
-          "num": "3",
-          "name": "AWUZIE, CHIDOBE"
         }
       ],
       "NB": [
@@ -749,12 +729,12 @@
           "name": "Hamilton, Kyle"
         },
         {
-          "num": "38",
-          "name": "Martin, Keyon"
-        },
-        {
           "num": "29",
           "name": "Rivers, Chandler"
+        },
+        {
+          "num": "38",
+          "name": "Martin, Keyon"
         }
       ]
     }
@@ -785,6 +765,10 @@
         {
           "num": "10",
           "name": "Shakir, Khalil"
+        },
+        {
+          "num": "19",
+          "name": "Dortch, Greg"
         }
       ],
       "LT": [
@@ -963,16 +947,16 @@
         {
           "num": "47",
           "name": "Benford, Christian"
+        },
+        {
+          "num": "21",
+          "name": "Igbinosun, Davison"
         }
       ],
       "SS": [
         {
           "num": "22",
           "name": "Gardner-Johnson, C.J."
-        },
-        {
-          "num": "3",
-          "name": "Hamlin, Damar"
         },
         {
           "num": "29",
@@ -993,10 +977,6 @@
         {
           "num": "1",
           "name": "Hairston, Maxwell"
-        },
-        {
-          "num": "21",
-          "name": "Igbinosun, Davison"
         }
       ],
       "NB": [
@@ -1005,8 +985,8 @@
           "name": "Alford, Dee"
         },
         {
-          "num": "37",
-          "name": "Hancock, Jordan"
+          "num": "3",
+          "name": "Hamlin, Damar"
         }
       ]
     }
@@ -1019,24 +999,24 @@
           "name": "McMillan, Tetairoa"
         },
         {
-          "num": "87",
-          "name": "Tremayne, Brycen"
+          "num": "83",
+          "name": "MOORE, DAVID"
         }
       ],
       "RWR": [
         {
-          "num": "17",
-          "name": "Legette, Xavier"
-        },
-        {
-          "num": "13",
-          "name": "Metchie III, John"
+          "num": "87",
+          "name": "Tremayne, Brycen"
         }
       ],
       "SWR": [
         {
           "num": "18",
           "name": "Coker, Jalen"
+        },
+        {
+          "num": "13",
+          "name": "Metchie III, John"
         }
       ],
       "LT": [
@@ -1053,6 +1033,10 @@
         {
           "num": "68",
           "name": "Lewis, Damien"
+        },
+        {
+          "num": "67",
+          "name": "Bullock, Corey"
         }
       ],
       "C": [
@@ -1071,8 +1055,8 @@
           "name": "HUNT, ROBERT"
         },
         {
-          "num": "67",
-          "name": "Bullock, Corey"
+          "num": "65",
+          "name": "Simpkins III, Torricelli"
         }
       ],
       "RT": [
@@ -1091,12 +1075,12 @@
           "name": "Tremble, Tommy"
         },
         {
-          "num": "84",
-          "name": "Evans, Mitchell"
-        },
-        {
           "num": "88",
           "name": "WALLER, DARREN"
+        },
+        {
+          "num": "84",
+          "name": "Evans, Mitchell"
         },
         {
           "num": "81",
@@ -1127,12 +1111,16 @@
           "name": "Hubbard, Chuba"
         },
         {
-          "num": "25",
-          "name": "Brooks, Jonathon"
+          "num": "23",
+          "name": "Etienne, Trevor"
         },
         {
           "num": "28",
           "name": "Dillon, AJ"
+        },
+        {
+          "num": "34",
+          "name": "Tyus III, Anthony"
         }
       ]
     },
@@ -1151,10 +1139,6 @@
         {
           "num": "92",
           "name": "Hunter, Lee"
-        },
-        {
-          "num": "99",
-          "name": "Jackson, Cam"
         }
       ],
       "RDE": [
@@ -1183,12 +1167,8 @@
           "name": "OKEREKE, BOBBY"
         },
         {
-          "num": "53",
-          "name": "Cherelus, Claudin"
-        },
-        {
-          "num": "33",
-          "name": "Dodson, Tyrel"
+          "num": "46",
+          "name": "Kuwatch, Jackson"
         }
       ],
       "RILB": [
@@ -1197,8 +1177,8 @@
           "name": "Lloyd, Devin"
         },
         {
-          "num": "46",
-          "name": "Kuwatch, Jackson"
+          "num": "33",
+          "name": "Dodson, Tyrel"
         }
       ],
       "ROLB": [
@@ -1217,28 +1197,24 @@
       ],
       "LCB": [
         {
-          "num": "2",
-          "name": "Jackson, Mike"
-        },
-        {
           "num": "29",
           "name": "Evans, Akayleb"
         }
       ],
       "SS": [
         {
-          "num": "7",
-          "name": "Moehrig, Tre'von"
+          "num": "21",
+          "name": "SCOTT, NICK"
         },
         {
-          "num": "20",
-          "name": "Wheatley, Zakee"
+          "num": "27",
+          "name": "Simmons, Isaiah"
         }
       ],
       "FS": [
         {
-          "num": "21",
-          "name": "SCOTT, NICK"
+          "num": "20",
+          "name": "Wheatley, Zakee"
         },
         {
           "num": "22",
@@ -1253,8 +1229,8 @@
       ],
       "NB": [
         {
-          "num": "8",
-          "name": "Horn, Jaycee"
+          "num": "7",
+          "name": "Moehrig, Tre'von"
         },
         {
           "num": "26",
@@ -1293,8 +1269,8 @@
       ],
       "LT": [
         {
-          "num": "70",
-          "name": "Jones, Braxton"
+          "num": "79",
+          "name": "Benedet, Theo"
         },
         {
           "num": "75",
@@ -1335,10 +1311,6 @@
         {
           "num": "58",
           "name": "Wright, Darnell"
-        },
-        {
-          "num": "79",
-          "name": "Benedet, Theo"
         }
       ],
       "TE": [
@@ -1387,12 +1359,12 @@
     "defense": {
       "LDE": [
         {
-          "num": "98",
-          "name": "SWEAT, MONTEZ"
-        },
-        {
           "num": "94",
           "name": "Booker, Austin"
+        },
+        {
+          "num": "95",
+          "name": "Turner, Shemar"
         },
         {
           "num": "59",
@@ -1409,8 +1381,8 @@
           "name": "Gallimore, Neville"
         },
         {
-          "num": "97",
-          "name": "Lynch, James"
+          "num": "91",
+          "name": "Loving, Jayden"
         }
       ],
       "RDT": [
@@ -1423,8 +1395,8 @@
           "name": "van den Berg, Jordan"
         },
         {
-          "num": "91",
-          "name": "Loving, Jayden"
+          "num": "97",
+          "name": "Lynch, James"
         }
       ],
       "RDE": [
@@ -1457,14 +1429,18 @@
           "name": "Bush, Devin"
         },
         {
+          "num": "44",
+          "name": "Sewell, Noah"
+        },
+        {
           "num": "57",
           "name": "Sanborn, Jack"
         }
       ],
       "LCB": [
         {
-          "num": "29",
-          "name": "Stevenson Sr., Tyrique"
+          "num": "1",
+          "name": "Johnson, Jaylon"
         },
         {
           "num": "20",
@@ -1493,12 +1469,12 @@
       ],
       "RCB": [
         {
-          "num": "1",
-          "name": "Johnson, Jaylon"
+          "num": "24",
+          "name": "Muhammad II, Malik"
         },
         {
-          "num": "39",
-          "name": "Blackwell, Josh"
+          "num": "29",
+          "name": "Stevenson Sr., Tyrique"
         }
       ],
       "NB": [
@@ -1507,8 +1483,8 @@
           "name": "Lewis, Cam"
         },
         {
-          "num": "24",
-          "name": "Muhammad II, Malik"
+          "num": "39",
+          "name": "Blackwell, Josh"
         }
       ]
     }
@@ -1519,10 +1495,6 @@
         {
           "num": "1",
           "name": "Chase, Ja'Marr"
-        },
-        {
-          "num": "12",
-          "name": "Williams, Ke'Shawn"
         }
       ],
       "RWR": [
@@ -1537,12 +1509,12 @@
       ],
       "SWR": [
         {
-          "num": "80",
-          "name": "Iosivas, Andrei"
-        },
-        {
           "num": "81",
           "name": "Meyers, Dohnte"
+        },
+        {
+          "num": "82",
+          "name": "Tinsley, Mitch"
         }
       ],
       "LT": [
@@ -1609,6 +1581,10 @@
           "name": "All Jr., Erick"
         },
         {
+          "num": "87",
+          "name": "HUDSON, TANNER"
+        },
+        {
           "num": "84",
           "name": "Endries, Jack"
         }
@@ -1645,12 +1621,12 @@
           "name": "Murphy, Myles"
         },
         {
-          "num": "94",
-          "name": "Stewart, Shemar"
-        },
-        {
           "num": "52",
           "name": "Johnson, Cedric"
+        },
+        {
+          "num": "94",
+          "name": "Stewart, Shemar"
         }
       ],
       "NT": [
@@ -1699,6 +1675,10 @@
         {
           "num": "42",
           "name": "BURKS, OREN"
+        },
+        {
+          "num": "45",
+          "name": "Kiser, Jack"
         }
       ],
       "MLB": [
@@ -1707,14 +1687,14 @@
           "name": "Carter, Barrett"
         },
         {
-          "num": "47",
-          "name": "Bozeman, Swayze"
+          "num": "43",
+          "name": "Giles-Harris, Joe"
         }
       ],
       "LCB": [
         {
-          "num": "23",
-          "name": "Hill, Dax"
+          "num": "38",
+          "name": "Ivey, DJ"
         },
         {
           "num": "20",
@@ -1747,18 +1727,14 @@
           "name": "Turner II, DJ"
         },
         {
-          "num": "38",
-          "name": "Ivey, DJ"
+          "num": "28",
+          "name": "Newton, Josh"
         }
       ],
       "NB": [
         {
-          "num": "35",
-          "name": "DAVIS, JALEN"
-        },
-        {
-          "num": "28",
-          "name": "Newton, Josh"
+          "num": "23",
+          "name": "Hill, Dax"
         }
       ]
     }
@@ -1831,12 +1807,12 @@
       ],
       "RG": [
         {
-          "num": "78",
-          "name": "Jenkins, Teven"
-        },
-        {
           "num": "58",
           "name": "Barber, Austin"
+        },
+        {
+          "num": "78",
+          "name": "Jenkins, Teven"
         }
       ],
       "RT": [
@@ -1879,12 +1855,12 @@
           "name": "Judkins, Quinshon"
         },
         {
-          "num": "23",
-          "name": "Sanders, Raheim"
-        },
-        {
           "num": "38",
           "name": "McLaughlin, Jaleel"
+        },
+        {
+          "num": "36",
+          "name": "Estimé, Audric"
         }
       ],
       "FB": [
@@ -1937,8 +1913,8 @@
       ],
       "WLB": [
         {
-          "num": "5",
-          "name": "WILLIAMS, QUINCY"
+          "num": "49",
+          "name": "Schwesinger, Carson"
         },
         {
           "num": "42",
@@ -1947,8 +1923,8 @@
       ],
       "MLB": [
         {
-          "num": "49",
-          "name": "Schwesinger, Carson"
+          "num": "5",
+          "name": "WILLIAMS, QUINCY"
         },
         {
           "num": "59",
@@ -1965,8 +1941,8 @@
           "name": "Ward, Denzel"
         },
         {
-          "num": "29",
-          "name": "Blackmon, Mekhi"
+          "num": "35",
+          "name": "Pride Jr., Toriano"
         }
       ],
       "SS": [
@@ -1997,6 +1973,10 @@
         {
           "num": "7",
           "name": "Campbell, Tyson"
+        },
+        {
+          "num": "29",
+          "name": "Blackmon, Mekhi"
         }
       ],
       "NB": [
@@ -2007,10 +1987,6 @@
         {
           "num": "20",
           "name": "Igbinoghene, Noah"
-        },
-        {
-          "num": "35",
-          "name": "Pride Jr., Toriano"
         }
       ]
     }
@@ -2059,12 +2035,12 @@
       ],
       "LG": [
         {
-          "num": "66",
-          "name": "Bass, T.J."
+          "num": "73",
+          "name": "Smith, Tyler"
         },
         {
-          "num": "51",
-          "name": "Leverett, Nick"
+          "num": "66",
+          "name": "Bass, T.J."
         }
       ],
       "C": [
@@ -2123,12 +2099,12 @@
           "name": "Williams, Javonte"
         },
         {
-          "num": "31",
-          "name": "Demercado, Emari"
-        },
-        {
           "num": "32",
           "name": "Goodson, Tyler"
+        },
+        {
+          "num": "31",
+          "name": "Demercado, Emari"
         }
       ],
       "FB": [
@@ -2161,8 +2137,8 @@
           "name": "Williams, Quinnen"
         },
         {
-          "num": "90",
-          "name": "BULLARD, JONATHAN"
+          "num": "93",
+          "name": "Garcia, Elijah"
         }
       ],
       "LOLB": [
@@ -2197,6 +2173,10 @@
         {
           "num": "55",
           "name": "Barham, Jaishawn"
+        },
+        {
+          "num": "45",
+          "name": "Barron, Justin"
         }
       ],
       "ROLB": [
@@ -2219,8 +2199,8 @@
           "name": "Bland, DaRon"
         },
         {
-          "num": "23",
-          "name": "Speed, Ameer"
+          "num": "2",
+          "name": "Durant, Cobie"
         },
         {
           "num": "21",
@@ -2228,10 +2208,6 @@
         }
       ],
       "SS": [
-        {
-          "num": "34",
-          "name": "Thompson, Jalen"
-        },
         {
           "num": "14",
           "name": "Bell, Markquese"
@@ -2243,22 +2219,22 @@
           "name": "HOOKER, MALIK"
         },
         {
-          "num": "1",
-          "name": "Locke, P.J."
-        },
-        {
           "num": "11",
           "name": "Clark, Alijah"
         }
       ],
       "RCB": [
         {
-          "num": "2",
-          "name": "Durant, Cobie"
+          "num": "25",
+          "name": "Porter Jr., Joey"
         },
         {
           "num": "28",
           "name": "Revel Jr., Shavon"
+        },
+        {
+          "num": "23",
+          "name": "Speed, Ameer"
         }
       ],
       "NB": [
@@ -2285,16 +2261,12 @@
         {
           "num": "17",
           "name": "Waddle, Jaylen"
-        },
-        {
-          "num": "11",
-          "name": "Franklin, Troy"
         }
       ],
       "SWR": [
         {
-          "num": "13",
-          "name": "Bryant, Pat"
+          "num": "11",
+          "name": "Franklin, Troy"
         },
         {
           "num": "19",
@@ -2389,12 +2361,14 @@
           "name": "Harvey, RJ"
         },
         {
-          "num": "20",
-          "name": "Coleman, Jonah"
-        },
-        {
           "num": "28",
           "name": "Badie, Tyler"
+        }
+      ],
+      "FB": [
+        {
+          "num": "46",
+          "name": "Prentice, Adam"
         }
       ]
     },
@@ -2479,8 +2453,12 @@
           "name": "Surtain II, Pat"
         },
         {
-          "num": "23",
-          "name": "Barron, Jahdae"
+          "num": "31",
+          "name": "Abrams-Draine, Kris"
+        },
+        {
+          "num": "37",
+          "name": "Fresch Jr., Sean"
         }
       ],
       "SS": [
@@ -2493,8 +2471,8 @@
           "name": "Skinner, JL"
         },
         {
-          "num": "6",
-          "name": "Anderson, Tycen"
+          "num": "30",
+          "name": "Rapp, Taylor"
         }
       ],
       "FS": [
@@ -2505,6 +2483,10 @@
         {
           "num": "26",
           "name": "Key, Devon"
+        },
+        {
+          "num": "6",
+          "name": "Anderson, Tycen"
         }
       ],
       "RCB": [
@@ -2513,8 +2495,8 @@
           "name": "Moss, Riley"
         },
         {
-          "num": "31",
-          "name": "Abrams-Draine, Kris"
+          "num": "23",
+          "name": "Barron, Jahdae"
         }
       ],
       "NB": [
@@ -2573,6 +2555,10 @@
         {
           "num": "70",
           "name": "Scruggs, Juice"
+        },
+        {
+          "num": "65",
+          "name": "McLaughlin, Seth"
         }
       ],
       "RG": [
@@ -2697,12 +2683,16 @@
           "name": "Barnes, Derrick"
         },
         {
-          "num": "44",
-          "name": "Rodriguez, Malcolm"
-        },
-        {
           "num": "53",
           "name": "Nowaske, Trevor"
+        },
+        {
+          "num": "57",
+          "name": "Ogbongbemiga, Amen"
+        },
+        {
+          "num": "45",
+          "name": "White, Devin"
         }
       ],
       "MLB": [
@@ -2711,12 +2701,8 @@
           "name": "Campbell, Jack"
         },
         {
-          "num": "45",
-          "name": "White, Devin"
-        },
-        {
-          "num": "35",
-          "name": "Bachie, Joe"
+          "num": "44",
+          "name": "Rodriguez, Malcolm"
         },
         {
           "num": "41",
@@ -2725,32 +2711,32 @@
       ],
       "LCB": [
         {
-          "num": "23",
-          "name": "YA-SIN, ROCK"
-        },
-        {
-          "num": "30",
-          "name": "Dorsey, Khalil"
-        },
-        {
           "num": "2",
           "name": "Rakestraw Jr., Ennis"
+        },
+        {
+          "num": "23",
+          "name": "YA-SIN, ROCK"
         }
       ],
       "SS": [
-        {
-          "num": "29",
-          "name": "MADDOX, AVONTE"
-        }
-      ],
-      "FS": [
         {
           "num": "36",
           "name": "CLARK, CHUCK"
         },
         {
-          "num": "12",
-          "name": "Harper, Thomas"
+          "num": "5",
+          "name": "Izien, Christian"
+        }
+      ],
+      "FS": [
+        {
+          "num": "6",
+          "name": "Abney II, Keith"
+        },
+        {
+          "num": "34",
+          "name": "Fitzgerald, Bishop"
         }
       ],
       "RCB": [
@@ -2759,18 +2745,14 @@
           "name": "Reed, D.J."
         },
         {
-          "num": "21",
-          "name": "McCreary, Roger"
+          "num": "30",
+          "name": "Dorsey, Khalil"
         }
       ],
       "NB": [
         {
-          "num": "5",
-          "name": "Izien, Christian"
-        },
-        {
-          "num": "6",
-          "name": "Abney II, Keith"
+          "num": "21",
+          "name": "McCreary, Roger"
         }
       ]
     }
@@ -2781,10 +2763,6 @@
         {
           "num": "9",
           "name": "Watson, Christian"
-        },
-        {
-          "num": "16",
-          "name": "Melton, Bo"
         }
       ],
       "RWR": [
@@ -2799,12 +2777,12 @@
       ],
       "SWR": [
         {
-          "num": "11",
-          "name": "Reed, Jayden"
-        },
-        {
           "num": "23",
           "name": "Moore, Skyy"
+        },
+        {
+          "num": "16",
+          "name": "Melton, Bo"
         }
       ],
       "LT": [
@@ -2823,6 +2801,10 @@
           "name": "Banks, Aaron"
         },
         {
+          "num": "72",
+          "name": "TOMLINSON, LAKEN"
+        },
+        {
           "num": "67",
           "name": "Jennings, Donovan"
         }
@@ -2839,19 +2821,19 @@
       ],
       "RG": [
         {
-          "num": "62",
-          "name": "Monk, Jacob"
-        },
-        {
           "num": "79",
           "name": "Glover, Travis"
+        },
+        {
+          "num": "70",
+          "name": "ZEITLER, KEVIN"
+        },
+        {
+          "num": "62",
+          "name": "Monk, Jacob"
         }
       ],
       "RT": [
-        {
-          "num": "50",
-          "name": "Bako-Bewele, Zach"
-        },
         {
           "num": "71",
           "name": "Belton, Anthony"
@@ -2863,12 +2845,12 @@
           "name": "Kraft, Tucker"
         },
         {
-          "num": "18",
-          "name": "SMITH, JONNU"
-        },
-        {
           "num": "86",
           "name": "Redman, Mark"
+        },
+        {
+          "num": "18",
+          "name": "SMITH, JONNU"
         },
         {
           "num": "81",
@@ -2887,12 +2869,12 @@
       ],
       "RB": [
         {
-          "num": "30",
-          "name": "Brooks, Chris"
-        },
-        {
           "num": "32",
           "name": "Lloyd, MarShawn"
+        },
+        {
+          "num": "22",
+          "name": "Strong Jr., Pierre"
         },
         {
           "num": "26",
@@ -2905,10 +2887,6 @@
         {
           "num": "94",
           "name": "Brooks, Karl"
-        },
-        {
-          "num": "91",
-          "name": "Brinson, Warren"
         },
         {
           "num": "93",
@@ -2947,22 +2925,22 @@
       ],
       "WLB": [
         {
-          "num": "56",
-          "name": "Cooper, Edgerrin"
+          "num": "58",
+          "name": "McDuffie, Isaiah"
         },
         {
           "num": "59",
           "name": "Hopper, Ty'Ron"
+        },
+        {
+          "num": "54",
+          "name": "Welch, Kristian"
         }
       ],
       "MLB": [
         {
           "num": "44",
           "name": "FRANKLIN, ZAIRE"
-        },
-        {
-          "num": "58",
-          "name": "McDuffie, Isaiah"
         },
         {
           "num": "31",
@@ -3033,13 +3011,13 @@
         {
           "num": "12",
           "name": "Collins, Nico"
-        },
-        {
-          "num": "17",
-          "name": "Wayne, Jared"
         }
       ],
       "RWR": [
+        {
+          "num": "18",
+          "name": "Harrison Jr., Marvin"
+        },
         {
           "num": "14",
           "name": "Boutte, Kayshon"
@@ -3059,6 +3037,10 @@
         {
           "num": "79",
           "name": "Ersery, Aireontae"
+        },
+        {
+          "num": "57",
+          "name": "Fisher, Blake"
         },
         {
           "num": "78",
@@ -3097,12 +3079,12 @@
       ],
       "RT": [
         {
-          "num": "77",
-          "name": "BROWN, TRENT"
+          "num": "71",
+          "name": "SMITH, BRADEN"
         },
         {
-          "num": "57",
-          "name": "Fisher, Blake"
+          "num": "77",
+          "name": "BROWN, TRENT"
         }
       ],
       "TE": [
@@ -3119,12 +3101,12 @@
           "name": "Stover, Cade"
         },
         {
-          "num": "83",
-          "name": "Klein, Marlin"
-        },
-        {
           "num": "9",
           "name": "Jordan, Brevin"
+        },
+        {
+          "num": "83",
+          "name": "Klein, Marlin"
         }
       ],
       "QB": [
@@ -3145,12 +3127,10 @@
         {
           "num": "4",
           "name": "Marks, Woody"
-        }
-      ],
-      "FB": [
+        },
         {
-          "num": "44",
-          "name": "Brooks, British"
+          "num": "23",
+          "name": "OGUNBOWALE, DARE"
         }
       ]
     },
@@ -3163,10 +3143,6 @@
         {
           "num": "94",
           "name": "Robinson, Dominique"
-        },
-        {
-          "num": "54",
-          "name": "Harsh, Sabastian"
         }
       ],
       "LDT": [
@@ -3185,8 +3161,8 @@
           "name": "RANKINS, SHELDON"
         },
         {
-          "num": "97",
-          "name": "EDWARDS JR., MARIO"
+          "num": "93",
+          "name": "McDonald, Kayden"
         },
         {
           "num": "95",
@@ -3201,6 +3177,10 @@
         {
           "num": "90",
           "name": "CLOWNEY, JADEVEON"
+        },
+        {
+          "num": "54",
+          "name": "Harsh, Sabastian"
         }
       ],
       "WLB": [
@@ -3209,12 +3189,12 @@
           "name": "Hansen, Jake"
         },
         {
-          "num": "33",
-          "name": "Hummel, Jake"
-        },
-        {
           "num": "59",
           "name": "Fisher, Aiden"
+        },
+        {
+          "num": "56",
+          "name": "Hill, Jamal"
         }
       ],
       "MLB": [
@@ -3225,20 +3205,12 @@
         {
           "num": "30",
           "name": "Woodaz, Wade"
-        },
-        {
-          "num": "56",
-          "name": "Hill, Jamal"
         }
       ],
       "LCB": [
         {
           "num": "24",
           "name": "Stingley Jr., Derek"
-        },
-        {
-          "num": "22",
-          "name": "Smith, Jaylin"
         },
         {
           "num": "37",
@@ -3249,6 +3221,10 @@
         {
           "num": "2",
           "name": "Bullock, Calen"
+        },
+        {
+          "num": "29",
+          "name": "STEWART, M.J."
         }
       ],
       "FS": [
@@ -3283,12 +3259,12 @@
     "offense": {
       "LWR": [
         {
-          "num": "14",
-          "name": "Pierce, Alec"
-        },
-        {
           "num": "13",
           "name": "TREADWELL, LAQUON"
+        },
+        {
+          "num": "80",
+          "name": "Burks, Deion"
         }
       ],
       "RWR": [
@@ -3297,8 +3273,8 @@
           "name": "ALLEN, KEENAN"
         },
         {
-          "num": "",
-          "name": "Slayton, Darius"
+          "num": "16",
+          "name": "Dulin, Ashton"
         }
       ],
       "SWR": [
@@ -3307,12 +3283,8 @@
           "name": "Downs, Josh"
         },
         {
-          "num": "16",
-          "name": "Dulin, Ashton"
-        },
-        {
-          "num": "80",
-          "name": "Burks, Deion"
+          "num": "6",
+          "name": "Gould, Anthony"
         }
       ],
       "LT": [
@@ -3373,6 +3345,10 @@
         {
           "num": "85",
           "name": "Ogletree, Drew"
+        },
+        {
+          "num": "49",
+          "name": "BROWN, PHARAOH"
         }
       ],
       "QB": [
@@ -3407,10 +3383,6 @@
     "defense": {
       "LDE": [
         {
-          "num": "98",
-          "name": "KEY, ARDEN"
-        },
-        {
           "num": "91",
           "name": "Tuimoloau, Jaylahn"
         },
@@ -3426,7 +3398,7 @@
         },
         {
           "num": "94",
-          "name": "Tillery, Jerry"
+          "name": "TILLERY, JERRY"
         },
         {
           "num": "93",
@@ -3449,10 +3421,6 @@
           "name": "Latu, Laiatu"
         },
         {
-          "num": "72",
-          "name": "Clemons, Micheal"
-        },
-        {
           "num": "55",
           "name": "Curry, Caden"
         }
@@ -3463,12 +3431,12 @@
           "name": "Carlies, Jaylon"
         },
         {
-          "num": "50",
-          "name": "Boettcher, Bryce"
+          "num": "58",
+          "name": "Ajiake, Austin"
         },
         {
-          "num": "44",
-          "name": "Chambers, Tahj"
+          "num": "50",
+          "name": "Boettcher, Bryce"
         }
       ],
       "MLB": [
@@ -3481,8 +3449,8 @@
           "name": "Allen, CJ"
         },
         {
-          "num": "58",
-          "name": "Ajiake, Austin"
+          "num": "44",
+          "name": "Chambers, Tahj"
         }
       ],
       "LCB": [
@@ -3566,10 +3534,6 @@
         }
       ],
       "LT": [
-        {
-          "num": "77",
-          "name": "Harrison, Anton"
-        },
         {
           "num": "72",
           "name": "Little, Walker"
@@ -3669,14 +3633,18 @@
           "name": "Striggow, Danny"
         },
         {
-          "num": "57",
-          "name": "Thomas Jr., Bryan"
+          "num": "90",
+          "name": "Williams, Wesley"
         }
       ],
       "NT": [
         {
           "num": "52",
           "name": "Hamilton, DaVon"
+        },
+        {
+          "num": "93",
+          "name": "DICKERSON, MATT"
         },
         {
           "num": "98",
@@ -3689,10 +3657,6 @@
           "name": "ARMSTEAD, ARIK"
         },
         {
-          "num": "93",
-          "name": "DICKERSON, MATT"
-        },
-        {
           "num": "99",
           "name": "Orhorhoro, Ruke"
         }
@@ -3703,8 +3667,8 @@
           "name": "Hines-Allen, Josh"
         },
         {
-          "num": "90",
-          "name": "Williams, Wesley"
+          "num": "57",
+          "name": "Thomas Jr., Bryan"
         }
       ],
       "WLB": [
@@ -3733,8 +3697,8 @@
           "name": "GARDECK, DENNIS"
         },
         {
-          "num": "54",
-          "name": "Kiser, Jack"
+          "num": "35",
+          "name": "McLeod, Jalen"
         }
       ],
       "LCB": [
@@ -3743,8 +3707,8 @@
           "name": "Hunter, Travis"
         },
         {
-          "num": "21",
-          "name": "Braswell, Christian"
+          "num": "36",
+          "name": "Jones, Jaylon"
         }
       ],
       "SS": [
@@ -3753,8 +3717,8 @@
           "name": "Johnson, Antonio"
         },
         {
-          "num": "25",
-          "name": "Lane III, Rayuan"
+          "num": "26",
+          "name": "Merriweather, Kaevon"
         }
       ],
       "FS": [
@@ -3763,8 +3727,8 @@
           "name": "MURRAY, ERIC"
         },
         {
-          "num": "27",
-          "name": "Ransaw, Caleb"
+          "num": "25",
+          "name": "Lane III, Rayuan"
         },
         {
           "num": "22",
@@ -3775,6 +3739,10 @@
         {
           "num": "1",
           "name": "Brown, Montaric"
+        },
+        {
+          "num": "4",
+          "name": "Jones, Jarrian"
         }
       ],
       "NB": [
@@ -3783,8 +3751,8 @@
           "name": "LEWIS, JOURDAN"
         },
         {
-          "num": "4",
-          "name": "Jones, Jarrian"
+          "num": "21",
+          "name": "Huzzie, Alijah"
         }
       ]
     }
@@ -3793,12 +3761,8 @@
     "offense": {
       "LWR": [
         {
-          "num": "2",
-          "name": "Thornton, Tyquan"
-        },
-        {
-          "num": "13",
-          "name": "Allen, Cyrus"
+          "num": "11",
+          "name": "Royals, Jalen"
         }
       ],
       "RWR": [
@@ -3817,8 +3781,8 @@
           "name": "Rice, Rashee"
         },
         {
-          "num": "11",
-          "name": "Royals, Jalen"
+          "num": "13",
+          "name": "Allen, Cyrus"
         }
       ],
       "LT": [
@@ -3975,8 +3939,12 @@
           "name": "TRANQUILL, DRUE"
         },
         {
-          "num": "31",
-          "name": "Bassa, Jeffrey"
+          "num": "43",
+          "name": "Cochrane, Jack"
+        },
+        {
+          "num": "45",
+          "name": "Jones, Cam"
         }
       ],
       "MLB": [
@@ -3985,8 +3953,8 @@
           "name": "Bolton, Nick"
         },
         {
-          "num": "43",
-          "name": "Cochrane, Jack"
+          "num": "31",
+          "name": "Bassa, Jeffrey"
         }
       ],
       "LCB": [
@@ -4049,8 +4017,12 @@
           "name": "Johnston, Quentin"
         },
         {
-          "num": "87",
-          "name": "Jennings, Gary"
+          "num": "13",
+          "name": "VALDES-SCANTLING, MARQUEZ"
+        },
+        {
+          "num": "82",
+          "name": "Wease Jr., Theo"
         }
       ],
       "RWR": [
@@ -4075,12 +4047,8 @@
       ],
       "LT": [
         {
-          "num": "70",
-          "name": "Slater, Rashawn"
-        },
-        {
-          "num": "79",
-          "name": "PIPKINS III, TREY"
+          "num": "77",
+          "name": "Burke, Travis"
         }
       ],
       "LG": [
@@ -4109,12 +4077,8 @@
           "name": "Strange, Cole"
         },
         {
-          "num": "75",
-          "name": "Penning, Trevor"
-        },
-        {
-          "num": "73",
-          "name": "Harkey, Alex"
+          "num": "71",
+          "name": "Taylor, Branson"
         }
       ],
       "RT": [
@@ -4123,14 +4087,22 @@
           "name": "Alt, Joe"
         },
         {
-          "num": "77",
-          "name": "Burke, Travis"
+          "num": "73",
+          "name": "Harkey, Alex"
         }
       ],
       "TE": [
         {
+          "num": "88",
+          "name": "Kolar, Charlie"
+        },
+        {
           "num": "86",
           "name": "Gadsden, Oronde"
+        },
+        {
+          "num": "40",
+          "name": "Rucci, Hayden"
         }
       ],
       "QB": [
@@ -4139,8 +4111,8 @@
           "name": "Herbert, Justin"
         },
         {
-          "num": "5",
-          "name": "Lance, Trey"
+          "num": "7",
+          "name": "Uiagalelei, DJ"
         }
       ],
       "RB": [
@@ -4159,30 +4131,30 @@
       ],
       "FB": [
         {
-          "num": "30",
-          "name": "INGOLD, ALEC"
+          "num": "44",
+          "name": "Matlock, Scott"
         }
       ]
     },
     "defense": {
       "DE": [
         {
-          "num": "94",
-          "name": "TOMLINSON, DALVIN"
-        },
-        {
           "num": "92",
           "name": "Eboigbe, Justin"
-        }
-      ],
-      "NT": [
-        {
-          "num": "99",
-          "name": "Caldwell, Jamaree"
         },
         {
           "num": "91",
           "name": "Barrett, Nick"
+        }
+      ],
+      "NT": [
+        {
+          "num": "94",
+          "name": "TOMLINSON, DALVIN"
+        },
+        {
+          "num": "99",
+          "name": "Caldwell, Jamaree"
         }
       ],
       "DT": [
@@ -4204,11 +4176,11 @@
       "LILB": [
         {
           "num": "53",
-          "name": "Phillips, Del'Shawn"
+          "name": "PHILLIPS, DEL'SHAWN"
         },
         {
-          "num": "58",
-          "name": "Wax, Marlowe"
+          "num": "43",
+          "name": "DYE, TROY"
         }
       ],
       "RILB": [
@@ -4217,8 +4189,8 @@
           "name": "Henley, Daiyan"
         },
         {
-          "num": "43",
-          "name": "DYE, TROY"
+          "num": "58",
+          "name": "Wax, Marlowe"
         }
       ],
       "ROLB": [
@@ -4233,19 +4205,19 @@
       ],
       "LCB": [
         {
-          "num": "4",
-          "name": "Still, Tarheeb"
+          "num": "26",
+          "name": "JACKSON, DONTE"
         },
         {
-          "num": "20",
-          "name": "Hart, Cam"
-        },
-        {
-          "num": "24",
-          "name": "Shelley, Rodney"
+          "num": "33",
+          "name": "Leonard, Deane"
         }
       ],
       "SS": [
+        {
+          "num": "3",
+          "name": "JAMES JR., DERWIN"
+        },
         {
           "num": "23",
           "name": "JEFFERSON, TONY"
@@ -4253,10 +4225,6 @@
         {
           "num": "32",
           "name": "Williamson, Kendall"
-        },
-        {
-          "num": "27",
-          "name": "Mickens, RJ"
         }
       ],
       "FS": [
@@ -4267,22 +4235,26 @@
         {
           "num": "22",
           "name": "Smith, Genesis"
+        },
+        {
+          "num": "27",
+          "name": "Mickens, RJ"
         }
       ],
       "RCB": [
         {
-          "num": "26",
-          "name": "JACKSON, DONTE"
+          "num": "20",
+          "name": "Hart, Cam"
         },
         {
-          "num": "33",
-          "name": "Leonard, Deane"
+          "num": "24",
+          "name": "Shelley, Rodney"
         }
       ],
       "NB": [
         {
-          "num": "3",
-          "name": "JAMES JR., DERWIN"
+          "num": "4",
+          "name": "Still, Tarheeb"
         }
       ]
     }
@@ -4295,8 +4267,12 @@
           "name": "ADAMS, DAVANTE"
         },
         {
-          "num": "8",
-          "name": "Atwell, Tutu"
+          "num": "88",
+          "name": "Whittington, Jordan"
+        },
+        {
+          "num": "6",
+          "name": "Daniels, CJ"
         }
       ],
       "RWR": [
@@ -4305,29 +4281,21 @@
           "name": "Nacua, Puka"
         },
         {
-          "num": "4",
-          "name": "Mumpfield, Konata"
-        },
-        {
-          "num": "6",
-          "name": "Daniels, CJ"
+          "num": "8",
+          "name": "Atwell, Tutu"
         }
       ],
       "SWR": [
         {
-          "num": "88",
-          "name": "Whittington, Jordan"
+          "num": "4",
+          "name": "Mumpfield, Konata"
         },
         {
-          "num": "19",
-          "name": "Smith, Xavier"
+          "num": "11",
+          "name": "BACHMAN, ALEX"
         }
       ],
       "LT": [
-        {
-          "num": "77",
-          "name": "Jackson, Alaric"
-        },
         {
           "num": "68",
           "name": "QUESSENBERRY, DAVID"
@@ -4371,20 +4339,16 @@
       ],
       "TE": [
         {
+          "num": "89",
+          "name": "HIGBEE, TYLER"
+        },
+        {
           "num": "84",
           "name": "Parkinson, Colby"
         },
         {
-          "num": "18",
-          "name": "Ferguson, Terrance"
-        },
-        {
           "num": "87",
           "name": "Allen, Davis"
-        },
-        {
-          "num": "89",
-          "name": "HIGBEE, TYLER"
         },
         {
           "num": "86",
@@ -4415,8 +4379,8 @@
           "name": "Corum, Blake"
         },
         {
-          "num": "20",
-          "name": "Rivers, Ronnie"
+          "num": "33",
+          "name": "Connors, Dean"
         }
       ]
     },
@@ -4449,6 +4413,10 @@
         {
           "num": "90",
           "name": "Davis, Tyler"
+        },
+        {
+          "num": "52",
+          "name": "Murchison, Larrell"
         }
       ],
       "LOLB": [
@@ -4507,18 +4475,22 @@
           "name": "Curl, Kam"
         },
         {
-          "num": "34",
-          "name": "Ingle, Tanner"
+          "num": "2",
+          "name": "McCollough, Jaylen"
         }
       ],
       "FS": [
+        {
+          "num": "37",
+          "name": "Lake, Quentin"
+        },
         {
           "num": "5",
           "name": "Kinchens, Kamren"
         },
         {
-          "num": "2",
-          "name": "McCollough, Jaylen"
+          "num": "36",
+          "name": "Pulley, Maximus"
         }
       ],
       "RCB": [
@@ -4528,10 +4500,6 @@
         }
       ],
       "NB": [
-        {
-          "num": "37",
-          "name": "Lake, Quentin"
-        },
         {
           "num": "30",
           "name": "Wallace, Josh"
@@ -4543,14 +4511,14 @@
     "offense": {
       "LWR": [
         {
-          "num": "1",
-          "name": "Tucker, Tre"
+          "num": "9",
+          "name": "Nailor, Jalen"
         }
       ],
       "RWR": [
         {
-          "num": "9",
-          "name": "Nailor, Jalen"
+          "num": "82",
+          "name": "White, Cody"
         },
         {
           "num": "19",
@@ -4559,8 +4527,8 @@
       ],
       "SWR": [
         {
-          "num": "18",
-          "name": "Bech, Jack"
+          "num": "1",
+          "name": "Tucker, Tre"
         },
         {
           "num": "81",
@@ -4673,25 +4641,7 @@
           "name": "Koonce, Malcolm"
         }
       ],
-      "LDT": [
-        {
-          "num": "97",
-          "name": "Hemingway, Tonka"
-        },
-        {
-          "num": "96",
-          "name": "Laulu, Jonah"
-        },
-        {
-          "num": "92",
-          "name": "Pegues, JJ"
-        }
-      ],
-      "RDT": [
-        {
-          "num": "69",
-          "name": "BUTLER, ADAM"
-        },
+      "NT": [
         {
           "num": "94",
           "name": "FATUKASI, FOLORUNSO"
@@ -4699,6 +4649,24 @@
         {
           "num": "99",
           "name": "Booker IV, Thomas"
+        },
+        {
+          "num": "92",
+          "name": "Pegues, JJ"
+        }
+      ],
+      "DT": [
+        {
+          "num": "97",
+          "name": "Hemingway, Tonka"
+        },
+        {
+          "num": "69",
+          "name": "BUTLER, ADAM"
+        },
+        {
+          "num": "96",
+          "name": "Laulu, Jonah"
         }
       ],
       "RDE": [
@@ -4753,6 +4721,10 @@
         {
           "num": "43",
           "name": "Johnson, Dalton"
+        },
+        {
+          "num": "27",
+          "name": "McCollum, Tristin"
         }
       ],
       "FS": [
@@ -4763,20 +4735,16 @@
         {
           "num": "20",
           "name": "Pola-Mao, Isaiah"
-        },
-        {
-          "num": "27",
-          "name": "McCollum, Tristin"
         }
       ],
       "RCB": [
         {
-          "num": "26",
-          "name": "Porter, Darien"
-        },
-        {
           "num": "35",
           "name": "Masses, Hezekiah"
+        },
+        {
+          "num": "26",
+          "name": "Porter, Darien"
         },
         {
           "num": "25",
@@ -4799,8 +4767,8 @@
           "name": "Bell, Chris"
         },
         {
-          "num": "1",
-          "name": "Tolbert, Jalen"
+          "num": "",
+          "name": "Wayne, Jared"
         }
       ],
       "RWR": [
@@ -4809,8 +4777,8 @@
           "name": "Douglas, Caleb"
         },
         {
-          "num": "84",
-          "name": "Miller, Ryan"
+          "num": "1",
+          "name": "Tolbert, Jalen"
         }
       ],
       "SWR": [
@@ -4899,24 +4867,20 @@
         {
           "num": "14",
           "name": "McCord, Kyle"
-        },
-        {
-          "num": "15",
-          "name": "Cook, Brady"
         }
       ],
       "RB": [
         {
-          "num": "28",
-          "name": "Achane, De'Von"
+          "num": "0",
+          "name": "Gordon II, Ollie"
         },
         {
           "num": "5",
           "name": "Wright, Jaylen"
         },
         {
-          "num": "0",
-          "name": "Gordon II, Ollie"
+          "num": "30",
+          "name": "Allen, Kaytron"
         }
       ],
       "FB": [
@@ -4937,14 +4901,14 @@
           "name": "Beal Jr., Rob"
         },
         {
-          "num": "",
+          "num": "58",
           "name": "Jones Jr., Andre"
         }
       ],
       "LDT": [
         {
-          "num": "93",
-          "name": "Biggers, Zeek"
+          "num": "78",
+          "name": "Grant, Kenneth"
         },
         {
           "num": "94",
@@ -4957,8 +4921,8 @@
           "name": "SIELER, ZACH"
         },
         {
-          "num": "97",
-          "name": "Cooper Jr., Keith"
+          "num": "93",
+          "name": "Biggers, Zeek"
         }
       ],
       "RDE": [
@@ -4975,6 +4939,10 @@
         {
           "num": "20",
           "name": "Brooks, Jordyn"
+        },
+        {
+          "num": "45",
+          "name": "Heyward, Shaka"
         }
       ],
       "MLB": [
@@ -5085,10 +5053,6 @@
       ],
       "LG": [
         {
-          "num": "74",
-          "name": "Jackson, Donovan"
-        },
-        {
           "num": "60",
           "name": "Huber, Joe"
         }
@@ -5099,8 +5063,8 @@
           "name": "Brandel, Blake"
         },
         {
-          "num": "62",
-          "name": "Samac, Nick"
+          "num": "65",
+          "name": "Jurgens, Michael"
         }
       ],
       "RG": [
@@ -5129,12 +5093,12 @@
           "name": "Hockenson, T.J."
         },
         {
-          "num": "84",
-          "name": "Oliver, Josh"
-        },
-        {
           "num": "86",
           "name": "Bartholomew, Gavin"
+        },
+        {
+          "num": "85",
+          "name": "Yurosek, Ben"
         }
       ],
       "QB": [
@@ -5147,8 +5111,8 @@
           "name": "WENTZ, CARSON"
         },
         {
-          "num": "9",
-          "name": "McCarthy, J.J."
+          "num": "12",
+          "name": "Brosmer, Max"
         }
       ],
       "RB": [
@@ -5207,6 +5171,10 @@
         {
           "num": "15",
           "name": "Turner, Dallas"
+        },
+        {
+          "num": "17",
+          "name": "VAN NOY, KYLE"
         },
         {
           "num": "32",
@@ -5313,18 +5281,14 @@
       ],
       "RWR": [
         {
-          "num": "13",
-          "name": "HOLLINS, MACK"
+          "num": "86",
+          "name": "Chism III, Efton"
         }
       ],
       "SWR": [
         {
           "num": "3",
           "name": "Douglas, DeMario"
-        },
-        {
-          "num": "86",
-          "name": "Chism III, Efton"
         }
       ],
       "LT": [
@@ -5351,20 +5315,16 @@
         {
           "num": "55",
           "name": "Wilson, Jared"
-        },
-        {
-          "num": "77",
-          "name": "Brown, Ben"
         }
       ],
       "RG": [
         {
-          "num": "71",
-          "name": "Onwenu, Mike"
+          "num": "77",
+          "name": "Brown, Ben"
         },
         {
-          "num": "70",
-          "name": "VAN ROTEN, GREG"
+          "num": "65",
+          "name": "PRYOR, MATT"
         }
       ],
       "RT": [
@@ -5411,22 +5371,16 @@
       ],
       "RB": [
         {
-          "num": "32",
-          "name": "Henderson, TreVeyon"
-        },
-        {
           "num": "38",
           "name": "Stevenson, Rhamondre"
         },
         {
+          "num": "32",
+          "name": "Henderson, TreVeyon"
+        },
+        {
           "num": "9",
           "name": "Kiner, Corey"
-        }
-      ],
-      "FB": [
-        {
-          "num": "44",
-          "name": "Gilliam, Reggie"
         }
       ]
     },
@@ -5437,8 +5391,8 @@
           "name": "Williams, Milton"
         },
         {
-          "num": "92",
-          "name": "Farmer, Joshua"
+          "num": "93",
+          "name": "Taylor III, Leonard"
         }
       ],
       "NT": [
@@ -5457,8 +5411,8 @@
           "name": "Barmore, Christian"
         },
         {
-          "num": "93",
-          "name": "Taylor III, Leonard"
+          "num": "92",
+          "name": "Farmer, Joshua"
         }
       ],
       "LOLB": [
@@ -5499,10 +5453,6 @@
         {
           "num": "91",
           "name": "Ponder, Elijah"
-        },
-        {
-          "num": "45",
-          "name": "Hutchins, Quintayvious"
         }
       ],
       "LCB": [
@@ -5511,8 +5461,12 @@
           "name": "Davis III, Carlton"
         },
         {
-          "num": "22",
-          "name": "Woods, Charles"
+          "num": "21",
+          "name": "Prunty, Karon"
+        },
+        {
+          "num": "28",
+          "name": "Vildor, Kindle"
         }
       ],
       "SS": [
@@ -5521,8 +5475,12 @@
           "name": "Woodson, Craig"
         },
         {
-          "num": "24",
-          "name": "Pettus, Dell"
+          "num": "23",
+          "name": "Reed, Jaylen"
+        },
+        {
+          "num": "41",
+          "name": "Schooler, Brenden"
         }
       ],
       "FS": [
@@ -5531,8 +5489,8 @@
           "name": "BYARD III, KEVIN"
         },
         {
-          "num": "23",
-          "name": "Reed, Jaylen"
+          "num": "33",
+          "name": "Brown, Mike"
         }
       ],
       "RCB": [
@@ -5541,8 +5499,8 @@
           "name": "Gonzalez, Christian"
         },
         {
-          "num": "21",
-          "name": "Prunty, Karon"
+          "num": "22",
+          "name": "Woods, Charles"
         }
       ],
       "NB": [
@@ -5569,23 +5527,19 @@
         {
           "num": "18",
           "name": "Lance, Bryce"
-        }
-      ],
-      "SWR": [
-        {
-          "num": "14",
-          "name": "Vele, Devaughn"
         },
         {
           "num": "19",
           "name": "Brown, Barion"
         }
       ],
-      "LT": [
+      "SWR": [
         {
-          "num": "71",
-          "name": "Banks Jr., Kelvin"
-        },
+          "num": "14",
+          "name": "Vele, Devaughn"
+        }
+      ],
+      "LT": [
         {
           "num": "72",
           "name": "Richards, Asim"
@@ -5661,8 +5615,8 @@
       ],
       "RB": [
         {
-          "num": "3",
-          "name": "Etienne Jr., Travis"
+          "num": "5",
+          "name": "Miller, Kendre"
         },
         {
           "num": "41",
@@ -5671,10 +5625,6 @@
         {
           "num": "43",
           "name": "Donaldson, CJ"
-        },
-        {
-          "num": "5",
-          "name": "Miller, Kendre"
         }
       ]
     },
@@ -5695,12 +5645,12 @@
           "name": "GODCHAUX, DAVON"
         },
         {
-          "num": "52",
-          "name": "Miller, Christen"
-        },
-        {
           "num": "97",
           "name": "Boyd, Khristian"
+        },
+        {
+          "num": "52",
+          "name": "Miller, Christen"
         }
       ],
       "DT": [
@@ -5729,8 +5679,8 @@
           "name": "ELLISS, KADEN"
         },
         {
-          "num": "58",
-          "name": "Rumph II, Chris"
+          "num": "28",
+          "name": "Stutsman, Danny"
         },
         {
           "num": "44",
@@ -5743,8 +5693,12 @@
           "name": "Werner, Pete"
         },
         {
-          "num": "28",
-          "name": "Stutsman, Danny"
+          "num": "53",
+          "name": "Ford, Jaylan"
+        },
+        {
+          "num": "58",
+          "name": "Rumph II, Chris"
         }
       ],
       "ROLB": [
@@ -5753,12 +5707,12 @@
           "name": "Young, Chase"
         },
         {
-          "num": "98",
-          "name": "Wilson, Tyree"
-        },
-        {
           "num": "33",
           "name": "Jennings, Anfernee"
+        },
+        {
+          "num": "98",
+          "name": "Wilson, Tyree"
         }
       ],
       "LCB": [
@@ -5807,8 +5761,8 @@
           "name": "Sanker, Jonas"
         },
         {
-          "num": "38",
-          "name": "Price, Jayden"
+          "num": "36",
+          "name": "Styles Jr., Lorenzo"
         }
       ]
     }
@@ -5819,16 +5773,16 @@
         {
           "num": "1",
           "name": "Nabers, Malik"
-        },
-        {
-          "num": "13",
-          "name": "BECKHAM JR., ODELL"
         }
       ],
       "RWR": [
         {
           "num": "88",
           "name": "Fields, Malachi"
+        },
+        {
+          "num": "89",
+          "name": "Jones, Charlie"
         }
       ],
       "SWR": [
@@ -5903,12 +5857,16 @@
       ],
       "QB": [
         {
-          "num": "6",
-          "name": "Dart, Jaxson"
-        },
-        {
           "num": "19",
           "name": "WINSTON, JAMEIS"
+        },
+        {
+          "num": "18",
+          "name": "McCarthy, J.J."
+        },
+        {
+          "num": "13",
+          "name": "Haener, Jake"
         }
       ],
       "RB": [
@@ -5917,16 +5875,16 @@
           "name": "Skattebo, Cam"
         },
         {
-          "num": "26",
-          "name": "Singletary, Devin"
+          "num": "23",
+          "name": "Harris, Najee"
         },
         {
           "num": "29",
           "name": "Tracy Jr., Tyrone"
         },
         {
-          "num": "23",
-          "name": "Harris, Najee"
+          "num": "26",
+          "name": "Singletary, Devin"
         }
       ],
       "FB": [
@@ -5938,10 +5896,6 @@
     },
     "defense": {
       "DE": [
-        {
-          "num": "57",
-          "name": "Golston, Chauncey"
-        },
         {
           "num": "91",
           "name": "Alexander, Darius"
@@ -5955,10 +5909,6 @@
         {
           "num": "99",
           "name": "Okoye, C.J."
-        },
-        {
-          "num": "97",
-          "name": "Jamison-Travis, Bobby"
         }
       ],
       "DT": [
@@ -5967,14 +5917,18 @@
           "name": "HARRIS, SHELBY"
         },
         {
-          "num": "94",
-          "name": "TUPOU, JOSH"
+          "num": "97",
+          "name": "Jamison-Travis, Bobby"
         }
       ],
       "RUSH": [
         {
-          "num": "0",
-          "name": "Burns, Brian"
+          "num": "3",
+          "name": "Carter, Abdul"
+        },
+        {
+          "num": "53",
+          "name": "WARD, JIHAD"
         }
       ],
       "WLB": [
@@ -5983,12 +5937,12 @@
           "name": "Reese, Arvell"
         },
         {
-          "num": "51",
-          "name": "Kelly, Jack"
-        },
-        {
           "num": "46",
           "name": "Barnes, Zaire"
+        },
+        {
+          "num": "54",
+          "name": "Harrison, Malik"
         }
       ],
       "MLB": [
@@ -5999,13 +5953,13 @@
         {
           "num": "41",
           "name": "McFadden, Micah"
+        },
+        {
+          "num": "51",
+          "name": "Kelly, Jack"
         }
       ],
       "SLB": [
-        {
-          "num": "3",
-          "name": "Carter, Abdul"
-        },
         {
           "num": "5",
           "name": "Thibodeaux, Kayvon"
@@ -6027,10 +5981,6 @@
           "name": "Nubin, Tyler"
         },
         {
-          "num": "28",
-          "name": "CAMPBELL, ELIJAH"
-        },
-        {
           "num": "25",
           "name": "Pinnock, Jason"
         }
@@ -6039,6 +5989,10 @@
         {
           "num": "8",
           "name": "Holland, Jevón"
+        },
+        {
+          "num": "28",
+          "name": "CAMPBELL, ELIJAH"
         },
         {
           "num": "24",
@@ -6075,14 +6029,18 @@
           "name": "Mitchell, Adonai"
         },
         {
-          "num": "82",
-          "name": "Smith, Arian"
+          "num": "17",
+          "name": "PATRICK, TIM"
         }
       ],
       "RWR": [
         {
           "num": "5",
           "name": "Wilson, Garrett"
+        },
+        {
+          "num": "84",
+          "name": "McClain, Malik"
         }
       ],
       "SWR": [
@@ -6121,6 +6079,10 @@
         {
           "num": "66",
           "name": "Tippmann, Joe"
+        },
+        {
+          "num": "60",
+          "name": "Levao, Kohl"
         }
       ],
       "RT": [
@@ -6189,12 +6151,12 @@
     "defense": {
       "DE": [
         {
-          "num": "93",
-          "name": "ONYEMATA, DAVID"
-        },
-        {
           "num": "91",
           "name": "Briggs, Jowon"
+        },
+        {
+          "num": "96",
+          "name": "Heflin, Jack"
         }
       ],
       "NT": [
@@ -6219,8 +6181,12 @@
           "name": "Bailey, David"
         },
         {
-          "num": "52",
-          "name": "Enagbare, Kingsley"
+          "num": "9",
+          "name": "McDonald IV, Will"
+        },
+        {
+          "num": "92",
+          "name": "Lynn, Nate"
         }
       ],
       "WLB": [
@@ -6229,12 +6195,8 @@
           "name": "Sherwood, Jamien"
         },
         {
-          "num": "41",
-          "name": "McCrary-Ball, Marcelino"
-        },
-        {
-          "num": "50",
-          "name": "REEDER, TROY"
+          "num": "49",
+          "name": "Wallace, Trevin"
         }
       ],
       "MLB": [
@@ -6245,24 +6207,16 @@
         {
           "num": "51",
           "name": "Mauigoa, Kiko"
-        },
-        {
-          "num": "49",
-          "name": "Wallace, Trevin"
         }
       ],
       "ROLB": [
         {
+          "num": "52",
+          "name": "Enagbare, Kingsley"
+        },
+        {
           "num": "46",
           "name": "Ossai, Joseph"
-        },
-        {
-          "num": "9",
-          "name": "McDonald IV, Will"
-        },
-        {
-          "num": "55",
-          "name": "McGregor, Braiden"
         }
       ],
       "LCB": [
@@ -6277,8 +6231,8 @@
       ],
       "SS": [
         {
-          "num": "29",
-          "name": "Fitzpatrick, Minkah"
+          "num": "6",
+          "name": "Belton, Dane"
         },
         {
           "num": "27",
@@ -6287,8 +6241,8 @@
       ],
       "FS": [
         {
-          "num": "6",
-          "name": "Belton, Dane"
+          "num": "29",
+          "name": "Fitzpatrick, Minkah"
         },
         {
           "num": "8",
@@ -6311,10 +6265,6 @@
           "name": "Brownlee Jr., Jarvis"
         },
         {
-          "num": "33",
-          "name": "Clark, Jordan"
-        },
-        {
           "num": "23",
           "name": "Ponds, D'Angelo"
         }
@@ -6329,8 +6279,8 @@
           "name": "Wicks, Dontayvion"
         },
         {
-          "num": "80",
-          "name": "Cooper, Darius"
+          "num": "0",
+          "name": "Brown, Hollywood"
         }
       ],
       "RWR": [
@@ -6339,8 +6289,8 @@
           "name": "Smith, DeVonta"
         },
         {
-          "num": "0",
-          "name": "Brown, Hollywood"
+          "num": "80",
+          "name": "Cooper, Darius"
         }
       ],
       "SWR": [
@@ -6349,12 +6299,12 @@
           "name": "Lemon, Makai"
         },
         {
-          "num": "85",
-          "name": "Covey, Britain"
-        },
-        {
           "num": "19",
           "name": "Moore, Elijah"
+        },
+        {
+          "num": "85",
+          "name": "Covey, Britain"
         }
       ],
       "LT": [
@@ -6363,15 +6313,11 @@
           "name": "Mailata, Jordan"
         },
         {
-          "num": "72",
-          "name": "Bell, Markel"
+          "num": "74",
+          "name": "Johnson, Fred"
         }
       ],
       "LG": [
-        {
-          "num": "51",
-          "name": "Jurgens, Cam"
-        },
         {
           "num": "61",
           "name": "Lampkin, Willie"
@@ -6381,6 +6327,10 @@
         {
           "num": "66",
           "name": "Kendall, Drew"
+        },
+        {
+          "num": "75",
+          "name": "Majors, Jake"
         }
       ],
       "RG": [
@@ -6395,12 +6345,8 @@
       ],
       "RT": [
         {
-          "num": "65",
-          "name": "JOHNSON, LANE"
-        },
-        {
-          "num": "74",
-          "name": "Johnson, Fred"
+          "num": "72",
+          "name": "Bell, Markel"
         }
       ],
       "TE": [
@@ -6423,16 +6369,16 @@
           "name": "Hurts, Jalen"
         },
         {
-          "num": "14",
-          "name": "DALTON, ANDY"
-        },
-        {
           "num": "16",
           "name": "McKee, Tanner"
         },
         {
           "num": "18",
           "name": "Payton, Cole"
+        },
+        {
+          "num": "",
+          "name": "Milton III, Joe"
         }
       ],
       "RB": [
@@ -6441,12 +6387,16 @@
           "name": "Barkley, Saquon"
         },
         {
-          "num": "8",
-          "name": "Bigsby, Tank"
-        },
-        {
           "num": "28",
           "name": "Shipley, Will"
+        },
+        {
+          "num": "39",
+          "name": "Pierce, Dameon"
+        },
+        {
+          "num": "34",
+          "name": "Steele, Carson"
         }
       ]
     },
@@ -6529,10 +6479,6 @@
         {
           "num": "31",
           "name": "JONES, JONATHAN"
-        },
-        {
-          "num": "22",
-          "name": "McWilliams, Mac"
         }
       ],
       "SS": [
@@ -6541,14 +6487,18 @@
           "name": "EPPS, MARCUS"
         },
         {
-          "num": "35",
-          "name": "Carter II, Michael"
+          "num": "23",
+          "name": "MOORE II, KENNY"
         }
       ],
       "FS": [
         {
           "num": "24",
           "name": "Mukuba, Andrew"
+        },
+        {
+          "num": "35",
+          "name": "Carter II, Michael"
         }
       ],
       "RCB": [
@@ -6567,8 +6517,8 @@
           "name": "DeJean, Cooper"
         },
         {
-          "num": "",
-          "name": "MOORE II, KENNY"
+          "num": "22",
+          "name": "McWilliams, Mac"
         }
       ]
     }
@@ -6586,10 +6536,6 @@
         }
       ],
       "RWR": [
-        {
-          "num": "11",
-          "name": "Pittman Jr., Michael"
-        },
         {
           "num": "17",
           "name": "Bernard, Germie"
@@ -6615,10 +6561,6 @@
         {
           "num": "66",
           "name": "McCormick, Mason"
-        },
-        {
-          "num": "73",
-          "name": "Dunker, Gennings"
         }
       ],
       "C": [
@@ -6633,22 +6575,22 @@
       ],
       "RG": [
         {
-          "num": "74",
-          "name": "Anderson, Spencer"
-        },
-        {
           "num": "67",
           "name": "Hoffman, Brock"
+        },
+        {
+          "num": "74",
+          "name": "Anderson, Spencer"
         }
       ],
       "RT": [
         {
-          "num": "60",
-          "name": "Cook, Dylan"
-        },
-        {
           "num": "71",
           "name": "Iheanachor, Max"
+        },
+        {
+          "num": "60",
+          "name": "Cook, Dylan"
         }
       ],
       "TE": [
@@ -6693,6 +6635,10 @@
           "name": "Dowdle, Rico"
         },
         {
+          "num": "21",
+          "name": "Homer, Travis"
+        },
+        {
           "num": "29",
           "name": "Heidenreich, Eli"
         }
@@ -6706,10 +6652,6 @@
     },
     "defense": {
       "DE": [
-        {
-          "num": "99",
-          "name": "Harmon, Derrick"
-        },
         {
           "num": "69",
           "name": "JOSEPH-DAY, SEBASTIAN"
@@ -6725,8 +6667,8 @@
           "name": "Benton, Keeanu"
         },
         {
-          "num": "96",
-          "name": "Rubio, Gabriel"
+          "num": "94",
+          "name": "Black, Yahya"
         }
       ],
       "DT": [
@@ -6735,8 +6677,8 @@
           "name": "HEYWARD, CAMERON"
         },
         {
-          "num": "94",
-          "name": "Black, Yahya"
+          "num": "96",
+          "name": "Rubio, Gabriel"
         }
       ],
       "LOLB": [
@@ -6781,12 +6723,16 @@
       ],
       "LCB": [
         {
-          "num": "24",
-          "name": "Porter Jr., Joey"
-        },
-        {
           "num": "22",
           "name": "Samuel Jr., Asante"
+        },
+        {
+          "num": "27",
+          "name": "Murphy-Bunting, Sean"
+        },
+        {
+          "num": "39",
+          "name": "Smith, Terell"
         }
       ],
       "SS": [
@@ -6808,11 +6754,15 @@
       "RCB": [
         {
           "num": "35",
-          "name": "Dean, Jamel"
+          "name": "DEAN, JAMEL"
         },
         {
           "num": "23",
           "name": "Everette, Daylen"
+        },
+        {
+          "num": "40",
+          "name": "Slaughter, Doneiko"
         }
       ],
       "NB": [
@@ -6845,14 +6795,18 @@
           "name": "Shaheed, Rashid"
         },
         {
-          "num": "15",
-          "name": "Horton, Tory"
+          "num": "85",
+          "name": "Charles, Irvin"
         }
       ],
       "SWR": [
         {
           "num": "10",
           "name": "KUPP, COOPER"
+        },
+        {
+          "num": "15",
+          "name": "Horton, Tory"
         }
       ],
       "LT": [
@@ -6886,10 +6840,6 @@
         }
       ],
       "RG": [
-        {
-          "num": "75",
-          "name": "Bradford, Anthony"
-        },
         {
           "num": "64",
           "name": "Haynes, Christian"
@@ -6935,16 +6885,20 @@
       ],
       "RB": [
         {
-          "num": "8",
-          "name": "Price, Jadarian"
-        },
-        {
           "num": "23",
           "name": "Wilson, Emanuel"
         },
         {
           "num": "36",
           "name": "Holani, George"
+        },
+        {
+          "num": "33",
+          "name": "Jones Jr., Velus"
+        },
+        {
+          "num": "34",
+          "name": "Henry Jr., Robert"
         }
       ],
       "FB": [
@@ -7005,8 +6959,8 @@
           "name": "Knight, Tyrice"
         },
         {
-          "num": "44",
-          "name": "Surratt, Chazz"
+          "num": "46",
+          "name": "Ciarlo, Jimmy"
         }
       ],
       "MLB": [
@@ -7017,6 +6971,10 @@
         {
           "num": "52",
           "name": "O'Connell, Patrick"
+        },
+        {
+          "num": "44",
+          "name": "Surratt, Chazz"
         }
       ],
       "SLB": [
@@ -7047,16 +7005,16 @@
         {
           "num": "20",
           "name": "Love, Julian"
-        },
-        {
-          "num": "30",
-          "name": "Finley, AJ"
         }
       ],
       "FS": [
         {
           "num": "39",
           "name": "Okada, Ty"
+        },
+        {
+          "num": "24",
+          "name": "Thomas II, Rodney"
         }
       ],
       "RCB": [
@@ -7065,8 +7023,8 @@
           "name": "Jobe, Josh"
         },
         {
-          "num": "1",
-          "name": "Neal, Julian"
+          "num": "16",
+          "name": "Diggs, Trevon"
         }
       ],
       "NB": [
@@ -7089,18 +7047,14 @@
           "name": "EVANS, MIKE"
         },
         {
-          "num": "4",
-          "name": "Cowing, Jacob"
+          "num": "84",
+          "name": "COOKS, BRANDIN"
         }
       ],
       "RWR": [
         {
-          "num": "11",
-          "name": "ROBINSON, DEMARCUS"
-        },
-        {
-          "num": "86",
-          "name": "HODGE, KHADAREL"
+          "num": "4",
+          "name": "Cowing, Jacob"
         }
       ],
       "SWR": [
@@ -7215,8 +7169,8 @@
           "name": "White, Keion"
         },
         {
-          "num": "47",
-          "name": "Kareem, Khalid"
+          "num": "98",
+          "name": "Williams, Mykel"
         },
         {
           "num": "59",
@@ -7231,16 +7185,20 @@
         {
           "num": "96",
           "name": "Thompson Jr., James"
+        },
+        {
+          "num": "50",
+          "name": "Jones, Naquan"
         }
       ],
       "RDT": [
         {
-          "num": "99",
-          "name": "West, C.J."
-        },
-        {
           "num": "93",
           "name": "Halton, Gracen"
+        },
+        {
+          "num": "55",
+          "name": "Valdez, Sebastian"
         }
       ],
       "RDE": [
@@ -7251,13 +7209,13 @@
         {
           "num": "94",
           "name": "Height, Romello"
+        },
+        {
+          "num": "47",
+          "name": "Kareem, Khalid"
         }
       ],
       "WLB": [
-        {
-          "num": "57",
-          "name": "Greenlaw, Dre"
-        },
         {
           "num": "53",
           "name": "Dugger, Jaden"
@@ -7265,6 +7223,10 @@
         {
           "num": "49",
           "name": "Wallow, Garret"
+        },
+        {
+          "num": "48",
+          "name": "Bethune, Tatum"
         }
       ],
       "MLB": [
@@ -7275,10 +7237,6 @@
         {
           "num": "51",
           "name": "GIFFORD, LUKE"
-        },
-        {
-          "num": "48",
-          "name": "Bethune, Tatum"
         }
       ],
       "LCB": [
@@ -7293,16 +7251,12 @@
       ],
       "SS": [
         {
-          "num": "6",
-          "name": "Mustapha, Malik"
-        },
-        {
           "num": "36",
           "name": "Sigle, Marques"
         },
         {
-          "num": "24",
-          "name": "Davis, Ashtyn"
+          "num": "6",
+          "name": "Mustapha, Malik"
         }
       ],
       "FS": [
@@ -7311,8 +7265,8 @@
           "name": "Brown, Ji'Ayir"
         },
         {
-          "num": "33",
-          "name": "NEAL, SIRAN"
+          "num": "24",
+          "name": "DAVIS, ASHTYN"
         }
       ],
       "RCB": [
@@ -7329,6 +7283,10 @@
         {
           "num": "20",
           "name": "Stout, Upton"
+        },
+        {
+          "num": "33",
+          "name": "NEAL, SIRAN"
         }
       ]
     }
@@ -7339,10 +7297,6 @@
         {
           "num": "17",
           "name": "Hurst III, Ted"
-        },
-        {
-          "num": "11",
-          "name": "McMillan, Jalen"
         }
       ],
       "RWR": [
@@ -7425,12 +7379,12 @@
           "name": "Durham, Payne"
         },
         {
-          "num": "41",
-          "name": "Kieft, Ko"
-        },
-        {
           "num": "84",
           "name": "Sharp, Bauer"
+        },
+        {
+          "num": "41",
+          "name": "Kieft, Ko"
         }
       ],
       "QB": [
@@ -7475,12 +7429,12 @@
           "name": "VEA, VITA"
         },
         {
-          "num": "90",
-          "name": "Capehart, DeMonte"
-        },
-        {
           "num": "92",
           "name": "Simmons, Elijah"
+        },
+        {
+          "num": "90",
+          "name": "Capehart, DeMonte"
         }
       ],
       "RDE": [
@@ -7551,6 +7505,10 @@
         {
           "num": "23",
           "name": "Smith, Tykee"
+        },
+        {
+          "num": "29",
+          "name": "KILLEBREW, MILES"
         }
       ],
       "FS": [
@@ -7559,8 +7517,8 @@
           "name": "Winfield Jr., Antoine"
         },
         {
-          "num": "29",
-          "name": "KILLEBREW, MILES"
+          "num": "5",
+          "name": "Melifonwu, Ifeatu"
         }
       ],
       "RCB": [
@@ -7589,12 +7547,12 @@
     "offense": {
       "LWR": [
         {
-          "num": "0",
-          "name": "RIDLEY, CALVIN"
-        },
-        {
           "num": "5",
           "name": "Ayomanor, Elic"
+        },
+        {
+          "num": "0",
+          "name": "RIDLEY, CALVIN"
         }
       ],
       "RWR": [
@@ -7629,8 +7587,8 @@
           "name": "Skoronski, Peter"
         },
         {
-          "num": "70",
-          "name": "Mafi, Atonio"
+          "num": "71",
+          "name": "Dellinger, Garrett"
         }
       ],
       "C": [
@@ -7645,12 +7603,8 @@
       ],
       "RG": [
         {
-          "num": "66",
-          "name": "Carmona Jr., Fernando"
-        },
-        {
-          "num": "64",
-          "name": "Slater, Jackson"
+          "num": "70",
+          "name": "Mafi, Atonio"
         }
       ],
       "RT": [
@@ -7701,12 +7655,16 @@
           "name": "Spears, Tyjae"
         },
         {
+          "num": "32",
+          "name": "Singleton, Nicholas"
+        },
+        {
           "num": "36",
           "name": "Chestnut, Julius"
         },
         {
-          "num": "32",
-          "name": "Singleton, Nicholas"
+          "num": "35",
+          "name": "Carter, Michael"
         }
       ]
     },
@@ -7765,16 +7723,12 @@
       ],
       "WLB": [
         {
-          "num": "33",
-          "name": "Gray, Cedric"
+          "num": "50",
+          "name": "Barton, Cody"
         },
         {
           "num": "52",
           "name": "Williams Sr., James"
-        },
-        {
-          "num": "40",
-          "name": "Pappoe, Owen"
         }
       ],
       "MLB": [
@@ -7783,8 +7737,8 @@
           "name": "Hill Jr., Anthony"
         },
         {
-          "num": "50",
-          "name": "Barton, Cody"
+          "num": "33",
+          "name": "Gray, Cedric"
         }
       ],
       "LCB": [
@@ -7831,6 +7785,10 @@
         {
           "num": "26",
           "name": "Harris, Marcus"
+        },
+        {
+          "num": "41",
+          "name": "Hallett II, Erick"
         }
       ]
     }
@@ -7861,10 +7819,6 @@
         {
           "num": "3",
           "name": "DIGGS, STEFON"
-        },
-        {
-          "num": "83",
-          "name": "Lane, Jaylin"
         },
         {
           "num": "11",
@@ -7959,13 +7913,13 @@
           "name": "White, Rachaad"
         },
         {
-          "num": "31",
-          "name": "Allen, Kaytron"
+          "num": "30",
+          "name": "EKELER, AUSTIN"
         }
       ]
     },
     "defense": {
-      "DE": [
+      "LDE": [
         {
           "num": "99",
           "name": "Kinlaw, Javon"
@@ -7985,10 +7939,14 @@
           "name": "TUTTLE, SHY"
         }
       ],
-      "DT": [
+      "RDE": [
         {
           "num": "94",
           "name": "Payne, Daron"
+        },
+        {
+          "num": "91",
+          "name": "WISE JR., DEATRICH"
         }
       ],
       "LOLB": [
@@ -8011,8 +7969,8 @@
           "name": "LUVU, FRANKIE"
         },
         {
-          "num": "54",
-          "name": "Chenal, Leo"
+          "num": "56",
+          "name": "Medrano, Kain"
         }
       ],
       "MLB": [
@@ -8021,8 +7979,8 @@
           "name": "Styles, Sonny"
         },
         {
-          "num": "56",
-          "name": "Medrano, Kain"
+          "num": "57",
+          "name": "Keys, Austin"
         }
       ],
       "ROLB": [
@@ -8037,32 +7995,28 @@
       ],
       "LCB": [
         {
-          "num": "0",
-          "name": "Sainristil, Mike"
-        },
-        {
           "num": "29",
           "name": "DOUGLAS, RASUL"
         },
         {
-          "num": "37",
-          "name": "YIADOM, ISAAC"
+          "num": "24",
+          "name": "MOREAU, FABIAN"
         }
       ],
       "SS": [
         {
           "num": "39",
           "name": "REAVES, JEREMY"
-        },
-        {
-          "num": "35",
-          "name": "Butler, Percy"
         }
       ],
       "FS": [
         {
           "num": "20",
           "name": "Martin, Quan"
+        },
+        {
+          "num": "35",
+          "name": "Butler, Percy"
         }
       ],
       "RCB": [
@@ -8071,14 +8025,18 @@
           "name": "Robertson, Amik"
         },
         {
-          "num": "24",
-          "name": "MOREAU, FABIAN"
+          "num": "37",
+          "name": "YIADOM, ISAAC"
         }
       ],
       "NB": [
         {
           "num": "25",
           "name": "Cross, Nick"
+        },
+        {
+          "num": "0",
+          "name": "Sainristil, Mike"
         },
         {
           "num": "18",
